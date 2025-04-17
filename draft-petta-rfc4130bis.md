@@ -1120,37 +1120,37 @@ that follow the AS1 semantics[4].
    not further defined in this document.  Refer to RFC 2616 [3] for
    complete definitions of HTTP entities.  The format of the AS2-MDN is:
 
-   AS2-MDN = AS2-sync-MDN | AS2-async-http-MDN |
-       AS2-async-smtp-MDN
+   AS2-MDN = AS2-sync-MDN | AS2-async-http-MDN |  <br>
+       AS2-async-smtp-MDN <br>
+ 
+   AS2-sync-MDN = <br>
+       Status-Line <br>
+       *(( general-header | response-header | entity-header ) <br>
+       CRLF ) <br>
+       CRLF <br>
+       AS2-MDN-body <br>
 
-   AS2-sync-MDN =
-       Status-Line
-       *(( general-header | response-header | entity-header )
-       CRLF )
-       CRLF
-       AS2-MDN-body
+   Status-Line = <br>
+       HTTP-Version SP Status-Code SP Reason-Phrase CRLF <br>
 
-   Status-Line =
-       HTTP-Version SP Status-Code SP Reason-Phrase CRLF
+   AS2-async-http-MDN =  <br>
+       Request-Line <br>
+       *(( general-header | request-header | entity-header ) <br>
+       CRLF ) <br>
+       CRLF <br>
+       AS2-MDN-body <br>
 
-   AS2-async-http-MDN =
-       Request-Line
-       *(( general-header | request-header | entity-header )
-       CRLF )
-       CRLF
-       AS2-MDN-body
+   Request-Line = <br>
+       Method SP Request-URI SP HTTP-Version CRLF <br>
 
-   Request-Line =
-       Method SP Request-URI SP HTTP-Version CRLF
+   AS2-async-smtp-MDN = <br>
+       *(( general-header | request-header | entity-header ) <br>
+       CRLF ) <br>
+       CRLF <br>
+       AS2-MDN-body <br>
 
-   AS2-async-smtp-MDN =
-       *(( general-header | request-header | entity-header )
-       CRLF )
-       CRLF
-       AS2-MDN-body
-
-   AS2-MDN-body =
-       AS2-signed-MDN-body | AS2-unsigned-MDN-body
+   AS2-MDN-body = <br>
+       AS2-signed-MDN-body | AS2-unsigned-MDN-body <br>
 
 ###  AS2-MDN Construction
 
@@ -1176,17 +1176,17 @@ that follow the AS1 semantics[4].
    disposition.  The second part of the MIME multipart/report is a
    "machine-readable" portion that is defined as:
 
-   AS2-disposition-notification-content =
-       [ reporting-ua-field CRLF ]
-       [ mdn-gateway-field CRLF ]
-       final-recipient-field CRLF
-       [ original-message-id-field CRLF ]
-       AS2-disposition-field CRLF
-       *( failure-field CRLF )
-       *( error-field CRLF )
-       *( warning-field CRLF )
-       *( extension-field CRLF )
-       [ AS2-received-content-MIC-field CRLF ]
+   AS2-disposition-notification-content =  <br>
+       [ reporting-ua-field CRLF ] <br>
+       [ mdn-gateway-field CRLF ] <br>
+       final-recipient-field CRLF <br>
+       [ original-message-id-field CRLF ] <br>
+       AS2-disposition-field CRLF <br>
+       *( failure-field CRLF ) <br>
+       *( error-field CRLF ) <br>
+       *( warning-field CRLF ) <br>
+       *( extension-field CRLF ) <br>
+       [ AS2-received-content-MIC-field CRLF ] <br>
 
 ###  AS2-MDN Fields
 
@@ -1202,48 +1202,48 @@ that follow the AS1 semantics[4].
    necessarily further defined in this document; refer to RFC 3798,
    Section 7, "Collected Grammar", for the original grammar.
 
-   AS2-disposition-field =
-       "Disposition" ":" disposition-mode ";"
-       AS2-disposition-type [ '/' AS2-disposition-modifier ]
+   AS2-disposition-field = <br>
+       "Disposition" ":" disposition-mode ";" <br>
+       AS2-disposition-type [ '/' AS2-disposition-modifier ] <br>
 
-   disposition-mode =
-       action-mode "/" sending-mode
+   disposition-mode = <br>
+       action-mode "/" sending-mode <br>
 
-   action-mode =
-       "manual-action" | "automatic-action"
+   action-mode = <br>
+       "manual-action" | "automatic-action" <br>
 
-   sending-mode =
-       "MDN-sent-manually" | "MDN-sent-automatically"
+   sending-mode = <br>
+       "MDN-sent-manually" | "MDN-sent-automatically" <br>
 
-   AS2-disposition-type =
-       "processed" | "failed"
+   AS2-disposition-type = <br>
+       "processed" | "failed" <br>
 
-   AS2-disposition-modifier =
-       ( "error" | "warning" ) | AS2-disposition-modifier-extension
+   AS2-disposition-modifier = <br>
+       ( "error" | "warning" ) | AS2-disposition-modifier-extension <br>
 
-   AS2-disposition-modifier-extension =
-       "error: authentication-failed" |
-       "error: decompression-failed" |
-       "error: decryption-failed" |
-       "error: insufficient-message-security" |
-       "error: integrity-check-failed" |
-       "error: unexpected-processing-error" |
-       "warning: " AS2-MDN-warning-description |
-       "failure: " AS2-MDN-failure-description
+   AS2-disposition-modifier-extension = <br>
+       "error: authentication-failed" | <br>
+       "error: decompression-failed" | <br>
+       "error: decryption-failed" | <br>
+       "error: insufficient-message-security" | <br>
+       "error: integrity-check-failed" | <br>
+       "error: unexpected-processing-error" | <br>
+       "warning: " AS2-MDN-warning-description | <br>
+       "failure: " AS2-MDN-failure-description <br>
 
-   AS2-MDN-warning-description = *( TEXT )
+   AS2-MDN-warning-description = *( TEXT ) <br>
 
-   AS2-MDN-failure-description = *( TEXT )
+   AS2-MDN-failure-description = *( TEXT ) <br>
 
-   AS2-received-content-MIC-field =
-       "Received-content-MIC" ":" encoded-message-digest ","
-       digest-alg-id CRLF
+   AS2-received-content-MIC-field = <br>
+       "Received-content-MIC" ":" encoded-message-digest "," <br>
+       digest-alg-id CRLF <br>
 
-   encoded-message-digest =
-       1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' )  (
-       i.e. base64( message-digest ) )
+   encoded-message-digest = <br>
+       1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' )  ( <br>
+       i.e. base64( message-digest ) ) <br>
 
-   digest-alg-id = "sha1" | "md5"
+   digest-alg-id = "sha1" | "md5" <br>
 
    "Insufficient-message-security" and "decompression-failed" are new
    error codes that are not mentioned in the AS1 RFC 3335, and may not
@@ -1384,9 +1384,8 @@ that follow the AS1 semantics[4].
    EDI, the following "failed" values are pre-defined and MUST be
    supported:
 
-       "Failure: unsupported format"
-
-       "Failure: unsupported MIC-algorithms"
+       "Failure: unsupported format"  <br>
+       "Failure: unsupported MIC-algorithms" <br>
 
 ###  Unsuccessful Non-Content Processing
 
