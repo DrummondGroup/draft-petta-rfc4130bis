@@ -844,17 +844,24 @@ that follow the AS1 semantics[4].
    Synchronous AS2-MDN
 
    [Peer1] ----( connect )----> [Peer2]
+   
    [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]]
+   
    [Peer1] <---( receive )----- [Peer2]   [HTTP Response [AS2-MDN]]
 
    Asynchronous AS2-MDN
 
    [Peer1] ----( connect )----> [Peer2]
+   
    [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]]
+   
    [Peer1] <---( receive )----- [Peer2]   [HTTP Response]
 
+
    [Peer1]*<---( connect )----- [Peer2]
+
    [Peer1] <--- ( send )------- [Peer2]   [HTTP Request [AS2-MDN]]
+   
    [Peer1] ----( receive )----> [Peer2]   [HTTP Response]
 
    * Note: An AS2-MDN may be directed to a host different from that of
