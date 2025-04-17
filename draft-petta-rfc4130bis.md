@@ -1432,8 +1432,7 @@ that follow the AS1 semantics[4].
    An example of how the "disposition-field" would look when errors
    other than those in content processing are detected is as follows:
 
-       Disposition: "disposition-mode"; processed/Error:
-         decryption-failed
+       Disposition: "disposition-mode"; processed/Error: decryption-failed
 
 ###  Processing Warnings
 
