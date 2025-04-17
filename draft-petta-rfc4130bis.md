@@ -843,26 +843,19 @@ that follow the AS1 semantics[4].
 
    Synchronous AS2-MDN
 
-   [Peer1] ----( connect )----> [Peer2]
-   
-   [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]]
-   
-   [Peer1] \<---( receive )----- [Peer2]   [HTTP Response [AS2-MDN]]
+   [Peer1] ----( connect )----> [Peer2] <br>
+   [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]] <br>
+   [Peer1] \<---( receive )----- [Peer2]  [HTTP Response [AS2-MDN]] <br>
 
    Asynchronous AS2-MDN
 
-   [Peer1] ----( connect )----> [Peer2]
-   
-   [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]]
-   
-   [Peer1] \<---( receive )----- [Peer2]   [HTTP Response]
+   [Peer1] ----( connect )----> [Peer2] <br>
+   [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]] <br>
+   [Peer1] \<---( receive )----- [Peer2]  [HTTP Response] <br>
 
-
-   [Peer1]*\<---( connect )----- [Peer2]
-
-   [Peer1] \<--- ( send )------- [Peer2]   [HTTP Request [AS2-MDN]]
-   
-   [Peer1] ----( receive )----> [Peer2]   [HTTP Response]
+   [Peer1]*\<---( connect )----- [Peer2] <br>
+   [Peer1] \<--- ( send )------- [Peer2]  [HTTP Request [AS2-MDN]] <br>
+   [Peer1] ----( receive )----> [Peer2]   [HTTP Response] <br>
 
    * Note: An AS2-MDN may be directed to a host different from that of
    the sender of the AS2 message.  It may utilize a transfer protocol
@@ -1854,88 +1847,88 @@ Appendix A:  Message Examples
 A.1.  Signed Message Requesting a Signed, Synchronous Receipt
 
    POST /receive HTTP/1.0 <br>
-   Host: 10.234.160.12:80
-   User-Agent: AS2 Company Server
-   Date: Wed, 31 Jul 2002 13:34:50 GMT
-   From: mrAS2@example.com
-   AS2-Version: 1.1
-   AS2-From: "\"  as2Name  \""
-   AS2-To: 0123456780000
-   Subject: Test Case
-   Message-Id: \<200207310834482A70BF63@\"~~foo~~\">
-   Disposition-Notification-To: mrAS2@example.com
-   Disposition-Notification-Options: signed-receipt-protocol=optional,
-     pkcs7-signature; signed-receipt-micalg=optional,sha1
-   Content-Type: multipart/signed; boundary="as2BouNdary1as2";
-     protocol="application/pkcs7-signature"; micalg=sha1
-   Content-Length: 2464
-
-   --as2BouNdary1as2
-   Content-Type: application/edi-x12
-   Content-Disposition: Attachment; filename=rfc1767.dat
-     [ISA ...EDI transaction data...IEA...]
-
-   --as2BouNdary1as2
-   Content-Type: application/pkcs7-signature
-
-     [omitted binary pkcs7 signature data]
-   --as2BouNdary1as2--
+   Host: 10.234.160.12:80 <br>
+   User-Agent: AS2 Company Server <br>
+   Date: Wed, 31 Jul 2002 13:34:50 GMT <br>
+   From: mrAS2@example.com <br>
+   AS2-Version: 1.1 <br>
+   AS2-From: "\"  as2Name  \"" <br>
+   AS2-To: 0123456780000 <br>
+   Subject: Test Case <br>
+   Message-Id: \<200207310834482A70BF63@\"~~foo~~\"> <br>
+   Disposition-Notification-To: mrAS2@example.com ****
+   Disposition-Notification-Options: signed-receipt-protocol=optional, <br>
+     pkcs7-signature; signed-receipt-micalg=optional,sha1 <br>
+   Content-Type: multipart/signed; boundary="as2BouNdary1as2"; <br>
+     protocol="application/pkcs7-signature"; micalg=sha1 <br>
+   Content-Length: 2464 <br>
+ <br>
+   --as2BouNdary1as2 <br>
+   Content-Type: application/edi-x12 <br>
+   Content-Disposition: Attachment; filename=rfc1767.dat <br>
+     [ISA ...EDI transaction data...IEA...] <br>
+ <br>
+   --as2BouNdary1as2 <br>
+   Content-Type: application/pkcs7-signature <br>
+ <br>
+     [omitted binary pkcs7 signature data] <br>
+   --as2BouNdary1as2-- <br>
 
 A.2.  MDN for Message A.1, Above
 
-   HTTP/1.0 200 OK
-   AS2-From: 0123456780000
-   AS2-To: "\"  as2Name  \""
-   AS2-Version: 1.1
-   Message-ID: \<709700825.1028122454671.JavaMail@ediXchange>
-   Content-Type: multipart/signed; micalg=sha1;
-        protocol="application/pkcs7-signature";
-        boundary="----=_Part_57_648441049.1028122454671"
-   Connection: Close
-   Content-Length: 1980
-
-   ------=_Part_57_648441049.1028122454671
-
-   & Content-Type: multipart/report;
-   & Report-Type=disposition-notification;
-   &    boundary="----=_Part_56_1672293592.1028122454656"
-   &
-   &------=_Part_56_1672293592.1028122454656
-   &Content-Type: text/plain
-   &Content-Transfer-Encoding: 7bit
-   &
-   &MDN for -
-   & Message ID: \<200207310834482A70BF63@\"~~foo~~\">
-   &  From: "\"  as2Name  \""
-   &  To: "0123456780000"
-   &  Received on: 2002-07-31 at 09:34:14 (EDT)
-   & Status: processed
-   & Comment: This is not a guarantee that the message has
-   &  been completely processed or &understood by the receiving
-   &  translator
-   &
-   &------=_Part_56_1672293592.1028122454656
-   &Content-Type: message/disposition-notification
-   &Content-Transfer-Encoding: 7bit
-   &
-   &Reporting-UA: AS2 Server
-   &Original-Recipient: rfc822; 0123456780000
-   &Final-Recipient: rfc822; 0123456780000
-   &Original-Message-ID: \<200207310834482A70BF63@\"~~foo~~\">
-   &Received-content-MIC: 7v7F++fQaNB1sVLFtMRp+dF+eG4=, sha1
-   &Disposition: automatic-action/MDN-sent-automatically;
-   &  processed
-   &
-   &------=_Part_56_1672293592.1028122454656--
-
-   ------=_Part_57_648441049.1028122454671
-   Content-Type: application/pkcs7-signature; name=smime.p7s
-   Content-Transfer-Encoding: base64
-   Content-Disposition: attachment; filename=smime.p7s
-
-   MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQ
-   cp24hMJNbxDKHnlB9jTiQzLwSwo+/90Pc87x+Sc6EpFSUYWGAAAAAAAA
-   ------=_Part_57_648441049.1028122454671--
+   HTTP/1.0 200 OK <br>
+   AS2-From: 0123456780000 <br>
+   AS2-To: "\"  as2Name  \"" <br>
+   AS2-Version: 1.1 <br>
+   Message-ID: \<709700825.1028122454671.JavaMail@ediXchange> <br>
+   Content-Type: multipart/signed; micalg=sha1; <br>
+        protocol="application/pkcs7-signature"; <br>
+        boundary="----=_Part_57_648441049.1028122454671" <br>
+   Connection: Close <br>
+   Content-Length: 1980 <br>
+ <br>
+   ------=_Part_57_648441049.1028122454671  <br>
+ <br>
+   & Content-Type: multipart/report;  <br>
+   & Report-Type=disposition-notification; <br>
+   &    boundary="----=_Part_56_1672293592.1028122454656" <br>
+   & <br>
+   &------=_Part_56_1672293592.1028122454656 <br>
+   &Content-Type: text/plain <br>
+   &Content-Transfer-Encoding: 7bit <br>
+   & <br>
+   &MDN for - <br>
+   & Message ID: \<200207310834482A70BF63@\"~~foo~~\"> <br>
+   &  From: "\"  as2Name  \"" <br>
+   &  To: "0123456780000" <br>
+   &  Received on: 2002-07-31 at 09:34:14 (EDT) <br>
+   & Status: processed <br>
+   & Comment: This is not a guarantee that the message has <br>
+   &  been completely processed or &understood by the receiving <br>
+   &  translator <br>
+   & <br>
+   &------=_Part_56_1672293592.1028122454656 <br>
+   &Content-Type: message/disposition-notification <br>
+   &Content-Transfer-Encoding: 7bit <br>
+   & <br>
+   &Reporting-UA: AS2 Server <br>
+   &Original-Recipient: rfc822; 0123456780000 <br>
+   &Final-Recipient: rfc822; 0123456780000 <br>
+   &Original-Message-ID: \<200207310834482A70BF63@\"~~foo~~\"> <br>
+   &Received-content-MIC: 7v7F++fQaNB1sVLFtMRp+dF+eG4=, sha1 <br>
+   &Disposition: automatic-action/MDN-sent-automatically; <br>
+   &  processed <br>
+   & <br>
+   &------=_Part_56_1672293592.1028122454656-- <br>
+ <br>
+   ------=_Part_57_648441049.1028122454671 <br>
+   Content-Type: application/pkcs7-signature; name=smime.p7s <br>
+   Content-Transfer-Encoding: base64 <br>
+   Content-Disposition: attachment; filename=smime.p7s <br>
+ <br>
+   MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQ <br>
+   cp24hMJNbxDKHnlB9jTiQzLwSwo+/90Pc87x+Sc6EpFSUYWGAAAAAAAA <br>
+   ------=_Part_57_648441049.1028122454671-- <br>
 
    Notes:
 
@@ -1960,97 +1953,94 @@ A.2.  MDN for Message A.1, Above
 
 A.3.  Signed, Encrypted Message Requesting a Signed, Asynchronous Receipt
 
-   Message-ID: \<#as2_company#01#a4260as2_companyout#>
-   Date: Thu, 19 Dec 2002 15:04:18 GMT
-   From: me@example.com
-   Subject: Async MDN request
-   Mime-Version: 1.0
-   Content-Type: application/pkcs7-mime;
-     smime-type=enveloped-data; name=smime.p7m
-   Content-Transfer-Encoding: binary
-   Content-Disposition: attachment; filename=smime.p7m
-   Recipient-Address: 10.240.1.2//
-   Disposition-Notification-To:
-     http://10.240.1.2:8201/exchange/as2_company
-   Disposition-Notification-Options: signed-receipt-protocol=optional,
-    pkcs7-signature; signed-receipt-micalg=optional,sha1
-   Receipt-Delivery-Option:
-     http://10.240.1.2:8201/exchange/as2_company
-   AS2-From: as2_company
-   AS2-To: "AS2 Test"
-   AS2-Version: 1.1
-   Host: 10.240.1.2:8101
-   Connection: close
-   Content-Length: 3428
-
-     [omitted binary encrypted data]   
+   Message-ID: \<#as2_company#01#a4260as2_companyout#> <br>
+   Date: Thu, 19 Dec 2002 15:04:18 GMT <br>
+   From: me@example.com <br>
+   Subject: Async MDN request <br>
+   Mime-Version: 1.0 <br>
+   Content-Type: application/pkcs7-mime; <br>
+     smime-type=enveloped-data; name=smime.p7m <br>
+   Content-Transfer-Encoding: binary <br>
+   Content-Disposition: attachment; filename=smime.p7m <br>
+   Recipient-Address: 10.240.1.2// <br>
+   Disposition-Notification-To: http://10.240.1.2:8201/exchange/as2_company <br>
+   Disposition-Notification-Options: signed-receipt-protocol=optional, <br>
+    pkcs7-signature; signed-receipt-micalg=optional,sha1 <br>
+   Receipt-Delivery-Option: http://10.240.1.2:8201/exchange/as2_company  <br>
+   AS2-From: as2_company <br>
+   AS2-To: "AS2 Test" <br>
+   AS2-Version: 1.1 <br>
+   Host: 10.240.1.2:8101 <br>
+   Connection: close <br>
+   Content-Length: 3428 <br>
+ <br>
+     [omitted binary encrypted data]    <br>
 
 A.4.  Asynchronous MDN for Message A.3, Above
 
-   POST / HTTP/1.1
-   Host: 10.240.1.2:8201
-   Connection: close, TE
-   TE: trailers, deflate, gzip, compress
-   User-Agent: RPT-HTTPClient/0.3-3I (Windows 2000)
-   Date: Thu, 19 Dec 2002 15:03:38 GMT
-   Message-ID: \<AS2-20021219_030338@as2_company.dgi_th>
-   AS2-Version: 1.1
-   Mime-Version: 1.0
-   Recipient-Address:
-   http://10.240.1.2:8201/exchange/as2_company
-   AS2-To: as2_company
-   AS2-From: "AS2 Test"
-   Subject: Your Requested MDN Response
-   From: as2debug@example.com
-   Accept-Encoding: deflate, gzip, x-gzip, compress, x-compress
-   Content-Type: multipart/signed; micalg=sha1;
-     protocol="application/pkcs7-signature";
-     boundary="----=_Part_337_6452266.1040310218750"
-   Content-Length: 3103
-
-   ------=_Part_337_6452266.1040310218750
-   Content-Type: multipart/report;
-     report-type=disposition-notification;
-     boundary="----=_Part_336_6069110.1040310218718"
-
-   ------=_Part_336_6069110.1040310218718
-   Content-Type: text/plain; charset=us-ascii
-   Content-Transfer-Encoding: 7bit
-
-   The message \<x12.edi> sent to Recipient \<AS2 Test> on Thu, 19 Dec
-   2002 15:04:18 GMT with Subject \<async MDN request> has been received.
-   The EDI Interchange was successfully decrypted, and its integrity was
-   verified.  In addition, the sender of the message, Sender
-   \<as2_company> at Location http://10.240.1.2:8201/exchange/as2_company
-   was authenticated as the originator of the message.  There is no
-   guarantee, however, that the EDI interchange was syntactically
-   correct, or that it was received by the EDI application/translator.
-
-   ------=_Part_336_6069110.1040310218718
-   Content-Type: message/disposition-notification
-   Content-Transfer-Encoding: 7bit
-
-   Reporting-UA: AS2@test:8101
-   Original-Recipient: rfc822; "AS2 Test"
-   Final-Recipient: rfc822; "AS2 Test"
-   Original-Message-ID: \<#as2_company#01#a4260as2_companyout#>
-   Disposition: automatic-action/MDN-sent-automatically;
-     processed
-   Received-Content-MIC: Hes6my+vIxIYxmvsA+MNpEOTPAc=, sha1
-
-   ------=_Part_336_6069110.1040310218718--
-
-   ------=_Part_337_6452266.1040310218750
-   Content-Type: application/pkcs7-signature; name=smime.p7s
-   Content-Transfer-Encoding: base64
-   Content-Disposition: attachment; filename=smime.p7s
-
-   BhbWjEfbyXoTAS/H0zpnEqLqbaBh29y2v82b8bdeGw8pipBQWmf53hIcqHGM
-   4ZBF3CHw5Wrf1JIE+8TwOzdbal30zeChw88WfRfD7c/j1fIA8sxsujvf2d9j
-   UxCUga8BVdVB9kH0Geexytyt0KvWQXfaEEcgZGUAAAAAAAA=
-
-   ------=_Part_337_6452266.1040310218750-
-
+   POST / HTTP/1.1 <br>
+   Host: 10.240.1.2:8201 <br>
+   Connection: close, TE <br>
+   TE: trailers, deflate, gzip, compress <br>
+   User-Agent: RPT-HTTPClient/0.3-3I (Windows 2000) <br>
+   Date: Thu, 19 Dec 2002 15:03:38 GMT <br>
+   Message-ID: \<AS2-20021219_030338@as2_company.dgi_th> <br>
+   AS2-Version: 1.1 <br>
+   Mime-Version: 1.0 <br>
+   Recipient-Address: http://10.240.1.2:8201/exchange/as2_company <br>
+   AS2-To: as2_company <br>
+   AS2-From: "AS2 Test" <br>
+   Subject: Your Requested MDN Response <br>
+   From: as2debug@example.com <br>
+   Accept-Encoding: deflate, gzip, x-gzip, compress, x-compress <br>
+   Content-Type: multipart/signed; micalg=sha1; <br>
+     protocol="application/pkcs7-signature"; <br>
+     boundary="----=_Part_337_6452266.1040310218750" <br>
+   Content-Length: 3103 <br>
+ <br>
+   ------=_Part_337_6452266.1040310218750 <br>
+   Content-Type: multipart/report; <br>
+     report-type=disposition-notification; <br>
+     boundary="----=_Part_336_6069110.1040310218718" <br>
+ <br>
+   ------=_Part_336_6069110.1040310218718 <br>
+   Content-Type: text/plain; charset=us-ascii <br>
+   Content-Transfer-Encoding: 7bit <br>
+ <br>
+   The message \<x12.edi> sent to Recipient \<AS2 Test> on Thu, 19 Dec <br>
+   2002 15:04:18 GMT with Subject \<async MDN request> has been received. <br>
+   The EDI Interchange was successfully decrypted, and its integrity was <br>
+   verified.  In addition, the sender of the message, Sender <br>
+   \<as2_company> at Location http://10.240.1.2:8201/exchange/as2_company <br>
+   was authenticated as the originator of the message.  There is no <br>
+   guarantee, however, that the EDI interchange was syntactically <br>
+   correct, or that it was received by the EDI application/translator. <br>
+ <br>
+   ------=_Part_336_6069110.1040310218718 <br>
+   Content-Type: message/disposition-notification <br>
+   Content-Transfer-Encoding: 7bit <br>
+ <br>
+   Reporting-UA: AS2@test:8101 <br>
+   Original-Recipient: rfc822; "AS2 Test" <br>
+   Final-Recipient: rfc822; "AS2 Test" <br>
+   Original-Message-ID: \<#as2_company#01#a4260as2_companyout#> <br>
+   Disposition: automatic-action/MDN-sent-automatically; <br>
+     processed <br>
+   Received-Content-MIC: Hes6my+vIxIYxmvsA+MNpEOTPAc=, sha1 <br>
+ <br>
+   ------=_Part_336_6069110.1040310218718-- <br>
+ <br>
+   ------=_Part_337_6452266.1040310218750 <br>
+   Content-Type: application/pkcs7-signature; name=smime.p7s <br>
+   Content-Transfer-Encoding: base64 <br>
+   Content-Disposition: attachment; filename=smime.p7s <br>
+ <br>
+   BhbWjEfbyXoTAS/H0zpnEqLqbaBh29y2v82b8bdeGw8pipBQWmf53hIcqHGM <br>
+   4ZBF3CHw5Wrf1JIE+8TwOzdbal30zeChw88WfRfD7c/j1fIA8sxsujvf2d9j <br>
+   UxCUga8BVdVB9kH0Geexytyt0KvWQXfaEEcgZGUAAAAAAAA= <br>
+ <br>
+   ------=_Part_337_6452266.1040310218750- <br>
+ <br>
 Authors' Addresses
 
    Dale Moberg
