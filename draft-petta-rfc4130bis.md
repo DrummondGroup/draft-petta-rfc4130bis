@@ -1853,7 +1853,7 @@ Appendix A:  Message Examples
 
 A.1.  Signed Message Requesting a Signed, Synchronous Receipt
 
-   POST /receive HTTP/1.0
+   POST /receive HTTP/1.0 <br>
    Host: 10.234.160.12:80
    User-Agent: AS2 Company Server
    Date: Wed, 31 Jul 2002 13:34:50 GMT
