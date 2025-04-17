@@ -639,8 +639,8 @@ that follow the AS1 semantics[4].
    To aid the receiving system in identifying the sending system,
    AS2-From and AS2-To headers are used.
 
-          AS2-From: < AS2-name >
-          AS2-To: < AS2-name >
+          AS2-From: \< AS2-name >
+          AS2-To: \< AS2-name >
 
    These AS2 headers contain textual values, as described below,
    identifying the sender/receiver of a data exchange.  Their values may
@@ -847,7 +847,7 @@ that follow the AS1 semantics[4].
    
    [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]]
    
-   [Peer1] <---( receive )----- [Peer2]   [HTTP Response [AS2-MDN]]
+   [Peer1] \<---( receive )----- [Peer2]   [HTTP Response [AS2-MDN]]
 
    Asynchronous AS2-MDN
 
@@ -855,12 +855,12 @@ that follow the AS1 semantics[4].
    
    [Peer1] -----( send )------> [Peer2]   [HTTP Request [AS2-Message]]
    
-   [Peer1] <---( receive )----- [Peer2]   [HTTP Response]
+   [Peer1] \<---( receive )----- [Peer2]   [HTTP Response]
 
 
-   [Peer1]*<---( connect )----- [Peer2]
+   [Peer1]*\<---( connect )----- [Peer2]
 
-   [Peer1] <--- ( send )------- [Peer2]   [HTTP Request [AS2-MDN]]
+   [Peer1] \<--- ( send )------- [Peer2]   [HTTP Request [AS2-MDN]]
    
    [Peer1] ----( receive )----> [Peer2]   [HTTP Response]
 
@@ -992,13 +992,13 @@ that follow the AS1 semantics[4].
 
    So the Disposition-notification-options string could be:
 
-        signed-receipt-protocol=optional,<protocol symbol>;
-        signed-receipt-micalg=optional,<micalg1>,<micalg2>,...;
+        signed-receipt-protocol=optional,\<protocol symbol>;
+        signed-receipt-micalg=optional,\<micalg1>,\<micalg2>,...;
 
-   The currently used value for <protocol symbol> is "pkcs7-signature"
+   The currently used value for \<protocol symbol> is "pkcs7-signature"
    for the S/MIME detached signature format.
 
-   The currently supported values for MIC algorithm <micalg> values are:
+   The currently supported values for MIC algorithm \<micalg> values are:
 
         Algorithm   Value Used
         ---------    -------
@@ -1863,7 +1863,7 @@ A.1.  Signed Message Requesting a Signed, Synchronous Receipt
    AS2-From: "\"  as2Name  \""
    AS2-To: 0123456780000
    Subject: Test Case
-   Message-Id: <200207310834482A70BF63@\"~~foo~~\">
+   Message-Id: \<200207310834482A70BF63@\"~~foo~~\">
    Disposition-Notification-To: mrAS2@example.com
    Disposition-Notification-Options: signed-receipt-protocol=optional,
      pkcs7-signature; signed-receipt-micalg=optional,sha1
@@ -1888,7 +1888,7 @@ A.2.  MDN for Message A.1, Above
    AS2-From: 0123456780000
    AS2-To: "\"  as2Name  \""
    AS2-Version: 1.1
-   Message-ID: <709700825.1028122454671.JavaMail@ediXchange>
+   Message-ID: \<709700825.1028122454671.JavaMail@ediXchange>
    Content-Type: multipart/signed; micalg=sha1;
         protocol="application/pkcs7-signature";
         boundary="----=_Part_57_648441049.1028122454671"
@@ -1906,7 +1906,7 @@ A.2.  MDN for Message A.1, Above
    &Content-Transfer-Encoding: 7bit
    &
    &MDN for -
-   & Message ID: <200207310834482A70BF63@\"~~foo~~\">
+   & Message ID: \<200207310834482A70BF63@\"~~foo~~\">
    &  From: "\"  as2Name  \""
    &  To: "0123456780000"
    &  Received on: 2002-07-31 at 09:34:14 (EDT)
@@ -1922,7 +1922,7 @@ A.2.  MDN for Message A.1, Above
    &Reporting-UA: AS2 Server
    &Original-Recipient: rfc822; 0123456780000
    &Final-Recipient: rfc822; 0123456780000
-   &Original-Message-ID: <200207310834482A70BF63@\"~~foo~~\">
+   &Original-Message-ID: \<200207310834482A70BF63@\"~~foo~~\">
    &Received-content-MIC: 7v7F++fQaNB1sVLFtMRp+dF+eG4=, sha1
    &Disposition: automatic-action/MDN-sent-automatically;
    &  processed
@@ -1961,7 +1961,7 @@ A.2.  MDN for Message A.1, Above
 
 A.3.  Signed, Encrypted Message Requesting a Signed, Asynchronous Receipt
 
-   Message-ID: <#as2_company#01#a4260as2_companyout#>
+   Message-ID: \<#as2_company#01#a4260as2_companyout#>
    Date: Thu, 19 Dec 2002 15:04:18 GMT
    From: me@example.com
    Subject: Async MDN request
@@ -1994,7 +1994,7 @@ A.4.  Asynchronous MDN for Message A.3, Above
    TE: trailers, deflate, gzip, compress
    User-Agent: RPT-HTTPClient/0.3-3I (Windows 2000)
    Date: Thu, 19 Dec 2002 15:03:38 GMT
-   Message-ID: <AS2-20021219_030338@as2_company.dgi_th>
+   Message-ID: \<AS2-20021219_030338@as2_company.dgi_th>
    AS2-Version: 1.1
    Mime-Version: 1.0
    Recipient-Address:
@@ -2018,11 +2018,11 @@ A.4.  Asynchronous MDN for Message A.3, Above
    Content-Type: text/plain; charset=us-ascii
    Content-Transfer-Encoding: 7bit
 
-   The message <x12.edi> sent to Recipient <AS2 Test> on Thu, 19 Dec
-   2002 15:04:18 GMT with Subject <async MDN request> has been received.
+   The message \<x12.edi> sent to Recipient \<AS2 Test> on Thu, 19 Dec
+   2002 15:04:18 GMT with Subject \<async MDN request> has been received.
    The EDI Interchange was successfully decrypted, and its integrity was
    verified.  In addition, the sender of the message, Sender
-   <as2_company> at Location http://10.240.1.2:8201/exchange/as2_company
+   \<as2_company> at Location http://10.240.1.2:8201/exchange/as2_company
    was authenticated as the originator of the message.  There is no
    guarantee, however, that the EDI interchange was syntactically
    correct, or that it was received by the EDI application/translator.
@@ -2034,7 +2034,7 @@ A.4.  Asynchronous MDN for Message A.3, Above
    Reporting-UA: AS2@test:8101
    Original-Recipient: rfc822; "AS2 Test"
    Final-Recipient: rfc822; "AS2 Test"
-   Original-Message-ID: <#as2_company#01#a4260as2_companyout#>
+   Original-Message-ID: \<#as2_company#01#a4260as2_companyout#>
    Disposition: automatic-action/MDN-sent-automatically;
      processed
    Received-Content-MIC: Hes6my+vIxIYxmvsA+MNpEOTPAc=, sha1
