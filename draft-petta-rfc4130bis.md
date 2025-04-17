@@ -639,8 +639,8 @@ that follow the AS1 semantics[4].
    To aid the receiving system in identifying the sending system,
    AS2-From and AS2-To headers are used.
 
-          AS2-From: \< AS2-name >
-          AS2-To: \< AS2-name >
+          AS2-From: < AS2-name >
+          AS2-To: < AS2-name >
 
    These AS2 headers contain textual values, as described below,
    identifying the sender/receiver of a data exchange.  Their values may
