@@ -1372,8 +1372,7 @@ that follow the AS1 semantics[4].
    contents itself) MUST be specified in the MDN "disposition-field" as
    follows:
 
-       Disposition: "disposition-mode";  failed/Failure:
-        unsupported format
+       Disposition: "disposition-mode";  failed/Failure: unsupported format
 
    The "failed" AS2-disposition-type MUST be used when a failure occurs
    that prevents the proper generation of an MDN.  For example, this
@@ -1524,16 +1523,12 @@ that follow the AS1 semantics[4].
 
       Disposition: automatic-action/MDN-sent-automatically; processed
 
-      Disposition: automatic-action/MDN-sent-automatically;
-        processed/error
+      Disposition: automatic-action/MDN-sent-automatically; processed/error
       Error: authentication-failed
-      Error: The signature did not decrypt into a valid PKCS#1 Type-2
-        block.
-      Error: The length of the decrypted key does not equal the
-        octet length of the modulus.
+      Error: The signature did not decrypt into a valid PKCS#1 Type-2 block.
+      Error: The length of the decrypted key does not equal the octet length of the modulus.
 
-      Disposition: automatic-action/MDN-sent-automatically;
-        processed/warning
+      Disposition: automatic-action/MDN-sent-automatically; processed/warning
       Warning: duplicate-document
  
       Disposition: automatic-action/MDN-sent-automatically; failed
@@ -1642,8 +1637,7 @@ that follow the AS1 semantics[4].
 
       o  No certificate chain leads to a trusted CA.
 
-      o  No ability to check the Certificate Revocation List (CRL) for a
-         certificate.
+      o  No ability to check the Certificate Revocation List (CRL) for a certificate.
 
       o  An invalid CRL was received.
 
