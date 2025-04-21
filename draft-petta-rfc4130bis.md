@@ -1778,7 +1778,6 @@ that follow the AS1 semantics[RFC3335].
 ---back
 
 # Acknowledgments
-{:numbered="false"}
    Carl Hage, Karen Rosenfeld, Chuck Fenton, and many others have
    provided valuable suggestions that improved this applicability
    statement.  The authors would also like to thank the vendors who
