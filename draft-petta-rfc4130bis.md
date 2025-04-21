@@ -48,10 +48,7 @@ normative:
 informative:
   RFC2246: {}
 
----
-
-# Abstract
-
+--- abstract
 This document provides an applicability statement (RFC 2026, Section
 3.2) that describes how to exchange structured business data securely
 using the HTTP transfer protocol, instead of SMTP; the applicability
@@ -67,7 +64,7 @@ use of multipart/signed Message Disposition Notification (MDN)
 responses to the original HTTP message.  This applicability statement
 is informally referred to as "AS2" because it is the second
 applicability statement, produced after "AS1", RFC 3335.
-
+--- middle
 
 # Introduction
 
