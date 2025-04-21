@@ -68,7 +68,7 @@ is informally referred to as "AS2" because it is the second
 applicability statement, produced after "AS1", RFC 3335.
 
 
-# 1. Introduction
+# Introduction
 
 ## 1.1 Applicable RFCs
 
