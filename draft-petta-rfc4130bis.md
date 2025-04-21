@@ -29,25 +29,25 @@ author:
     email: "86016128+debrapetta@users.noreply.github.com"
 
 normative:
-  - RFC2045
-  - RFC2046
-  - RFC2049
-  - RFC1767
-  - RFC2616
-  - RFC3335
-  - RFC3798
-  - RFC1847
-  - RFC3851
-  - RFC3852
-  - RFC3462
-  - RFC3023
-  - RFC2822
-  - RFC2026
-  - RFC3850
-  - RFC2234
+  - RFC2045: {}
+  - RFC2046: {}
+  - RFC2049: {}
+  - RFC1767: {}
+  - RFC2616: {}
+  - RFC3335: {}
+  - RFC3798: {}
+  - RFC1847: {}
+  - RFC3851: {}
+  - RFC3852: {}
+  - RFC3462: {}
+  - RFC3023: {}
+  - RFC2822: {}
+  - RFC2026: {}
+  - RFC3850: {}
+  - RFC2234: {}
 
 informative:
-  - RFC2246
+  - RFC2246: {}
 
 --- abstract
 
