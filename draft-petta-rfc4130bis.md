@@ -23,6 +23,7 @@ venue:
   latest: "https://DrummondGroup.github.io/draft-petta-rfc4130bis/draft-petta-rfc4130bis.html"
 
 author:
+-
     fullname: "debrapetta"
     organization: Drummond Group, LLC
     email: "86016128+debrapetta@users.noreply.github.com"
@@ -47,8 +48,8 @@ normative:
 
 informative:
   RFC2246: {}
-
 --- abstract
+
 This document provides an applicability statement (RFC 2026, Section
 3.2) that describes how to exchange structured business data securely
 using the HTTP transfer protocol, instead of SMTP; the applicability
@@ -64,6 +65,7 @@ use of multipart/signed Message Disposition Notification (MDN)
 responses to the original HTTP message.  This applicability statement
 is informally referred to as "AS2" because it is the second
 applicability statement, produced after "AS1", RFC 3335.
+
 --- middle
 
 # Introduction
@@ -1773,14 +1775,17 @@ that follow the AS1 semantics[RFC3335].
    Parameter-name:  warning
    Semantics: See Sections 7.4.3 and 7.5.5 of this document.
 
-# Acknowledgments
+---back
 
+# Acknowledgments
+{:numbered="false"}
    Carl Hage, Karen Rosenfeld, Chuck Fenton, and many others have
    provided valuable suggestions that improved this applicability
    statement.  The authors would also like to thank the vendors who
    participated in the Drummond Group Inc. AS2 interoperability testing.
    Their contributions led to great improvement in the clarity of this
    document.
+
 
 # References
 
