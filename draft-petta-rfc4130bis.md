@@ -54,9 +54,9 @@ applicability statement, produced after "AS1", RFC 3335.
 
 --- middle
 
-# Introduction
+# 1. Introduction
 
-## Applicable RFCs
+## 1.1 Applicable RFCs
 
    Previous work on Internet EDI focused on specifying MIME content
    types for EDI data [2] and extending this work to support secure
@@ -88,7 +88,7 @@ applicability statement, produced after "AS1", RFC 3335.
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in RFC 2119 [13].
 
-## Terms
+## 1.2 Terms
 
    AS2:     Applicability Statement 2 (this document); see RFC 2026
             [11], Section 3.2
@@ -153,9 +153,9 @@ applicability statement, produced after "AS1", RFC 3335.
    User Agent (UA): The application that handles and processes the AS2
            request.
             
-# Overview
+# 2. Overview
 
-## Overall Operation
+## 2.1 Overall Operation
 
    A HTTP POST operation [3] is used to send appropriately packaged EDI,
    XML, or other business data.  The Request-URI ([3], Section 9.5)
@@ -173,7 +173,7 @@ applicability statement, produced after "AS1", RFC 3335.
    records of these document data transmissions, acknowledgements, and
    authentication.
 
-## Purpose of a Security Guideline for MIME EDI
+## 2.2 Purpose of a Security Guideline for MIME EDI
 
    The purpose of these specifications is to ensure interoperability
    between B2B EC user agents, invoking some or all of the commonly
@@ -182,9 +182,9 @@ applicability statement, produced after "AS1", RFC 3335.
    which business data needs to be exchanged over the Internet in a
    secure manner.
 
-## Definitions
+## 2.3 Definitions
 
-### The Secure Transmission Loop
+### 2.3.1 The Secure Transmission Loop
 
    This document's focus is on the formats and protocols for exchanging
    EDI/EC content securely in the Internet's HTTP environment.
@@ -219,7 +219,7 @@ applicability statement, produced after "AS1", RFC 3335.
    flexibility for users to decide the degree to which they want to
    deploy those security features with their trading partners.
 
-### Definition of Receipts
+### 2.3.2 Definition of Receipts
 
    The term used for both the functional activity and the message for
    acknowledging delivery of an EDI/EC interchange is "receipt" or
@@ -241,9 +241,9 @@ applicability statement, produced after "AS1", RFC 3335.
    For information on how to format and process receipts in AS2, refer
    to Section 7.
 
-## Assumptions
+## 2.4 Assumptions
 
-### EDI/EC Process Assumptions
+### 2.4.1 EDI/EC Process Assumptions
 
    o  Encrypted object is an EDI/EC Interchange.
 
@@ -275,7 +275,7 @@ applicability statement, produced after "AS1", RFC 3335.
    standards.  They are both fully compatible, though possibly
    redundant, with this specification.
 
-### Flexibility Assumptions
+### 2.4.2 Flexibility Assumptions
 
    o  Encrypted or Unencrypted Data
 
@@ -366,29 +366,29 @@ applicability statement, produced after "AS1", RFC 3335.
    the synchronous or asynchronous receipts does not change the nature
    of the secure transmission loop in support of NRR.
    
-# References RFCs and Their Contributions
+# 3. References RFCs and Their Contributions
 
-##  RFC 2616 HTTP v1.1 [3]
+##  3.1 RFC 2616 HTTP v1.1 [3]
 
    This document specifies how data is transferred using HTTP.
 
-##  RFC 1847 MIME Security Multiparts [6]
+##  3.2 RFC 1847 MIME Security Multiparts [6]
 
    This document defines security multipart for MIME:
    multipart/encrypted and multipart/signed.
 
-##  RFC 3462 Multipart/Report [8]
+##  3.3 RFC 3462 Multipart/Report [8]
 
    This RFC defines the use of the multipart/report content type,
    something that the MDN RFC 3798 builds upon.
 
-##  RFC 1767 EDI Content [2]
+##  3.4 RFC 1767 EDI Content [2]
 
    This RFC defines the use of content type "application" for ANSI X12
    (application/EDI-X12), EDIFACT (application/EDIFACT), and mutually
    defined EDI (application/EDI-Consent).
 
-##  RFC 2045, 2046, and 2049 MIME [1]
+##  3.5 RFC 2045, 2046, and 2049 MIME [1]
 
    These are the basic MIME standards, upon which all MIME related RFCs
    build, including this one.  Key contributions include definitions of
@@ -396,24 +396,24 @@ applicability statement, produced after "AS1", RFC 3335.
    guidelines, which establish 7-bit US-ASCII as the canonical character
    set to be used in Internet messaging.
 
-##  RFC 3798 Message Disposition Notification [5]
+##  3.6 RFC 3798 Message Disposition Notification [5]
 
    This Internet RFC defines how an MDN is requested, and the format and
    syntax of the MDN.  The MDN is the basis upon which receipts and
    signed receipts are defined in this specification.
 
-##  RFC 3851 and 3852 S/MIME Version 3.1 Message Specifications and Cryptographic Message Syntax (CMS) [7]
+##  3.7 RFC 3851 and 3852 S/MIME Version 3.1 Message Specifications and Cryptographic Message Syntax (CMS) [7]
 
    This specification describes how S/MIME will carry CMS Objects.
 
-##  RFC 3023 XML Media Types [10]
+##  3.8 RFC 3023 XML Media Types [10]
 
    This RFC defines the use of content type "application" for XML
    (application/xml).
    
-# Structure of an AS2 Message
+# 4. Structure of an AS2 Message
 
-##  Introduction
+##  4.1 Introduction
 
    The basic structure of an AS2 message consists of MIME format inside
    an HTTP message with a few additional specific AS2 headers.  The
@@ -423,44 +423,44 @@ applicability statement, produced after "AS1", RFC 3335.
    referenced.  Any difference between AS2 implantations and RFCs are
    mentioned specifically in the sections below.
 
-##  Structure of an Internet EDI MIME Message
+##  4.2 Structure of an Internet EDI MIME Message
 
-   No encryption, no signature
-      -RFC2616/2045
-         -RFC1767/RFC3023 (application/EDIxxxx or /xml)
+   No encryption, no signature <br>
+      -RFC2616/2045 <br>
+         -RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
 
-   No encryption, signature
-      -RFC2616/2045
-        -RFC1847 (multipart/signed)
-          -RFC1767/RFC3023 (application/EDIxxxx or /xml)
-          -RFC3851 (application/pkcs7-signature)
+   No encryption, signature <br>
+      -RFC2616/2045 <br>
+        -RFC1847 (multipart/signed) <br>
+          -RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
+          -RFC3851 (application/pkcs7-signature) <br>
 
-   Encryption, no signature
-      -RFC2616/2045
-        -RFC3851 (application/pkcs7-mime)
-          -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted)
+   Encryption, no signature <br>
+      -RFC2616/2045 <br>
+        -RFC3851 (application/pkcs7-mime) <br>
+          -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
 
-   Encryption, signature
-      -RFC2616/2045
-        -RFC3851 (application/pkcs7-mime)
-          -RFC1847 (multipart/signed)(encrypted)
-            -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted)
-            -RFC3851 (application/pkcs7-signature)(encrypted)
+   Encryption, signature <br>
+      -RFC2616/2045 <br>
+        -RFC3851 (application/pkcs7-mime) <br>
+          -RFC1847 (multipart/signed)(encrypted) <br>
+            -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
+            -RFC3851 (application/pkcs7-signature)(encrypted) <br>
 
-   MDN over HTTP, no signature
-      -RFC2616/2045
-        -RFC3798 (message/disposition-notification)
+   MDN over HTTP, no signature <br>
+      -RFC2616/2045 <br>
+        -RFC3798 (message/disposition-notification) <br>
 
-   MDN over HTTP, signature
-      -RFC2616/2045
-        -RFC1847 (multipart/signed)
-         -RFC3798 (message/disposition-notification)
-         -RFC3851 (application/pkcs7-signature)
+   MDN over HTTP, signature <br>
+      -RFC2616/2045 <br>
+        -RFC1847 (multipart/signed) <br>
+         -RFC3798 (message/disposition-notification) <br>
+         -RFC3851 (application/pkcs7-signature) <br>
 
-   MDN over SMTP, no signature
+   MDN over SMTP, no signature <br>
    
-   MDN over SMTP, signature
-     Refer to the EDI over SMTP standard [4].
+   MDN over SMTP, signature <br>
+     Refer to the EDI over SMTP standard [4]. <br>
 
    Although all MIME content types SHOULD be supported, the following
    MIME content types MUST be supported:
@@ -475,9 +475,9 @@ applicability statement, produced after "AS1", RFC 3335.
              Content-Type: application/edi-consent
              Content-Type: application/XML
              
-# HTTP Considerations
+# 5. HTTP Considerations
 
-##  Sending EDI in HTTP POST Requests
+##  5.1 Sending EDI in HTTP POST Requests
 
    The request line will have the form: "POST Request-URI HTTP/1.1",
    with spaces and followed by a CRLF.  The Request URI is typically
@@ -506,9 +506,9 @@ applicability statement, produced after "AS1", RFC 3335.
    exist because HTTP does not conform to MIME [1] as used in SMTP
    transport.  Relevant differences are summarized below.
 
-##  Unused MIME Headers and Operations
+##  5.2 Unused MIME Headers and Operations
 
-###  Content-Transfer-Encoding Not Used in HTTP Transport
+###  5.2.1 Content-Transfer-Encoding Not Used in HTTP Transport
 
    HTTP can handle binary data and so there is no need to use the
    content transfer encodings of MIME [1].  This difference is discussed
@@ -518,7 +518,7 @@ applicability statement, produced after "AS1", RFC 3335.
    encoding of MIME bodyparts within the AS2 message body is also
    allowed.
 
-###  Message Bodies
+###  5.2.2 Message Bodies
 
    In [3], Section 3.7.2, it is explicitly noted that multiparts MUST
    have null epilogues.
@@ -530,19 +530,19 @@ applicability statement, produced after "AS1", RFC 3335.
    be transferred.  In [3], Section 8.1.2.2 discusses a pipelining
    option that is useful for segmenting large amounts of data.
 
-##  Modification of MIME or Other Headers or Parameters Used
+##  5.3 Modification of MIME or Other Headers or Parameters Used
 
-###  Content-Length
+###  5.3.1 Content-Length
 
    The use of the content-length header MUST follow the guidelines of
    [3], specifically Sections 4.4 and 14.13.
 
-###  Final Recipient and Original Recipient
+###  5.3.2 Final Recipient and Original Recipient
 
    The final and original recipient values SHOULD be the same value.
    These values MUST NOT be aliases or mailing lists.
 
-###  Message-Id and Original-Message-Id
+###  5.3.3 Message-Id and Original-Message-Id
 
    Message-Id and Original-Message-Id is formatted as defined in RFC
    2822 [9]:
@@ -561,14 +561,14 @@ applicability statement, produced after "AS1", RFC 3335.
    always use the exact syntax as received on the original message;
    don't strip or add angle brackets.
 
-###  Host Header
+###  5.3.4 Host Header
 
    The host request header field MUST be included in the POST request
    made when sending business data.  This field is intended to allow one
    server IP address to service multiple hostnames, and potentially to
    conserve IP addresses.  See [3], Sections 14.23 and 19.5.1.
 
-##  HTTP Response Status Codes
+##  5.4 HTTP Response Status Codes
 
    The status codes return status concerning HTTP operations.  For
    example, the status code 401, together with the WWW-Authenticate
@@ -583,7 +583,7 @@ applicability statement, produced after "AS1", RFC 3335.
    any retry functionality.  Retries SHOULD NOT be made if the error is
    not transient or if retries are explicitly discouraged.
 
-##  HTTP Error Recovery
+##  5.5 HTTP Error Recovery
 
    If the HTTP client fails to read the HTTP server response data, the
    POST operation with identical content, including same Message-ID,
@@ -601,13 +601,13 @@ applicability statement, produced after "AS1", RFC 3335.
    Message-ID.  The MIME reply body previously sent SHOULD be resent,
    including the MDN and other MIME parts.
 
-# Additional AS2-Specific HTTP Headers
+# 6. Additional AS2-Specific HTTP Headers
 
 The following headers are to be included in all AS2 messages and all
 AS2 MDNs, except for asynchronous MDNs that are sent using SMTP and
 that follow the AS1 semantics[4].
 
-##  AS2 Version Header
+##  6.1 AS2 Version Header
 
    To promote backward compatibility, AS2 includes a version header:
 
@@ -634,7 +634,7 @@ that follow the AS1 semantics[4].
    header.  Its absence would indicate that the message is from an
    implementation based on a previous version of this specification.
 
-##  AS2 System Identifiers
+##  6.2 AS2 System Identifiers
 
    To aid the receiving system in identifying the sending system,
    AS2-From and AS2-To headers are used.
@@ -696,9 +696,9 @@ that follow the AS1 semantics[4].
    system MAY return an unsigned MDN with an explanation of the error,
    if the sending system requested an MDN.
 
-# Structure and Processing of an MDN Message
+# 7. Structure and Processing of an MDN Message
 
-##  Introduction
+##  7.1 Introduction
 
    In order to support non-repudiation of receipt, a signed receipt,
    based on digitally signing a message disposition notification, is to
@@ -813,7 +813,7 @@ that follow the AS1 semantics[4].
            inside the MDN is the same as the digest of the original
            message.
 
-##  Synchronous and Asynchronous MDNs
+##  7.2 Synchronous and Asynchronous MDNs
 
    The AS2-MDN exists in two varieties: synchronous and asynchronous.
 
@@ -884,7 +884,7 @@ that follow the AS1 semantics[4].
    However, SMTP MDNs are formatted according to the requirements of RFC
    3335 [4].
 
-##  Requesting a Signed Receipt
+##  7.3 Requesting a Signed Receipt
 
    Message disposition notifications are requested as per RFC 3798.  A
    request that the receiving user agent issue a message disposition
@@ -1049,7 +1049,7 @@ that follow the AS1 semantics[4].
       relationship and is not received, the transaction will likely not
       be considered valid.
 
-###  Signed Receipt Considerations
+###  7.3.1 Signed Receipt Considerations
 
    The method used to request a receipt or a signed receipt is defined
    in RFC 3798, "An Extensible Message Format for Message Disposition
@@ -1106,12 +1106,12 @@ that follow the AS1 semantics[4].
          2822 headers, since these are sometimes altered or reordered by
          Mail Transport Agents (MTAs).
 
-##  MDN Format and Values
+##  7.4 MDN Format and Values
 
    This section defines the format of the AS2 Message Disposition
    Notification (AS2-MDN).
 
-###  AS2-MDN General Formats
+###  7.4.1 AS2-MDN General Formats
 
    The AS2-MDN follows the MDN specification [5] except where noted in
    this section.  The modified ABNF definitions in this document use the
@@ -1152,7 +1152,7 @@ that follow the AS1 semantics[4].
    AS2-MDN-body = <br>
        AS2-signed-MDN-body | AS2-unsigned-MDN-body <br>
 
-###  AS2-MDN Construction
+###  7.4.2 AS2-MDN Construction
 
    The AS2-MDN-body is formatted as a MIME multipart/report with a
    report-type of "disposition-notification".  When the message is
@@ -1188,7 +1188,7 @@ that follow the AS1 semantics[4].
        *( extension-field CRLF ) <br>
        [ AS2-received-content-MIC-field CRLF ] <br>
 
-###  AS2-MDN Fields
+###  7.4.3 AS2-MDN Fields
 
    The rules for constructing the AS2-disposition-notification content
    are identical to the disposition-notification-content rules provided
@@ -1274,7 +1274,7 @@ that follow the AS1 semantics[4].
    description or AS2-MDN-failure-description, or for the values of any
    (optional) error, warning, or failure fields.
 
-###  Additional AS2-MDN Programming Notes
+###  7.4.4 Additional AS2-MDN Programming Notes
 
    o  Unlike SMTP, for HTTP transactions, Original-Recipient and Final-
       Recipient SHOULD not be different.  The value in Original-
@@ -1311,14 +1311,14 @@ that follow the AS1 semantics[4].
       other disposition type with appropriate disposition modifiers is
       to be used in such situations.
 
-##  Disposition Mode, Type, and Modifier
+##  7.5 Disposition Mode, Type, and Modifier
 
-###  Disposition Mode Overview
+###  7.5.1 Disposition Mode Overview
 
    This section provides a brief overview of how "processed", "error",
    "failure", and "warning" are used.
 
-###  Successful Processing Status Indication
+###  7.5.2 Successful Processing Status Indication
 
    When the request for a receipt or signed receipt, and the received
    message contents are successfully processed by the receiving EDI UA,
@@ -1352,7 +1352,7 @@ that follow the AS1 semantics[4].
    valid as long as it is kept in mind that a request for a signed
    receipt MUST be honored.
 
-###  Unsuccessful Processed Content
+###  7.5.3 Unsuccessful Processed Content
 
    The request for a signed receipt requires the use of two
    "disposition-notification-options", which specify the protocol format
@@ -1387,7 +1387,7 @@ that follow the AS1 semantics[4].
        "Failure: unsupported format"  <br>
        "Failure: unsupported MIC-algorithms" <br>
 
-###  Unsuccessful Non-Content Processing
+###  7.5.4 Unsuccessful Non-Content Processing
 
    When errors occur in processing the received message (other than
    content), the "disposition-field" MUST be set to the "processed"
@@ -1426,7 +1426,7 @@ that follow the AS1 semantics[4].
 
        Disposition: "disposition-mode"; processed/Error: decryption-failed
 
-###  Processing Warnings
+###  7.5.5 Processing Warnings
 
    Situations arise in EDI when, even if a trading partner cannot be
    authenticated correctly, the trading partners still agree to continue
@@ -1459,7 +1459,7 @@ that follow the AS1 semantics[4].
        Disposition: "disposition-mode"; processed/Warning:
          authentication-failed, processing continued
 
-###  Backward Compatibility with Disposition Type, Modifier, and Extension
+###  7.5.6 Backward Compatibility with Disposition Type, Modifier, and Extension
 
    The following set of examples represents typical constructions of the
    Disposition field that have been in use by AS2 implementations.  This
@@ -1525,7 +1525,7 @@ that follow the AS1 semantics[4].
       Disposition: automatic-action/MDN-sent-automatically; failed
       Failure: sender-equals-receiver
 
-##  Receipt Reply Considerations in an HTTP POST
+##  7.6 Receipt Reply Considerations in an HTTP POST
 
    The details of the response to the POST command vary depending upon
    whether a receipt has been requested.
@@ -1564,7 +1564,7 @@ that follow the AS1 semantics[4].
    third optional part of the multipart/report (used to return the
    original message or its headers in the SMTP context).
 
-# Public Key Certificate Handling
+# 8. Public Key Certificate Handling
 
    In the near term, the exchange of public keys and certification of
    these keys MUST be handled as part of the process of establishing a
@@ -1594,7 +1594,7 @@ that follow the AS1 semantics[4].
    third-party authentication of trading partners, as well as the
    attributes of the trading relationship.
 
-# Security Considerations
+# 9. Security Considerations
 
    This entire document is concerned with secure transport of business
    to business data, and it considers both data confidentiality and
@@ -1647,7 +1647,7 @@ that follow the AS1 semantics[4].
    The following are additional security considerations to those listed
    in [7] and [12].
 
-##  NRR Cautions
+##  9.1 NRR Cautions
 
    This specification seeks to provide multiple mechanisms that can be
    combined in accordance with local policies to achieve a wide range of
@@ -1698,7 +1698,7 @@ that follow the AS1 semantics[4].
    returned unsigned, evidentiary requirements for NRR are weak; some
    authentication of the identity of the receiver is needed.
 
-##  HTTPS Remark
+##  9.2 HTTPS Remark
 
    The following certificate types MUST be supported for SSL server-side
    certificates:
@@ -1725,7 +1725,7 @@ that follow the AS1 semantics[4].
    to an accepted trust anchor.  Additionally, the certificate hash
    SHOULD match the hash recomputed by the receiver.
 
-9.3.  Replay Remark
+## 9.3.  Replay Remark
 
    Because business data documents normally contain transaction ids,
    replays (such as resends of not-yet-acknowledged messages) are
@@ -1733,7 +1733,7 @@ that follow the AS1 semantics[4].
    Detection of duplicates by Message-Id or by business transaction
    identifiers is recommended.  
 
-# IANA Considerations
+# 10. IANA Considerations
 
    RFC 3335 registered two Disposition-Notification-Options parameters
 
@@ -1749,21 +1749,21 @@ that follow the AS1 semantics[4].
    that is also used by this specification (see Section 7.4.3).
    Registration of the above is therefore NOT needed.
 
-##  Registration
+##  10.1 Registration
 
    This specification defines an extension to the Message Disposition
    Notification (MDN) protocol for a disposition-modifier in the
    Disposition field of a body of content-type "message/disposition-
    notification".
 
-###  Disposition Modifier 'warning'
+###  10.1.1. Disposition Modifier 'warning'
 
    Parameter-name:  warning
    Semantics: See Sections 7.4.3 and 7.5.5 of this document.
 
 --- back
 
-# Acknowledgments
+# 11. Acknowledgments
 
    Carl Hage, Karen Rosenfeld, Chuck Fenton, and many others have
    provided valuable suggestions that improved this applicability
@@ -1772,9 +1772,9 @@ that follow the AS1 semantics[4].
    Their contributions led to great improvement in the clarity of this
    document.
 
-# References
+# 12. References
 
-##  Normative References
+##  12.1 Normative References
 
    [1]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
         Extensions (MIME) Part One: Format of Internet Message Bodies",
@@ -1831,19 +1831,18 @@ that follow the AS1 semantics[4].
    [14] Crocker, D. and P. Overell, "Augmented BNF for Syntax
         Specifications: ABNF", RFC 2234, November 1997.
 
-##  Informative References
+##  12.2 Informative References
 
    [15] Dierks, T. and C. Allen, "The TLS Protocol Version 1.0", RFC
         2246, January 1999.
-
-Appendix A:  Message Examples
+# Appendix A:  Message Examples
 
    NOTE: All examples are provided for illustration only, and are not
    considered part of the protocol specification.  If an example
    conflicts with the protocol definitions specified above or in the
    other referenced RFCs, the example is wrong.
 
-A.1.  Signed Message Requesting a Signed, Synchronous Receipt
+## A.1.  Signed Message Requesting a Signed, Synchronous Receipt
 
    POST /receive HTTP/1.0 <br>
    Host: 10.234.160.12:80 <br>
@@ -1873,7 +1872,7 @@ A.1.  Signed Message Requesting a Signed, Synchronous Receipt
      [omitted binary pkcs7 signature data] <br>
    --as2BouNdary1as2-- <br>
 
-A.2.  MDN for Message A.1, Above
+## A.2.  MDN for Message A.1, Above
 
    HTTP/1.0 200 OK <br>
    AS2-From: 0123456780000 <br>
@@ -1950,7 +1949,7 @@ A.2.  MDN for Message A.1, Above
       However, it is RECOMMENDED that this body part be omitted or left
       blank.
 
-A.3.  Signed, Encrypted Message Requesting a Signed, Asynchronous Receipt
+## A.3.  Signed, Encrypted Message Requesting a Signed, Asynchronous Receipt
 
    Message-ID: \<#as2_company#01#a4260as2_companyout#> <br>
    Date: Thu, 19 Dec 2002 15:04:18 GMT <br>
@@ -1975,7 +1974,7 @@ A.3.  Signed, Encrypted Message Requesting a Signed, Asynchronous Receipt
  <br>
      [omitted binary encrypted data]    <br>
 
-A.4.  Asynchronous MDN for Message A.3, Above
+## A.4.  Asynchronous MDN for Message A.3, Above
 
    POST / HTTP/1.1 <br>
    Host: 10.240.1.2:8201 <br>
@@ -2040,19 +2039,20 @@ A.4.  Asynchronous MDN for Message A.3, Above
  <br>
    ------=_Part_337_6452266.1040310218750- <br>
  <br>
+<br>
 Authors' Addresses
 
-   Dale Moberg
-   Cyclone Commerce
-   8388 E. Hartford Drive, Suite 100
-   Scottsdale, AZ  85255 USA
+   Dale Moberg <br>
+   Cyclone Commerce <br>
+   8388 E. Hartford Drive, Suite 100 <br>
+   Scottsdale, AZ  85255 USA <br>
+<br>
+   EMail: dmoberg@cyclonecommerce.com<br>
 
-   EMail: dmoberg@cyclonecommerce.com
 
-
-   Rik Drummond
-   Drummond Group Inc.
-   4700 Bryant Irvin Court, Suite 303
-   Fort Worth, TX  76107 USA
-
-   EMail: rvd2@drummondgroup.com   
+   Rik Drummond <br>
+   Drummond Group Inc. <br>
+   4700 Bryant Irvin Court, Suite 303 <br>
+   Fort Worth, TX  76107 USA<br>
+<br>
+   EMail: rvd2@drummondgroup.com <br>
