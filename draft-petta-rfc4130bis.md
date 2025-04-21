@@ -99,7 +99,7 @@ applicability statement, produced after "AS1", RFC 3335.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in RFC 2119 [RFC2119].
+   document are to be interpreted as described in RFC 2119 [RFC3852].
 
 ## 1.2 Terms
 
@@ -915,7 +915,7 @@ that follow the AS1 semantics[RFC3335].
    Because this specification is adjusting the functionality from SMTP
    to HTTP while retaining as much as possible from the [RFC3335]
    functionality, the mail-address MUST be present.  The mail-address
-   field is specified as an RFC 2822 localpart@domain [addr-spec]
+   field is specified as an RFC 2822 localpart@domain (addr-spec)
    address.  However, the address is not used to identify where to
    return the MDN.  Receiving applications MUST ignore the value and
    MUST not complain about RFC 2822 address syntax violations.
