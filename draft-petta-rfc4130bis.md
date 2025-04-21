@@ -48,7 +48,7 @@ normative:
 informative:
   RFC2246: {}
 
---- abstract
+# Abstract
 
 This document provides an applicability statement (RFC 2026, Section
 3.2) that describes how to exchange structured business data securely
