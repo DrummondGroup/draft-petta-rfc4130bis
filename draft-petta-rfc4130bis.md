@@ -112,7 +112,7 @@ applicability statement, produced after "AS1", RFC 3335.
    EC:      Business-to-Business Electronic Commerce
 
    B2B:     Business to Business
-  
+
    Receipt: The functional message that is sent from a receiver to a
             sender to acknowledge receipt of an EDI/EC interchange.
             This message may be either synchronous or asynchronous in
@@ -166,7 +166,7 @@ applicability statement, produced after "AS1", RFC 3335.
 
    User Agent (UA): The application that handles and processes the AS2
            request.
-            
+
 # Overview
 
 ## Overall Operation
@@ -195,6 +195,7 @@ applicability statement, produced after "AS1", RFC 3335.
    strict EDI use; it applies to any electronic commerce application for
    which business data needs to be exchanged over the Internet in a
    secure manner.
+
 
 ## Definitions
 
@@ -233,6 +234,7 @@ applicability statement, produced after "AS1", RFC 3335.
    flexibility for users to decide the degree to which they want to
    deploy those security features with their trading partners.
 
+
 ### Definition of Receipts
 
    The term used for both the functional activity and the message for
@@ -254,6 +256,7 @@ applicability statement, produced after "AS1", RFC 3335.
    Considerations section for some cautions regarding NRR.
    For information on how to format and process receipts in AS2, refer
    to Section 7.
+
 
 ## Assumptions
 
@@ -289,6 +292,7 @@ applicability statement, produced after "AS1", RFC 3335.
    standards.  They are both fully compatible, though possibly
    redundant, with this specification.
 
+
 ### Flexibility Assumptions
 
    o  Encrypted or Unencrypted Data
@@ -296,7 +300,7 @@ applicability statement, produced after "AS1", RFC 3335.
    This specification allows for EDI/EC message exchange in which the
    EDI/EC data can be either unprotected or protected by means of
    encryption.
-   
+
   o  Signed or Unsigned Data
 
    This specification allows for EDI/EC message exchange with or without
@@ -379,7 +383,7 @@ applicability statement, produced after "AS1", RFC 3335.
    or asynchronous depending on the type requested.  The use of either
    the synchronous or asynchronous receipts does not change the nature
    of the secure transmission loop in support of NRR.
-   
+
 # References RFCs and Their Contributions
 
 ##  RFC 2616 HTTP v1.1 [RFC2616]
@@ -424,7 +428,8 @@ applicability statement, produced after "AS1", RFC 3335.
 
    This RFC defines the use of content type "application" for XML
    (application/xml).
-   
+
+
 # Structure of an AS2 Message
 
 ##  Introduction
@@ -436,6 +441,8 @@ applicability statement, produced after "AS1", RFC 3335.
    code in compliance with all RFCs involved, turn directly to the RFCs
    referenced.  Any difference between AS2 implantations and RFCs are
    mentioned specifically in the sections below.
+
+
 
 ##  Structure of an Internet EDI MIME Message
 
@@ -472,7 +479,7 @@ applicability statement, produced after "AS1", RFC 3335.
          -RFC3851 (application/pkcs7-signature) <br>
 
    MDN over SMTP, no signature <br>
-   
+
    MDN over SMTP, signature <br>
      Refer to the EDI over SMTP standard [RFC3335]. <br>
 
@@ -488,7 +495,8 @@ applicability statement, produced after "AS1", RFC 3335.
              Content-Type: application/EDIFACT
              Content-Type: application/edi-consent
              Content-Type: application/XML
-             
+
+
 # HTTP Considerations
 
 ##  Sending EDI in HTTP POST Requests
@@ -531,6 +539,7 @@ applicability statement, produced after "AS1", RFC 3335.
    this header MUST NOT result in transaction failure.  Content transfer
    encoding of MIME bodyparts within the AS2 message body is also
    allowed.
+
 
 ###  Message Bodies
 
@@ -648,20 +657,21 @@ that follow the AS1 semantics[RFC3335].
    header.  Its absence would indicate that the message is from an
    implementation based on a previous version of this specification.
 
+
 ##  AS2 System Identifiers
 
    To aid the receiving system in identifying the sending system,
    AS2-From and AS2-To headers are used.
 
-          AS2-From: < AS2-name >
-          AS2-To: < AS2-name >
+          AS2-From: \< AS2-name >
+          AS2-To: \< AS2-name >
 
    These AS2 headers contain textual values, as described below,
    identifying the sender/receiver of a data exchange.  Their values may
    be company specific, such as Data Universal Numbering System (DUNS)
    numbers, or they may be simply identification strings agreed upon
    between the trading partners.
-   
+
       AS2-text = "!" /           ; printable ASCII characters
                  %d35-91 /       ; except double-quote (%d34)
                  %d93-126        ; or backslash (%d92)
@@ -709,6 +719,7 @@ that follow the AS1 semantics[RFC3335].
    or unknown AS2-From or AS2-To header values.  The receiving AS2
    system MAY return an unsigned MDN with an explanation of the error,
    if the sending system requested an MDN.
+
 
 # Structure and Processing of an MDN Message
 
@@ -826,6 +837,7 @@ that follow the AS1 semantics[RFC3335].
            trading partner's public key and the returned MIC value
            inside the MDN is the same as the digest of the original
            message.
+
 
 ##  Synchronous and Asynchronous MDNs
 
@@ -977,6 +989,7 @@ that follow the AS1 semantics[RFC3335].
    most important of these options is for indicating the signing options
    for the MDN, as in the following example:
 
+
         Disposition-notification-options:
              signed-receipt-protocol=optional,pkcs7-signature;
              signed-receipt-micalg=optional,sha1,md5
@@ -1005,10 +1018,11 @@ that follow the AS1 semantics[RFC3335].
    The currently used value for \<protocol symbol> is "pkcs7-signature"
    for the S/MIME detached signature format.
 
+
    The currently supported values for MIC algorithm \<micalg> values are:
 
         Algorithm   Value Used
-        ---------    -------
+        ---------    ---------
          SHA-1        sha1
          MD5          md5
 
@@ -1078,7 +1092,7 @@ that follow the AS1 semantics[RFC3335].
    2. When a receipt is requested, explicitly specifying that the
       receipt be signed, but the recipient cannot support either the
       requested protocol format or the requested MIC algorithms, then
-      either a signed or unsigned receipt SHOULD be returned.                     
+      either a signed or unsigned receipt SHOULD be returned.
 
    3. When a signature is not explicitly requested, or if the signed
       receipt request parameter is not recognized by the UA, then no
@@ -1136,7 +1150,7 @@ that follow the AS1 semantics[RFC3335].
 
    AS2-MDN = AS2-sync-MDN | AS2-async-http-MDN |  <br>
        AS2-async-smtp-MDN <br>
- 
+
    AS2-sync-MDN = <br>
        Status-Line <br>
        *(( general-header | response-header | entity-header ) <br>
@@ -1226,6 +1240,7 @@ that follow the AS1 semantics[RFC3335].
    action-mode = <br>
        "manual-action" | "automatic-action" <br>
 
+
    sending-mode = <br>
        "MDN-sent-manually" | "MDN-sent-automatically" <br>
 
@@ -1234,6 +1249,7 @@ that follow the AS1 semantics[RFC3335].
 
    AS2-disposition-modifier = <br>
        ( "error" | "warning" ) | AS2-disposition-modifier-extension <br>
+
 
    AS2-disposition-modifier-extension = <br>
        "error: authentication-failed" | <br>
@@ -1254,12 +1270,14 @@ that follow the AS1 semantics[RFC3335].
        digest-alg-id CRLF <br>
 
    encoded-message-digest = <br>
-       1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' )  ( <br>
-       i.e. base64( message-digest ) ) <br>
+       1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' ) <br>
+       (i.e., base64( message-digest ) ) <br>
 
-   digest-alg-id = "sha1" | "md5" <br>
+   digest-alg-id = "sha1" | <br>
+                   "md5" <br>
 
-   "Insufficient-message-security" and "decompression-failed" are new
+
+  "Insufficient-message-security" and "decompression-failed" are new
    error codes that are not mentioned in the AS1 RFC 3335, and may not
    be compatible with earlier implementations of AS2.
 
@@ -1535,7 +1553,7 @@ that follow the AS1 semantics[RFC3335].
 
       Disposition: automatic-action/MDN-sent-automatically; processed/warning
       Warning: duplicate-document
- 
+
       Disposition: automatic-action/MDN-sent-automatically; failed
       Failure: sender-equals-receiver
 
@@ -1745,7 +1763,7 @@ that follow the AS1 semantics[RFC3335].
    replays (such as resends of not-yet-acknowledged messages) are
    discarded as part of the normal process of duplicate detection.
    Detection of duplicates by Message-Id or by business transaction
-   identifiers is recommended.  
+   identifiers is recommended.
 
 # IANA Considerations
 
@@ -1775,7 +1793,6 @@ that follow the AS1 semantics[RFC3335].
    Parameter-name:  warning
    Semantics: See Sections 7.4.3 and 7.5.5 of this document.
 
----back
 
 # Acknowledgments
    Carl Hage, Karen Rosenfeld, Chuck Fenton, and many others have
@@ -1784,6 +1801,7 @@ that follow the AS1 semantics[RFC3335].
    participated in the Drummond Group Inc. AS2 interoperability testing.
    Their contributions led to great improvement in the clarity of this
    document.
+
 
 
 # References
@@ -1849,7 +1867,7 @@ that follow the AS1 semantics[RFC3335].
 
    [RFC2246] Dierks, T. and C. Allen, "The TLS Protocol Version 1.0", RFC
         2246, January 1999.
- 
+
 # Appendix A:  Message Examples
 
    NOTE: All examples are provided for illustration only, and are not
@@ -1875,15 +1893,15 @@ that follow the AS1 semantics[RFC3335].
    Content-Type: multipart/signed; boundary="as2BouNdary1as2"; <br>
      protocol="application/pkcs7-signature"; micalg=sha1 <br>
    Content-Length: 2464 <br>
- <br>
+
    --as2BouNdary1as2 <br>
    Content-Type: application/edi-x12 <br>
    Content-Disposition: Attachment; filename=rfc1767.dat <br>
      {ISA ...EDI transaction data...IEA...} <br>
- <br>
+
    --as2BouNdary1as2 <br>
    Content-Type: application/pkcs7-signature <br>
- <br>
+
      {omitted binary pkcs7 signature data} <br>
    --as2BouNdary1as2-- <br>
 
@@ -1899,13 +1917,13 @@ that follow the AS1 semantics[RFC3335].
         boundary="----=_Part_57_648441049.1028122454671" <br>
    Connection: Close <br>
    Content-Length: 1980 <br>
- <br>
+
    ------=_Part_57_648441049.1028122454671  <br>
- <br>
+<br>
    & Content-Type: multipart/report;  <br>
    & Report-Type=disposition-notification; <br>
    &    boundary="----=_Part_56_1672293592.1028122454656" <br>
-   & <br>
+   &<br>
    &------=_Part_56_1672293592.1028122454656 <br>
    &Content-Type: text/plain <br>
    &Content-Transfer-Encoding: 7bit <br>
@@ -1919,11 +1937,11 @@ that follow the AS1 semantics[RFC3335].
    & Comment: This is not a guarantee that the message has <br>
    &  been completely processed or &understood by the receiving <br>
    &  translator <br>
-   & <br>
+   &<br>
    &------=_Part_56_1672293592.1028122454656 <br>
    &Content-Type: message/disposition-notification <br>
    &Content-Transfer-Encoding: 7bit <br>
-   & <br>
+   &<br>
    &Reporting-UA: AS2 Server <br>
    &Original-Recipient: rfc822; 0123456780000 <br>
    &Final-Recipient: rfc822; 0123456780000 <br>
@@ -1931,14 +1949,14 @@ that follow the AS1 semantics[RFC3335].
    &Received-content-MIC: 7v7F++fQaNB1sVLFtMRp+dF+eG4=, sha1 <br>
    &Disposition: automatic-action/MDN-sent-automatically; <br>
    &  processed <br>
-   & <br>
+   &<br>
    &------=_Part_56_1672293592.1028122454656-- <br>
- <br>
+
    ------=_Part_57_648441049.1028122454671 <br>
    Content-Type: application/pkcs7-signature; name=smime.p7s <br>
    Content-Transfer-Encoding: base64 <br>
    Content-Disposition: attachment; filename=smime.p7s <br>
- <br>
+
    MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQ <br>
    cp24hMJNbxDKHnlB9jTiQzLwSwo+/90Pc87x+Sc6EpFSUYWGAAAAAAAA <br>
    ------=_Part_57_648441049.1028122454671-- <br>
@@ -1986,7 +2004,7 @@ that follow the AS1 semantics[RFC3335].
    Host: 10.240.1.2:8101 <br>
    Connection: close <br>
    Content-Length: 3428 <br>
- <br>
+<br>
      {omitted binary encrypted data}   <br>
 
 ## A.4.  Asynchronous MDN for Message A.3, Above
@@ -2010,16 +2028,16 @@ that follow the AS1 semantics[RFC3335].
      protocol="application/pkcs7-signature"; <br>
      boundary="----=_Part_337_6452266.1040310218750" <br>
    Content-Length: 3103 <br>
- <br>
+
    ------=_Part_337_6452266.1040310218750 <br>
    Content-Type: multipart/report; <br>
      report-type=disposition-notification; <br>
      boundary="----=_Part_336_6069110.1040310218718" <br>
- <br>
+
    ------=_Part_336_6069110.1040310218718 <br>
    Content-Type: text/plain; charset=us-ascii <br>
    Content-Transfer-Encoding: 7bit <br>
- <br>
+
    The message \<x12.edi> sent to Recipient \<AS2 Test> on Thu, 19 Dec <br>
    2002 15:04:18 GMT with Subject \<async MDN request> has been received. <br>
    The EDI Interchange was successfully decrypted, and its integrity was <br>
@@ -2028,11 +2046,11 @@ that follow the AS1 semantics[RFC3335].
    was authenticated as the originator of the message.  There is no <br>
    guarantee, however, that the EDI interchange was syntactically <br>
    correct, or that it was received by the EDI application/translator. <br>
- <br>
+
    ------=_Part_336_6069110.1040310218718 <br>
    Content-Type: message/disposition-notification <br>
    Content-Transfer-Encoding: 7bit <br>
- <br>
+
    Reporting-UA: AS2@test:8101 <br>
    Original-Recipient: rfc822; "AS2 Test" <br>
    Final-Recipient: rfc822; "AS2 Test" <br>
@@ -2040,28 +2058,28 @@ that follow the AS1 semantics[RFC3335].
    Disposition: automatic-action/MDN-sent-automatically; <br>
      processed <br>
    Received-Content-MIC: Hes6my+vIxIYxmvsA+MNpEOTPAc=, sha1 <br>
- <br>
+
    ------=_Part_336_6069110.1040310218718-- <br>
- <br>
+
    ------=_Part_337_6452266.1040310218750 <br>
    Content-Type: application/pkcs7-signature; name=smime.p7s <br>
    Content-Transfer-Encoding: base64 <br>
    Content-Disposition: attachment; filename=smime.p7s <br>
- <br>
+
    BhbWjEfbyXoTAS/H0zpnEqLqbaBh29y2v82b8bdeGw8pipBQWmf53hIcqHGM <br>
    4ZBF3CHw5Wrf1JIE+8TwOzdbal30zeChw88WfRfD7c/j1fIA8sxsujvf2d9j <br>
    UxCUga8BVdVB9kH0Geexytyt0KvWQXfaEEcgZGUAAAAAAAA= <br>
- <br>
+
    ------=_Part_337_6452266.1040310218750- <br>
- <br>
-<br>
+
+
 Authors' Addresses
 
    Dale Moberg <br>
    Cyclone Commerce <br>
    8388 E. Hartford Drive, Suite 100 <br>
    Scottsdale, AZ  85255 USA <br>
-<br>
+
    EMail: dmoberg@cyclonecommerce.com<br>
 
 
@@ -2069,5 +2087,5 @@ Authors' Addresses
    Drummond Group Inc. <br>
    4700 Bryant Irvin Court, Suite 303 <br>
    Fort Worth, TX  76107 USA<br>
-<br>
+
    EMail: rvd2@drummondgroup.com <br>
