@@ -1230,7 +1230,7 @@ applicability statement, produced after "AS1", RFC 3335.<a href="#section-abstra
                 <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-rfc-1767-edi-content" class="internal xref">RFC 1767 EDI Content RFC1767</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-rfc-2045-2046-and-2049-mime" class="internal xref">RFC 2045, 2046, and 2049 MIME RFC2045 RFC2049</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-rfc-2045-2046-and-2049-mime" class="internal xref">RFC 2045, 2046, and 2049 MIME   RFC2045, RFC2046, and RFC2049</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
                 <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-rfc-3798-message-dispositio" class="internal xref">RFC 3798 Message Disposition Notification RFC3798</a></p>
@@ -1827,10 +1827,10 @@ receipt.  Receiver sends back the signed receipt.<a href="#section-2.4.2-15.12.1
    defined EDI (application/EDI-Consent).<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="rfc-2045-2046-and-2049-mime-rfc2045-rfc2046-rfc2049">
+<div id="rfc-2045-2046-and-2049-mime-rfc2045-rfc2046-and-rfc2049">
 <section id="section-3.5">
         <h3 id="name-rfc-2045-2046-and-2049-mime">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-rfc-2045-2046-and-2049-mime" class="section-name selfRef">RFC 2045, 2046, and 2049 MIME <span class="cite xref">RFC2045 [RFC2046]</span> <span class="cite xref">[RFC2049]</span></a>
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-rfc-2045-2046-and-2049-mime" class="section-name selfRef">RFC 2045, 2046, and 2049 MIME   <span class="cite xref">[RFC2045]</span>, <span class="cite xref">[RFC2046]</span>, and <span class="cite xref">[RFC2049]</span></a>
         </h3>
 <p id="section-3.5-1">These are the basic MIME standards, upon which all MIME related RFCs
    build, including this one.  Key contributions include definitions of
@@ -1893,31 +1893,31 @@ receipt.  Receiver sends back the signed receipt.<a href="#section-2.4.2-15.12.1
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-structure-of-an-internet-ed" class="section-name selfRef">Structure of an Internet EDI MIME Message</a>
         </h3>
 <p id="section-4.2-1">No encryption, no signature <br>
-      -RFC2616/2045 <br>
-         -RFC1767/RFC3023 (application/EDIxxxx or /xml) <br><a href="#section-4.2-1" class="pilcrow">¶</a></p>
+      - RFC2616/2045 <br>
+        - RFC1767/RFC3023 (application/EDIxxxx or /xml) <br><a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">No encryption, signature <br>
-      -RFC2616/2045 <br>
-        -RFC1847 (multipart/signed) <br>
-          -RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
-          -RFC3851 (application/pkcs7-signature) <br><a href="#section-4.2-2" class="pilcrow">¶</a></p>
+      - RFC2616/2045 <br>
+        - RFC1847 (multipart/signed) <br>
+          - RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
+          - RFC3851 (application/pkcs7-signature) <br><a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">Encryption, no signature <br>
-      -RFC2616/2045 <br>
-        -RFC3851 (application/pkcs7-mime) <br>
-          -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br><a href="#section-4.2-3" class="pilcrow">¶</a></p>
+      - RFC2616/2045 <br>
+        - RFC3851 (application/pkcs7-mime) <br>
+          - RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br><a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4">Encryption, signature <br>
-      -RFC2616/2045 <br>
-        -RFC3851 (application/pkcs7-mime) <br>
-          -RFC1847 (multipart/signed)(encrypted) <br>
-            -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
-            -RFC3851 (application/pkcs7-signature)(encrypted) <br><a href="#section-4.2-4" class="pilcrow">¶</a></p>
+      - RFC2616/2045 <br>
+        - RFC3851 (application/pkcs7-mime) <br>
+          - RFC1847 (multipart/signed)(encrypted) <br>
+            - RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
+            - RFC3851 (application/pkcs7-signature)(encrypted) <br><a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5">MDN over HTTP, no signature <br>
-      -RFC2616/2045 <br>
-        -RFC3798 (message/disposition-notification) <br><a href="#section-4.2-5" class="pilcrow">¶</a></p>
+      - RFC2616/2045 <br>
+        - RFC3798 (message/disposition-notification) <br><a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <p id="section-4.2-6">MDN over HTTP, signature <br>
-      -RFC2616/2045 <br>
-        -RFC1847 (multipart/signed) <br>
-         -RFC3798 (message/disposition-notification) <br>
-         -RFC3851 (application/pkcs7-signature) <br><a href="#section-4.2-6" class="pilcrow">¶</a></p>
+      - RFC2616/2045 <br>
+        - RFC1847 (multipart/signed) <br>
+         - RFC3798 (message/disposition-notification) <br>
+         - RFC3851 (application/pkcs7-signature) <br><a href="#section-4.2-6" class="pilcrow">¶</a></p>
 <p id="section-4.2-7">MDN over SMTP, no signature <br><a href="#section-4.2-7" class="pilcrow">¶</a></p>
 <p id="section-4.2-8">MDN over SMTP, signature <br>
      Refer to the EDI over SMTP standard <span>[<a href="#RFC3335" class="cite xref">RFC3335</a>]</span>. <br><a href="#section-4.2-8" class="pilcrow">¶</a></p>
@@ -2154,8 +2154,8 @@ that follow the AS1 semantics<span>[<a href="#RFC3335" class="cite xref">RFC3335
    AS2-From and AS2-To headers are used.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.2-2">
 <pre>
-      AS2-From: \&lt; AS2-name &gt;
-      AS2-To: \&lt; AS2-name &gt;
+      AS2-From: &lt; AS2-name &gt;
+      AS2-To: &lt; AS2-name &gt;
 </pre><a href="#section-6.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-6.2-3">These AS2 headers contain textual values, as described below,
@@ -2523,8 +2523,8 @@ where
 <p id="section-7.3-27">So the Disposition-notification-options string could be:<a href="#section-7.3-27" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-7.3-28">
 <pre>
-    signed-receipt-protocol=optional,\&lt;protocol symbol&gt;;
-    signed-receipt-micalg=optional,\&lt;micalg1&gt;,\&lt;micalg2&gt;,...;
+    signed-receipt-protocol=optional, &lt;protocol symbol&gt;;
+    signed-receipt-micalg=optional, &lt;micalg1&gt;, &lt;micalg2&gt;,...;
 </pre><a href="#section-7.3-28" class="pilcrow">¶</a>
 </div>
 <p id="section-7.3-29">The currently used value for &lt;protocol symbol&gt; is "pkcs7-signature"
@@ -2939,8 +2939,8 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
    supported:<a href="#section-7.5.3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-7.5.3-6">
 <pre>
-   "Failure: unsupported format"  &lt;br&gt;
-   "Failure: unsupported MIC-algorithms" &lt;br&gt;
+   "Failure: unsupported format"
+   "Failure: unsupported MIC-algorithms"
 </pre><a href="#section-7.5.3-6" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3461,7 +3461,7 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
    AS2-To: 0123456780000 <br>
    Subject: Test Case <br>
    Message-Id: &lt;200207310834482A70BF63@"~~foo~~"&gt; <br>
-   Disposition-Notification-To: mrAS2@example.com <em>**</em>
+   Disposition-Notification-To: mrAS2@example.com <br>
    Disposition-Notification-Options: signed-receipt-protocol=optional, <br>
      pkcs7-signature; signed-receipt-micalg=optional,sha1 <br>
    Content-Type: multipart/signed; boundary="as2BouNdary1as2"; <br>
@@ -3475,9 +3475,10 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
    Content-Type: application/pkcs7-signature <br><a href="#section-13.1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-13.1-4">
 <pre>
- {omitted binary pkcs7 signature data} &lt;br&gt;    --as2BouNdary1as2-- &lt;br&gt;
+ {omitted binary pkcs7 signature data}
 </pre><a href="#section-13.1-4" class="pilcrow">¶</a>
 </div>
+<p id="section-13.1-5">--as2BouNdary1as2-- <br><a href="#section-13.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="a2-mdn-for-message-a1-above">
