@@ -1276,7 +1276,7 @@ that follow the AS1 semantics[RFC3335].
                     "sha1" | <br>
                     "md5" <br>
                  ; The "sha1" is a legacy spelling of the "sha-1" defined hash in the IANA Textual Names Registry
-	               	; It should be maintained for backwards compatibility
+                 ; It should be maintained for backwards compatibility
 
   "Insufficient-message-security" and "decompression-failed" are new
    error codes that are not mentioned in the AS1 RFC 3335, and may not
@@ -1817,7 +1817,7 @@ that follow the AS1 semantics[RFC3335].
    Date: Wed, 31 Jul 2002 13:34:50 GMT <br>
    From: mrAS2@example.com <br>
    AS2-Version: 1.1 <br>
-   AS2-From: "\"  as2Name  \"" <br>
+   AS2-From: "  as2Name  " <br>
    AS2-To: 0123456780000 <br>
    Subject: Test Case <br>
    Message-Id: \<200207310834482A70BF63@\"~~foo~~\"> <br>
@@ -1845,7 +1845,7 @@ that follow the AS1 semantics[RFC3335].
 
    HTTP/1.0 200 OK <br>
    AS2-From: 0123456780000 <br>
-   AS2-To: "\"  as2Name  \"" <br>
+   AS2-To: "  as2Name  " <br>
    AS2-Version: 1.1 <br>
    Message-ID: \<709700825.1028122454671.JavaMail@ediXchange> <br>
    Content-Type: multipart/signed; micalg=sha1; <br>
@@ -1866,7 +1866,7 @@ that follow the AS1 semantics[RFC3335].
    & <br>
    &MDN for - <br>
    & Message ID: \<200207310834482A70BF63@\"~~foo~~\"> <br>
-   &  From: "\"  as2Name  \"" <br>
+   &  From: "  as2Name  " <br>
    &  To: "0123456780000" <br>
    &  Received on: 2002-07-31 at 09:34:14 (EDT) <br>
    & Status: processed <br>
