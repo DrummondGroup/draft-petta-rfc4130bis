@@ -439,7 +439,7 @@ applicability statement, produced after "AS1", RFC 3335.
    structures below are described hierarchically in terms of which RFCs
    are applied to form the specific structure.  For details of how to
    code in compliance with all RFCs involved, turn directly to the RFCs
-   referenced.  Any difference between AS2 implantations and RFCs are
+   referenced.  Any difference between AS2 implementations and RFCs are
    mentioned specifically in the sections below.
 
 ##  Structure of an Internet EDI MIME Message
@@ -1019,7 +1019,7 @@ that follow the AS1 semantics[RFC3335].
 
         Algorithm   Value Used
         ---------    ---------
-         SHA-1        sha1
+         SHA-1        sha-1 or sha1
          MD5          md5
 
    The semantics of the "signed-receipt-protocol" and the "signed-
@@ -1269,9 +1269,11 @@ that follow the AS1 semantics[RFC3335].
        1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' ) <br>
        (i.e., base64( message-digest ) ) <br>
 
-   digest-alg-id = "sha1" | <br>
-                   "md5" <br>
-
+   digest-alg-id = "sha-1" | <br>
+                    "sha1" | <br>
+                    "md5" <br>
+                 ; The "sha1" is a legacy spelling of the "sha-1" defined hash in the IANA Textual Names Registry
+	               	; It should be maintained for backwards compatibility
 
   "Insufficient-message-security" and "decompression-failed" are new
    error codes that are not mentioned in the AS1 RFC 3335, and may not
@@ -1925,14 +1927,14 @@ that follow the AS1 semantics[RFC3335].
    Content-Transfer-Encoding: binary <br>
    Content-Disposition: attachment; filename=smime.p7m <br>
    Recipient-Address: 10.240.1.2// <br>
-   Disposition-Notification-To: http://10.240.1.2:8201/exchange/as2_company <br>
+   Disposition-Notification-To: http://10.240.1.2:58201/exchange/as2_company <br>
    Disposition-Notification-Options: signed-receipt-protocol=optional, <br>
     pkcs7-signature; signed-receipt-micalg=optional,sha1 <br>
-   Receipt-Delivery-Option: http://10.240.1.2:8201/exchange/as2_company  <br>
+   Receipt-Delivery-Option: http://10.240.1.2:58201/exchange/as2_company  <br>
    AS2-From: as2_company <br>
    AS2-To: "AS2 Test" <br>
    AS2-Version: 1.1 <br>
-   Host: 10.240.1.2:8101 <br>
+   Host: 10.240.1.2:58101 <br>
    Connection: close <br>
    Content-Length: 3428 <br>
 
@@ -1941,7 +1943,7 @@ that follow the AS1 semantics[RFC3335].
 ## A.4.  Asynchronous MDN for Message A.3, Above
 
    POST / HTTP/1.1 <br>
-   Host: 10.240.1.2:8201 <br>
+   Host: 10.240.1.2:58201 <br>
    Connection: close, TE <br>
    TE: trailers, deflate, gzip, compress <br>
    User-Agent: RPT-HTTPClient/0.3-3I (Windows 2000) <br>
@@ -1949,7 +1951,7 @@ that follow the AS1 semantics[RFC3335].
    Message-ID: \<AS2-20021219_030338@as2_company.dgi_th> <br>
    AS2-Version: 1.1 <br>
    Mime-Version: 1.0 <br>
-   Recipient-Address: http://10.240.1.2:8201/exchange/as2_company <br>
+   Recipient-Address: http://10.240.1.2:58201/exchange/as2_company <br>
    AS2-To: as2_company <br>
    AS2-From: "AS2 Test" <br>
    Subject: Your Requested MDN Response <br>
@@ -1973,7 +1975,7 @@ that follow the AS1 semantics[RFC3335].
    2002 15:04:18 GMT with Subject \<async MDN request> has been received. <br>
    The EDI Interchange was successfully decrypted, and its integrity was <br>
    verified.  In addition, the sender of the message, Sender <br>
-   \<as2_company> at Location http://10.240.1.2:8201/exchange/as2_company <br>
+   \<as2_company> at Location http://10.240.1.2:58201/exchange/as2_company <br>
    was authenticated as the originator of the message.  There is no <br>
    guarantee, however, that the EDI interchange was syntactically <br>
    correct, or that it was received by the EDI application/translator. <br>
