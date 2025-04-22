@@ -1872,7 +1872,7 @@ receipt.  Receiver sends back the signed receipt.<a href="#section-2.4.2-15.12.1
    structures below are described hierarchically in terms of which RFCs
    are applied to form the specific structure.  For details of how to
    code in compliance with all RFCs involved, turn directly to the RFCs
-   referenced.  Any difference between AS2 implantations and RFCs are
+   referenced.  Any difference between AS2 implementations and RFCs are
    mentioned specifically in the sections below.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2523,7 +2523,7 @@ where
 <pre>
     Algorithm   Value Used
     ---------    ---------
-     SHA-1        sha1
+     SHA-1        sha-1 or sha1
      MD5          md5
 </pre><a href="#section-7.3-31" class="pilcrow">¶</a>
 </div>
@@ -2776,8 +2776,11 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
 <p id="section-7.4.3-12">encoded-message-digest = <br>
        1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' ) <br>
        (i.e., base64( message-digest ) ) <br><a href="#section-7.4.3-12" class="pilcrow">¶</a></p>
-<p id="section-7.4.3-13">digest-alg-id = "sha1" | <br>
-                   "md5" <br><a href="#section-7.4.3-13" class="pilcrow">¶</a></p>
+<p id="section-7.4.3-13">digest-alg-id = "sha-1" | <br>
+                    "sha1" | <br>
+                    "md5" <br>
+                 ; The "sha1" is a legacy spelling of the "sha-1" defined hash in the IANA Textual Names Registry
+                        ; It should be maintained for backwards compatibility<a href="#section-7.4.3-13" class="pilcrow">¶</a></p>
 <p id="section-7.4.3-14">"Insufficient-message-security" and "decompression-failed" are new
    error codes that are not mentioned in the AS1 RFC 3335, and may not
    be compatible with earlier implementations of AS2.<a href="#section-7.4.3-14" class="pilcrow">¶</a></p>
@@ -3509,14 +3512,14 @@ blank.<a href="#section-12.2-7.4.1" class="pilcrow">¶</a></p>
    Content-Transfer-Encoding: binary <br>
    Content-Disposition: attachment; filename=smime.p7m <br>
    Recipient-Address: 10.240.1.2// <br>
-   Disposition-Notification-To: http://10.240.1.2:8201/exchange/as2_company <br>
+   Disposition-Notification-To: http://10.240.1.2:58201/exchange/as2_company <br>
    Disposition-Notification-Options: signed-receipt-protocol=optional, <br>
     pkcs7-signature; signed-receipt-micalg=optional,sha1 <br>
-   Receipt-Delivery-Option: http://10.240.1.2:8201/exchange/as2_company  <br>
+   Receipt-Delivery-Option: http://10.240.1.2:58201/exchange/as2_company  <br>
    AS2-From: as2_company <br>
    AS2-To: "AS2 Test" <br>
    AS2-Version: 1.1 <br>
-   Host: 10.240.1.2:8101 <br>
+   Host: 10.240.1.2:58101 <br>
    Connection: close <br>
    Content-Length: 3428 <br><a href="#section-12.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-12.3-2">
@@ -3532,7 +3535,7 @@ blank.<a href="#section-12.2-7.4.1" class="pilcrow">¶</a></p>
 <a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-a4-asynchronous-mdn-for-mes" class="section-name selfRef">A.4.  Asynchronous MDN for Message A.3, Above</a>
         </h3>
 <p id="section-12.4-1">POST / HTTP/1.1 <br>
-   Host: 10.240.1.2:8201 <br>
+   Host: 10.240.1.2:58201 <br>
    Connection: close, TE <br>
    TE: trailers, deflate, gzip, compress <br>
    User-Agent: RPT-HTTPClient/0.3-3I (Windows 2000) <br>
@@ -3540,7 +3543,7 @@ blank.<a href="#section-12.2-7.4.1" class="pilcrow">¶</a></p>
    Message-ID: &lt;AS2-20021219_030338@as2_company.dgi_th&gt; <br>
    AS2-Version: 1.1 <br>
    Mime-Version: 1.0 <br>
-   Recipient-Address: http://10.240.1.2:8201/exchange/as2_company <br>
+   Recipient-Address: http://10.240.1.2:58201/exchange/as2_company <br>
    AS2-To: as2_company <br>
    AS2-From: "AS2 Test" <br>
    Subject: Your Requested MDN Response <br>
@@ -3561,7 +3564,7 @@ blank.<a href="#section-12.2-7.4.1" class="pilcrow">¶</a></p>
    2002 15:04:18 GMT with Subject &lt;async MDN request&gt; has been received. <br>
    The EDI Interchange was successfully decrypted, and its integrity was <br>
    verified.  In addition, the sender of the message, Sender <br>
-   &lt;as2_company&gt; at Location http://10.240.1.2:8201/exchange/as2_company <br>
+   &lt;as2_company&gt; at Location http://10.240.1.2:58201/exchange/as2_company <br>
    was authenticated as the originator of the message.  There is no <br>
    guarantee, however, that the EDI interchange was syntactically <br>
    correct, or that it was received by the EDI application/translator. <br><a href="#section-12.4-4" class="pilcrow">¶</a></p>

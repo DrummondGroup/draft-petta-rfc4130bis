@@ -517,7 +517,7 @@ Table of Contents
    structures below are described hierarchically in terms of which RFCs
    are applied to form the specific structure.  For details of how to
    code in compliance with all RFCs involved, turn directly to the RFCs
-   referenced.  Any difference between AS2 implantations and RFCs are
+   referenced.  Any difference between AS2 implementations and RFCs are
    mentioned specifically in the sections below.
 
 4.2.  Structure of an Internet EDI MIME Message
@@ -1091,7 +1091,7 @@ Table of Contents
 
        Algorithm   Value Used
        ---------    ---------
-        SHA-1        sha1
+        SHA-1        sha-1 or sha1
         MD5          md5
 
    The semantics of the "signed-receipt-protocol" and the "signed-
@@ -1340,8 +1340,12 @@ Table of Contents
    1*( 'A'-Z' | 'a'-'z' | '0'-'9' | '/' | '+' | '=' )
    (i.e., base64( message-digest ) )
 
-   digest-alg-id = "sha1" |
+   digest-alg-id = "sha-1" |
+   "sha1" |
    "md5"
+   ; The "sha1" is a legacy spelling of the "sha-1" defined hash in the
+   IANA Textual Names Registry ; It should be maintained for backwards
+   compatibility
 
    "Insufficient-message-security" and "decompression-failed" are new
    error codes that are not mentioned in the AS1 RFC 3335, and may not
@@ -1994,15 +1998,15 @@ Table of Contents
    Content-Transfer-Encoding: binary
    Content-Disposition: attachment; filename=smime.p7m
    Recipient-Address: 10.240.1.2//
-   Disposition-Notification-To: http://10.240.1.2:8201/exchange/
+   Disposition-Notification-To: http://10.240.1.2:58201/exchange/
    as2_company
    Disposition-Notification-Options: signed-receipt-protocol=optional,
    pkcs7-signature; signed-receipt-micalg=optional,sha1
-   Receipt-Delivery-Option: http://10.240.1.2:8201/exchange/as2_company
+   Receipt-Delivery-Option: http://10.240.1.2:58201/exchange/as2_company
    AS2-From: as2_company
    AS2-To: "AS2 Test"
    AS2-Version: 1.1
-   Host: 10.240.1.2:8101
+   Host: 10.240.1.2:58101
    Connection: close
    Content-Length: 3428
 
@@ -2011,7 +2015,7 @@ Table of Contents
 12.4.  A.4.  Asynchronous MDN for Message A.3, Above
 
    POST / HTTP/1.1
-   Host: 10.240.1.2:8201
+   Host: 10.240.1.2:58201
    Connection: close, TE
    TE: trailers, deflate, gzip, compress
    User-Agent: RPT-HTTPClient/0.3-3I (Windows 2000)
@@ -2019,7 +2023,7 @@ Table of Contents
    Message-ID: <AS2-20021219_030338@as2_company.dgi_th>
    AS2-Version: 1.1
    Mime-Version: 1.0
-   Recipient-Address: http://10.240.1.2:8201/exchange/as2_company
+   Recipient-Address: http://10.240.1.2:58201/exchange/as2_company
    AS2-To: as2_company
    AS2-From: "AS2 Test"
    Subject: Your Requested MDN Response
@@ -2043,7 +2047,8 @@ Table of Contents
    2002 15:04:18 GMT with Subject <async MDN request> has been received.
    The EDI Interchange was successfully decrypted, and its integrity was
    verified.  In addition, the sender of the message, Sender
-   <as2_company> at Location http://10.240.1.2:8201/exchange/as2_company
+   <as2_company> at Location http://10.240.1.2:58201/exchange/
+   as2_company
    was authenticated as the originator of the message.  There is no
    guarantee, however, that the EDI interchange was syntactically
    correct, or that it was received by the EDI application/translator.
