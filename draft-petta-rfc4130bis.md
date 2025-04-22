@@ -406,7 +406,7 @@ applicability statement, produced after "AS1", RFC 3335.
    (application/EDI-X12), EDIFACT (application/EDIFACT), and mutually
    defined EDI (application/EDI-Consent).
 
-##  RFC 2045, 2046, and 2049 MIME [RFC2045] [RFC2046] [RFC2049]
+##  RFC 2045, 2046, and 2049 MIME   [RFC2045], [RFC2046], and [RFC2049]
 
    These are the basic MIME standards, upon which all MIME related RFCs
    build, including this one.  Key contributions include definitions of
@@ -442,41 +442,39 @@ applicability statement, produced after "AS1", RFC 3335.
    referenced.  Any difference between AS2 implantations and RFCs are
    mentioned specifically in the sections below.
 
-
-
 ##  Structure of an Internet EDI MIME Message
 
    No encryption, no signature <br>
-      -RFC2616/2045 <br>
-         -RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
+      - RFC2616/2045 <br>
+        - RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
 
    No encryption, signature <br>
-      -RFC2616/2045 <br>
-        -RFC1847 (multipart/signed) <br>
-          -RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
-          -RFC3851 (application/pkcs7-signature) <br>
+      - RFC2616/2045 <br>
+        - RFC1847 (multipart/signed) <br>
+          - RFC1767/RFC3023 (application/EDIxxxx or /xml) <br>
+          - RFC3851 (application/pkcs7-signature) <br>
 
    Encryption, no signature <br>
-      -RFC2616/2045 <br>
-        -RFC3851 (application/pkcs7-mime) <br>
-          -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
+      - RFC2616/2045 <br>
+        - RFC3851 (application/pkcs7-mime) <br>
+          - RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
 
    Encryption, signature <br>
-      -RFC2616/2045 <br>
-        -RFC3851 (application/pkcs7-mime) <br>
-          -RFC1847 (multipart/signed)(encrypted) <br>
-            -RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
-            -RFC3851 (application/pkcs7-signature)(encrypted) <br>
+      - RFC2616/2045 <br>
+        - RFC3851 (application/pkcs7-mime) <br>
+          - RFC1847 (multipart/signed)(encrypted) <br>
+            - RFC1767/RFC3023  (application/EDIxxxx or /xml)(encrypted) <br>
+            - RFC3851 (application/pkcs7-signature)(encrypted) <br>
 
    MDN over HTTP, no signature <br>
-      -RFC2616/2045 <br>
-        -RFC3798 (message/disposition-notification) <br>
+      - RFC2616/2045 <br>
+        - RFC3798 (message/disposition-notification) <br>
 
    MDN over HTTP, signature <br>
-      -RFC2616/2045 <br>
-        -RFC1847 (multipart/signed) <br>
-         -RFC3798 (message/disposition-notification) <br>
-         -RFC3851 (application/pkcs7-signature) <br>
+      - RFC2616/2045 <br>
+        - RFC1847 (multipart/signed) <br>
+         - RFC3798 (message/disposition-notification) <br>
+         - RFC3851 (application/pkcs7-signature) <br>
 
    MDN over SMTP, no signature <br>
 
@@ -663,8 +661,8 @@ that follow the AS1 semantics[RFC3335].
    To aid the receiving system in identifying the sending system,
    AS2-From and AS2-To headers are used.
 
-          AS2-From: \< AS2-name >
-          AS2-To: \< AS2-name >
+          AS2-From: < AS2-name >
+          AS2-To: < AS2-name >
 
    These AS2 headers contain textual values, as described below,
    identifying the sender/receiver of a data exchange.  Their values may
@@ -989,7 +987,6 @@ that follow the AS1 semantics[RFC3335].
    most important of these options is for indicating the signing options
    for the MDN, as in the following example:
 
-
         Disposition-notification-options:
              signed-receipt-protocol=optional,pkcs7-signature;
              signed-receipt-micalg=optional,sha1,md5
@@ -1012,12 +1009,11 @@ that follow the AS1 semantics[RFC3335].
 
    So the Disposition-notification-options string could be:
 
-        signed-receipt-protocol=optional,\<protocol symbol>;
-        signed-receipt-micalg=optional,\<micalg1>,\<micalg2>,...;
+        signed-receipt-protocol=optional, <protocol symbol>;
+        signed-receipt-micalg=optional, <micalg1>, <micalg2>,...;
 
    The currently used value for \<protocol symbol> is "pkcs7-signature"
    for the S/MIME detached signature format.
-
 
    The currently supported values for MIC algorithm \<micalg> values are:
 
@@ -1416,8 +1412,8 @@ that follow the AS1 semantics[RFC3335].
    EDI, the following "failed" values are pre-defined and MUST be
    supported:
 
-       "Failure: unsupported format"  <br>
-       "Failure: unsupported MIC-algorithms" <br>
+       "Failure: unsupported format"
+       "Failure: unsupported MIC-algorithms"
 
 ###  Unsuccessful Non-Content Processing
 
@@ -1793,7 +1789,6 @@ that follow the AS1 semantics[RFC3335].
    Parameter-name:  warning
    Semantics: See Sections 7.4.3 and 7.5.5 of this document.
 
-
 # Acknowledgments
    Carl Hage, Karen Rosenfeld, Chuck Fenton, and many others have
    provided valuable suggestions that improved this applicability
@@ -1801,8 +1796,6 @@ that follow the AS1 semantics[RFC3335].
    participated in the Drummond Group Inc. AS2 interoperability testing.
    Their contributions led to great improvement in the clarity of this
    document.
-
-
 
 # References
 
@@ -1887,7 +1880,7 @@ that follow the AS1 semantics[RFC3335].
    AS2-To: 0123456780000 <br>
    Subject: Test Case <br>
    Message-Id: \<200207310834482A70BF63@\"~~foo~~\"> <br>
-   Disposition-Notification-To: mrAS2@example.com ****
+   Disposition-Notification-To: mrAS2@example.com <br>
    Disposition-Notification-Options: signed-receipt-protocol=optional, <br>
      pkcs7-signature; signed-receipt-micalg=optional,sha1 <br>
    Content-Type: multipart/signed; boundary="as2BouNdary1as2"; <br>
@@ -1902,7 +1895,8 @@ that follow the AS1 semantics[RFC3335].
    --as2BouNdary1as2 <br>
    Content-Type: application/pkcs7-signature <br>
 
-     {omitted binary pkcs7 signature data} <br>
+     {omitted binary pkcs7 signature data}
+
    --as2BouNdary1as2-- <br>
 
 ## A.2.  MDN for Message A.1, Above
