@@ -24,7 +24,7 @@ venue:
 
 author:
 -
-    fullname: "debrapetta"
+    fullname: Debra Petta
     organization: Drummond Group, LLC
     email: "86016128+debrapetta@users.noreply.github.com"
 
@@ -1890,6 +1890,7 @@ that follow the AS1 semantics[RFC3335].
    --as2BouNdary1as2 <br>
    Content-Type: application/edi-x12 <br>
    Content-Disposition: Attachment; filename=rfc1767.dat <br>
+
      {ISA ...EDI transaction data...IEA...} <br>
 
    --as2BouNdary1as2 <br>
@@ -1913,7 +1914,7 @@ that follow the AS1 semantics[RFC3335].
    Content-Length: 1980 <br>
 
    ------=_Part_57_648441049.1028122454671  <br>
-<br>
+
    & Content-Type: multipart/report;  <br>
    & Report-Type=disposition-notification; <br>
    &    boundary="----=_Part_56_1672293592.1028122454656" <br>
@@ -1998,7 +1999,7 @@ that follow the AS1 semantics[RFC3335].
    Host: 10.240.1.2:8101 <br>
    Connection: close <br>
    Content-Length: 3428 <br>
-<br>
+
      {omitted binary encrypted data}   <br>
 
 ## A.4.  Asynchronous MDN for Message A.3, Above
