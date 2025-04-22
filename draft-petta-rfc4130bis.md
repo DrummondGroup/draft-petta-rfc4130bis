@@ -1797,70 +1797,6 @@ that follow the AS1 semantics[RFC3335].
    Their contributions led to great improvement in the clarity of this
    document.
 
-# References
-
-##  Normative References
-
-   [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
-        Extensions (MIME) Part One: Format of Internet Message Bodies",
-        RFC 2045, November 1996.
-
-   [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
-        Extensions (MIME) Part Two: Media Types", RFC 2046, November
-        1996.
-
-   [RFC2049]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
-        Extensions (MIME) Part Five: Conformance Criteria and Examples",
-        RFC 2049, November 1996.
-
-   [RFC1767]  Crocker, D., "MIME Encapsulation of EDI Objects", RFC 1767,
-        March 1995.
-
-   [RFC2616]  Fielding,  R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L.,
-        Leach, P., and T. Berners-Lee, "Hypertext Transfer Protocol --
-        HTTP/1.1", RFC 2616, June 1999.
-
-   [RFC3335]  Harding, T., Drummond, R., and C. Shih, "MIME-based Secure
-        Peer-to-Peer Business Data Interchange over the Internet", RFC
-        3335, September 2002.
-
-   [RFC3798]  Hansen, T. and G. Vaudreuil, "Message Disposition Notification",
-        RFC 3798, May 2004.
-
-   [RFC1847]  Galvin, J., Murphy, S., Crocker, S., and N. Freed, "Security
-        Multiparts for MIME: Multipart/Signed and Multipart/Encrypted",
-        RFC 1847, October 1995.
-
-   [RFC3851] / [RFC3852]  Ramsdell, B., "Secure/Multipurpose Internet Mail Extensions
-        (S/MIME) Version 3.1 Message Specification", RFC 3851, July
-        2004.
-
-   [RFC3462]  Vaudreuil, G., "The Multipart/Report Content Type for the
-        Reporting of Mail System Administrative Messages", RFC 3462,
-        January 2003.
-
-   [RFC2822]  Resnick, P., "Internet Message Format", RFC 2822, April 2001.
-
-   [RFC3023] Murata, M., Laurent, S. St., and D. Kohn, "XML Media Types", RFC
-        3023, January 2001.
-
-   [RFC2026] Bradner, S., "The Internet Standards Process -- Revision 3", BCP
-        9, RFC 2026, October 1996.
-
-   [RFC3850] Ramsdell, B., "Secure/Multipurpose Internet Mail Extensions
-        (S/MIME) Version 3.1 Certificate Handling", RFC 3850, July 2004.
-
-   [RFC3852] Housley, R., "Cryptographic Message Syntax (CMS)", RFC 3852,
-        July 2004.
-
-   [RFC2234] Crocker, D. and P. Overell, "Augmented BNF for Syntax
-        Specifications: ABNF", RFC 2234, November 1997.
-
-##  Informative References
-
-   [RFC2246] Dierks, T. and C. Allen, "The TLS Protocol Version 1.0", RFC
-        2246, January 1999.
-
 # Appendix A:  Message Examples
 
    NOTE: All examples are provided for illustration only, and are not
@@ -2066,21 +2002,3 @@ that follow the AS1 semantics[RFC3335].
    UxCUga8BVdVB9kH0Geexytyt0KvWQXfaEEcgZGUAAAAAAAA= <br>
 
    ------=_Part_337_6452266.1040310218750- <br>
-
-
-Authors' Addresses
-
-   Dale Moberg <br>
-   Cyclone Commerce <br>
-   8388 E. Hartford Drive, Suite 100 <br>
-   Scottsdale, AZ  85255 USA <br>
-
-   EMail: dmoberg@cyclonecommerce.com<br>
-
-
-   Rik Drummond <br>
-   Drummond Group Inc. <br>
-   4700 Bryant Irvin Court, Suite 303 <br>
-   Fort Worth, TX  76107 USA<br>
-
-   EMail: rvd2@drummondgroup.com <br>
