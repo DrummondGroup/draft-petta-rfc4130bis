@@ -5,7 +5,7 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>AS2 Specification Modernization</title>
-<meta content="debrapetta" name="author">
+<meta content="Debra Petta" name="author">
 <meta content='
        This document provides an applicability statement (RFC 2026, Section
 3.2) that describes how to exchange structured business data securely
@@ -1063,7 +1063,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">debrapetta</td>
+<td class="left">Petta</td>
 <td class="center">Expires 24 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1086,7 +1086,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
-      <div class="author-name">debrapetta</div>
+      <div class="author-name">D. Petta</div>
 <div class="org">Drummond Group, LLC</div>
 </div>
 </dd>
@@ -3469,16 +3469,20 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
    Content-Length: 2464 <br><a href="#section-13.1-1" class="pilcrow">¶</a></p>
 <p id="section-13.1-2">--as2BouNdary1as2 <br>
    Content-Type: application/edi-x12 <br>
-   Content-Disposition: Attachment; filename=rfc1767.dat <br>
-     {ISA ...EDI transaction data...IEA...} <br><a href="#section-13.1-2" class="pilcrow">¶</a></p>
-<p id="section-13.1-3">--as2BouNdary1as2 <br>
-   Content-Type: application/pkcs7-signature <br><a href="#section-13.1-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-13.1-4">
+   Content-Disposition: Attachment; filename=rfc1767.dat <br><a href="#section-13.1-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-13.1-3">
+<pre>
+ {ISA ...EDI transaction data...IEA...} &lt;br&gt;
+</pre><a href="#section-13.1-3" class="pilcrow">¶</a>
+</div>
+<p id="section-13.1-4">--as2BouNdary1as2 <br>
+   Content-Type: application/pkcs7-signature <br><a href="#section-13.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-13.1-5">
 <pre>
  {omitted binary pkcs7 signature data}
-</pre><a href="#section-13.1-4" class="pilcrow">¶</a>
+</pre><a href="#section-13.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-13.1-5">--as2BouNdary1as2-- <br><a href="#section-13.1-5" class="pilcrow">¶</a></p>
+<p id="section-13.1-6">--as2BouNdary1as2-- <br><a href="#section-13.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="a2-mdn-for-message-a1-above">
@@ -3496,9 +3500,8 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
         boundary="----=_Part_57_648441049.1028122454671" <br>
    Connection: Close <br>
    Content-Length: 1980 <br><a href="#section-13.2-1" class="pilcrow">¶</a></p>
-<p id="section-13.2-2">------=_Part_57_648441049.1028122454671  <br>
-          <br>
-   &amp; Content-Type: multipart/report;  <br>
+<p id="section-13.2-2">------=_Part_57_648441049.1028122454671  <br><a href="#section-13.2-2" class="pilcrow">¶</a></p>
+<p id="section-13.2-3">&amp; Content-Type: multipart/report;  <br>
    &amp; Report-Type=disposition-notification; <br>
    &amp;    boundary="----=_Part_56_1672293592.1028122454656" <br>
    &amp;<br>
@@ -3528,38 +3531,38 @@ by the recipient.<a href="#section-7.3.1-3.3.1" class="pilcrow">¶</a></p>
    &amp;Disposition: automatic-action/MDN-sent-automatically; <br>
    &amp;  processed <br>
    &amp;<br>
-   &amp;------=_Part_56_1672293592.1028122454656-- <br><a href="#section-13.2-2" class="pilcrow">¶</a></p>
-<p id="section-13.2-3">------=_Part_57_648441049.1028122454671 <br>
+   &amp;------=_Part_56_1672293592.1028122454656-- <br><a href="#section-13.2-3" class="pilcrow">¶</a></p>
+<p id="section-13.2-4">------=_Part_57_648441049.1028122454671 <br>
    Content-Type: application/pkcs7-signature; name=smime.p7s <br>
    Content-Transfer-Encoding: base64 <br>
-   Content-Disposition: attachment; filename=smime.p7s <br><a href="#section-13.2-3" class="pilcrow">¶</a></p>
-<p id="section-13.2-4">MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQ <br>
+   Content-Disposition: attachment; filename=smime.p7s <br><a href="#section-13.2-4" class="pilcrow">¶</a></p>
+<p id="section-13.2-5">MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQ <br>
    cp24hMJNbxDKHnlB9jTiQzLwSwo+/90Pc87x+Sc6EpFSUYWGAAAAAAAA <br>
-   ------=_Part_57_648441049.1028122454671-- <br><a href="#section-13.2-4" class="pilcrow">¶</a></p>
-<p id="section-13.2-5">Notes:<a href="#section-13.2-5" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-13.2-6">
-<li id="section-13.2-6.1">
-            <p id="section-13.2-6.1.1">The lines proceeded with "&amp;" are what the signature is calculated
-over.<a href="#section-13.2-6.1.1" class="pilcrow">¶</a></p>
+   ------=_Part_57_648441049.1028122454671-- <br><a href="#section-13.2-5" class="pilcrow">¶</a></p>
+<p id="section-13.2-6">Notes:<a href="#section-13.2-6" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-13.2-7">
+<li id="section-13.2-7.1">
+            <p id="section-13.2-7.1.1">The lines proceeded with "&amp;" are what the signature is calculated
+over.<a href="#section-13.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-13.2-6.2">
-            <p id="section-13.2-6.2.1">For details on how to prepare the multipart/signed with protocol =
+          <li id="section-13.2-7.2">
+            <p id="section-13.2-7.2.1">For details on how to prepare the multipart/signed with protocol =
 "application/pkcs7-signature", see the "S/MIME Message
-Specification, PKCS Security Services for MIME".)<a href="#section-13.2-6.2.1" class="pilcrow">¶</a></p>
+Specification, PKCS Security Services for MIME".)<a href="#section-13.2-7.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-13.2-6.3">
-            <p id="section-13.2-6.3.1">Note that the textual first body part of the multipart/report can
+          <li id="section-13.2-7.3">
+            <p id="section-13.2-7.3.1">Note that the textual first body part of the multipart/report can
 be used to include a more detailed explanation of the error
 conditions reported by the disposition headers.  The first body
 part of the multipart/report, when used in this way, allows a
-person to better diagnose a problem in detail.<a href="#section-13.2-6.3.1" class="pilcrow">¶</a></p>
+person to better diagnose a problem in detail.<a href="#section-13.2-7.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-13.2-6.4">
-            <p id="section-13.2-6.4.1">As specified by RFC 3462 <span>[<a href="#RFC3462" class="cite xref">RFC3462</a>]</span>, returning the original or portions
+          <li id="section-13.2-7.4">
+            <p id="section-13.2-7.4.1">As specified by RFC 3462 <span>[<a href="#RFC3462" class="cite xref">RFC3462</a>]</span>, returning the original or portions
 of the original message in the third body part of the
 multipart/report is not required.  This is an optional body part.
 However, it is RECOMMENDED that this body part be omitted or left
-blank.<a href="#section-13.2-6.4.1" class="pilcrow">¶</a></p>
+blank.<a href="#section-13.2-7.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
@@ -3588,9 +3591,12 @@ blank.<a href="#section-13.2-6.4.1" class="pilcrow">¶</a></p>
    AS2-Version: 1.1 <br>
    Host: 10.240.1.2:8101 <br>
    Connection: close <br>
-   Content-Length: 3428 <br>
-          <br>
-     {omitted binary encrypted data}   <br><a href="#section-13.3-1" class="pilcrow">¶</a></p>
+   Content-Length: 3428 <br><a href="#section-13.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-13.3-2">
+<pre>
+ {omitted binary encrypted data}   &lt;br&gt;
+</pre><a href="#section-13.3-2" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="a4-asynchronous-mdn-for-message-a3-above">
@@ -3765,7 +3771,7 @@ blank.<a href="#section-13.2-6.4.1" class="pilcrow">¶</a></p>
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">debrapetta</span></div>
+        <div dir="auto" class="left"><span class="fn nameRole">Debra Petta</span></div>
 <div dir="auto" class="left"><span class="org">Drummond Group, LLC</span></div>
 <div class="email">
 <span>Email:</span>

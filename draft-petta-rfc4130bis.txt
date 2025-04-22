@@ -2,7 +2,7 @@
 
 
 
-Network Working Group                                         debrapetta
+Network Working Group                                           D. Petta
 Internet-Draft                                       Drummond Group, LLC
 Intended status: Informational                             22 April 2025
 Expires: 24 October 2025
@@ -1961,7 +1961,8 @@ Table of Contents
    --as2BouNdary1as2
    Content-Type: application/edi-x12
    Content-Disposition: Attachment; filename=rfc1767.dat
-   {ISA ...EDI transaction data...IEA...}
+
+    {ISA ...EDI transaction data...IEA...} <br>
 
    --as2BouNdary1as2
    Content-Type: application/pkcs7-signature
@@ -2072,7 +2073,7 @@ Table of Contents
    Connection: close
    Content-Length: 3428
 
-   {omitted binary encrypted data}
+    {omitted binary encrypted data}   <br>
 
 13.4.  A.4.  Asynchronous MDN for Message A.3, Above
 
@@ -2241,6 +2242,6 @@ Table of Contents
 
 Author's Address
 
-   debrapetta
+   Debra Petta
    Drummond Group, LLC
    Email: 86016128+debrapetta@users.noreply.github.com
