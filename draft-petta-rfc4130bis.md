@@ -70,7 +70,7 @@ applicability statement, produced after "AS1", RFC 3335.
 
 # Introduction
 
-This draft is a copy of the original RFC4130 draft with only the changes necessary to render it in markdown. 
+This draft is a copy of the original RFC4130 draft with only the changes necessary to render it in markdown.
 Future versions of this draft will propose changes, hopefully with the consensus of the IETF community.
 
 ## Applicable RFCs
