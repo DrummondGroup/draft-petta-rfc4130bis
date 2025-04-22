@@ -11,9 +11,9 @@ v: 3
 # area: AREA
 # workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - AS2
+ - EDIINT
+ - B2B
 venue:
 #  group: WG
 #  type: Working Group
@@ -26,7 +26,7 @@ author:
 -
     fullname: Debra Petta
     organization: Drummond Group, LLC
-    email: "86016128+debrapetta@users.noreply.github.com"
+    email: "IETF-Activity@drummondgroup.com"
 
 normative:
   RFC2045: {}
@@ -69,6 +69,9 @@ applicability statement, produced after "AS1", RFC 3335.
 --- middle
 
 # Introduction
+
+This draft is a copy of the original RFC4130 draft with only the changes necessary to render it in markdown. 
+Future versions of this draft will propose changes, hopefully with the consensus of the IETF community.
 
 ## Applicable RFCs
 
