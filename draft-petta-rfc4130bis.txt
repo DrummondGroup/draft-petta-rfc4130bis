@@ -4,8 +4,8 @@
 
 Network Working Group                                           D. Petta
 Internet-Draft                                       Drummond Group, LLC
-Intended status: Informational                             22 April 2025
-Expires: 24 October 2025
+Intended status: Informational                           14 October 2025
+Expires: 17 April 2026
 
 
                     AS2 Specification Modernization
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 October 2025.
+   This Internet-Draft will expire on 17 April 2026.
 
 Copyright Notice
 
@@ -161,6 +161,10 @@ Table of Contents
    changes necessary to render it in markdown.  Future versions of this
    draft will propose changes, hopefully with the consensus of the IETF
    community.
+
+   NOTE: This version is an IDENTICAL copy of the original (expired) bis
+   document.  This note is the only difference and was added so that the
+   expiration date could be updated.
 
 1.1.  Applicable RFCs
 
