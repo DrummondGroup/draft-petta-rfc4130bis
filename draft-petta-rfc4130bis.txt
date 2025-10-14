@@ -162,9 +162,9 @@ Table of Contents
    draft will propose changes, hopefully with the consensus of the IETF
    community.
 
-   NOTE: This version is an IDENTICAL copy of the original (expired) bis
-   document.  This note is the only difference and was added so that the
-   expiration date could be updated.
+   NOTE: This version contains IDENTICAL content of the original
+   (expired) bis document.  The only difference are edits to trigger
+   updates so that the expiration date could be modified.
 
 1.1.  Applicable RFCs
 
