@@ -73,6 +73,9 @@ applicability statement, produced after "AS1", RFC 3335.
 This draft is a copy of the original RFC4130 draft with only the changes necessary to render it in markdown.
 Future versions of this draft will propose changes, hopefully with the consensus of the IETF community.
 
+NOTE: This version is an IDENTICAL copy of the original (expired) bis document.  This note is the only difference and
+was added so that the expiration date could be updated.
+
 ## Applicable RFCs
 
    Previous work on Internet EDI focused on specifying MIME content
