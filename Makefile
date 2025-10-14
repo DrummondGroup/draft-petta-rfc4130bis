@@ -13,3 +13,14 @@ else
 	    https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 endif
+
+# This allows rebuilding even if no changes are detected
+
+.PHONY: clean rebuild
+
+# clean is probably already defined in lib/targets.mk, so we just
+# declare it phony and define a "rebuild" wrapper.
+rebuild: 
+	@echo "Rebuilding draft from scratch..."
+	$(MAKE) clean
+	$(MAKE) all

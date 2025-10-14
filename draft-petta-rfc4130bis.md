@@ -5,7 +5,7 @@ category: info
 docname: draft-petta-rfc4130bis-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
-date:
+date: 2025-10-14
 consensus: true
 v: 3
 # area: AREA
@@ -70,8 +70,13 @@ applicability statement, produced after "AS1", RFC 3335.
 
 # Introduction
 
-This draft is a copy of the original RFC4130 draft with only the changes necessary to render it in markdown.
-Future versions of this draft will propose changes, hopefully with the consensus of the IETF community.
+This draft is a copy of the original RFC4130 draft with only the changes
+necessary to render it in markdown. Future versions of this draft will
+propose changes, hopefully with the consensus of the IETF community.
+
+NOTE: This version contains IDENTICAL content of the original (expired)
+bis document. The only difference are edits to trigger updates so that
+the expiration date could be modified.
 
 ## Applicable RFCs
 
