@@ -5,7 +5,7 @@ category: info
 docname: draft-petta-rfc4130bis-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
-date: 2025-10-14
+date: 2025-10-15
 consensus: true
 v: 3
 # area: AREA
