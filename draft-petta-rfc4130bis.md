@@ -53,10 +53,13 @@ normative:
   RFC8551: {}
   RFC5322: {}
   RFC6017: {}
+  RFC5751: {}
 
 informative:
   RFC2246: {}
   RFC4918: {}
+  RFC3560: {}
+  RFC5753: {}
   I-D.draft-duker-as2-reliability-16: {}
   I-D.draft-harding-as2-restart-02: {}
 
@@ -70,7 +73,7 @@ the UN Electronic Data Interchange for Administration, Commerce, and
 Transport (UN/EDIFACT) format; or other structured data formats. The data
 is packaged using standard MIME structures. Authentication and data
 confidentiality are obtained by using Cryptographic Message Syntax with
-S/MIME security body parts (see [Section 10.1](#https-tls-reqs){:format="none"}).
+S/MIME security body parts (see [Section 10.1](#https-tls-reqs)).
 Authenticated acknowledgements make use of multipart/signed
 Message Disposition Notification (MDN) responses to the original HTTP message.
 This applicability statement is informally referred to as "AS2" because
@@ -96,7 +99,7 @@ also adheres to the principle of backward compatibility. Implementations
 conformant with RFC 4130 remain valid under this specification, and no
 breaking changes are introduced. In addition, this document updates
 existing IANA registrations from RFC 3335 and RFC 4130. The specific
-IANA actions are described in [Section 11](#iana-considerations){:format="none"}.
+IANA actions are described in [Section 11](#iana-considerations).
 
 Note to readers: Some contributors have suggested that this work could
 eventually be split into two documents: a minimal RFC4130bis for errata and
@@ -108,13 +111,13 @@ the scope.
 ## Applicable RFCs
 
 Previous work on Internet EDI focused on specifying MIME content types
-for EDI data [RFC1767]. This document expands on RFC 1767 to specify a
-comprehensive set of data security features, specifically data
-confidentiality, data integrity/authenticity, non-repudiation of origin,
-and non-repudiation of receipt over HTTP. This document recognizes
-contemporary RFCs and avoids re-inventing mechanisms wherever possible.
-Although this document focuses on EDI data, any other data types
-describable in a MIME format are also supported.
+for EDI data. [RFC1767] expands on this to specify a comprehensive set
+of data security features, specifically data confidentiality, data
+integrity/authenticity, non-repudiation of origin, and non-repudiation
+of receipt over HTTP. This document recognizes contemporary RFCs and
+avoids re-inventing mechanisms wherever possible. Although this
+document focuses on EDI data, any other data types describable in a
+MIME format are also supported.
 
 Internet MIME-based EDI can be accomplished by using and complying with
 the following RFCs:
@@ -126,9 +129,21 @@ the following RFCs:
      o  RFC 3462 Multipart/Report
      o  RFC 2045 to 2049 MIME RFCs
      o  RFC 8098 Message Disposition Notification (updates RFC 3798)
-     o  RFC 3851, 3852 S/MIME v3.1 Specification
-     o  RFC 8551 S/MIME v4.0 (updated algorithm requirements including AES,
-        AES-GCM, AES-CCM)
+     o  RFC 5751 S/MIME v3.2 Specification (obsoletes RFC 3851)
+     o  RFC 8551 S/MIME v4.0 (obsoletes RFC 5751)
+     o  RFC 3852 Cryptographic Message Syntax (CMS)
+
+This specification references S/MIME Version 4.0 [RFC8551] as the
+baseline for algorithm requirements and security message formats.
+S/MIME 4.0 introduces AuthEnvelopedData, which provides authenticated
+encryption for algorithms such as AES-GCM and AES-CCM. For backward
+compatibility with implementations that have not yet migrated to
+S/MIME 4.0, this specification also permits the use of EnvelopedData
+from S/MIME 3.2 [RFC5751] when using algorithms such as AES-CBC that
+require separate integrity protection. The choice between
+AuthEnvelopedData and EnvelopedData is determined by the content
+encryption algorithm selected (see [Section 7.2](#encryption-algorithms)
+for details).
 
 Our intent here is to define clearly and precisely how these are used
 together, and what is required by user agents to be compliant with this
@@ -154,12 +169,18 @@ this document clarifies requirements and aligns terminology but does not introdu
 Implementations that conformed to RFC 4130 remain conformant to this specification. Any deviations
 are limited to clarifications intended to improve interoperability.
 
-Implementations MAY interoperate using S/MIME Version 3.1 [RFC3851][RFC3852]
-with legacy trading partners, but conformant implementations MUST also
-support S/MIME Version 4.0 [RFC8551] to meet the algorithm requirements
-of this specification and ensure forward compatibility. These provisions ensure
-smooth migration for existing deployments while establishing RFC 8551 as
-the baseline for new implementations.
+This specification establishes S/MIME Version 4.0 [RFC8551] as the
+baseline for conformant implementations. Implementations MUST support
+S/MIME 4.0 message formats (including AuthEnvelopedData) and the
+algorithm requirements specified in [Section 7](#algorithm-requirements).
+Implementations MAY also support S/MIME Version 3.2 [RFC5751] for
+backward compatibility with legacy trading partners that have not yet
+migrated to S/MIME 4.0. When both partners support S/MIME 4.0,
+implementations SHOULD use AuthEnvelopedData with authenticated
+encryption algorithms (AES-GCM, AES-CCM) for improved security.
+When interoperating with S/MIME 3.2 systems, implementations MAY use
+EnvelopedData with algorithms such as AES-CBC that require separate
+integrity protection via digital signatures.
 
 This specification defines requirements for modern AS2 deployments
 using contemporary cryptographic algorithms. It does not redefine or
@@ -168,8 +189,8 @@ partners support this version of AS2, only modern algorithms are in
 scope.
 
 When interoperability with RFC 4130 systems is required, implementers
-SHOULD apply the clarifications provided in Appendix B (Legacy
-Interoperability). Appendix B is non-normative and does not alter the
+SHOULD apply the clarifications provided in [Appendix B](#legacy-interoperability-non-normative)
+(Legacy Interoperability). Appendix B is non-normative and does not alter the
 algorithm requirements defined in Section 7, but records expected
 behavior when communicating with legacy systems.
 
@@ -279,14 +300,14 @@ interoperability across implementations.
    This request/reply transactional interchange can provide secure,
    reliable, and authenticated transport for EDI or other business data
    using HTTP as a transfer protocol. HTTPS is RECOMMENDED as the default
-   transport for new implementations (see [Section 10.1](#https-tls-reqs){:format="none"}).
+   transport for new implementations (see [Section 10.1](#https-tls-reqs)).
 
    The security protocols and structures used also support auditable
    records of these document data transmissions, acknowledgements, and
    authentication.
 
    The message formats and processing requirements described below maintain
-   strict backward compatibility (see [Section 1.2](#backward-compatibility-and-interoperability){:format="none"}).
+   strict backward compatibility (see [Section 1.2](#backward-compatibility-and-interoperability)).
 
 ## Purpose of a Security Guideline for MIME EDI
 
@@ -355,7 +376,7 @@ interoperability across implementations.
    receipt make use of digital signatures. See the Security
    Considerations section for some cautions regarding NRR.
    For information on how to format and process receipts in AS2, refer
-   to refer to [Section 8](#structure-and-processing-of-an-mdn-message){:format="none"}.
+   to refer to [Section 8](#structure-and-processing-of-an-mdn-message).
 
 
 ## Assumptions
@@ -381,7 +402,7 @@ interoperability across implementations.
    In order to optimize routing from existing commercial EDI networks
    (called Value Added Networks or VANs) to the Internet, it was previously
    useful to make some envelope information visible. Since the EDI/EC message exchanges
-   are routed over the public internet and not over VANs, this
+   are routed over the public Internet and not over VANs, this
    specification provides no support for this optimization.
 
    o  X12.58 and UN/EDIFACT Security Considerations
@@ -443,6 +464,30 @@ interoperability across implementations.
    for backward compatibility, but SHOULD NOT be generated for outgoing messages
    unless it is strictly required for interoperability. MD5 is obsolete
    and MUST NOT be generated by conformant implementations.
+
+   o  Encryption Algorithms
+
+   For content encryption, implementations MUST support AES-128-CBC and SHOULD
+   support AES-256-CBC. Implementations are RECOMMENDED to support authenticated
+   encryption modes such as AES-GCM and AES-CCM, which use AuthEnvelopedData
+   (S/MIME 4.0). When using AES-GCM or AES-CCM, implementations MUST use
+   AuthEnvelopedData. When using AES-CBC or other non-authenticated modes,
+   implementations MUST use EnvelopedData with separate integrity protection
+   via digital signatures. Triple-DES (3DES) and RC2 are deprecated and MUST NOT
+   be generated by conformant implementations, though they MAY be accepted
+   for backward compatibility with legacy systems. A single content encryption
+   algorithm MUST be used for all recipients of a given message; it is not
+   permitted to encrypt the same message with AES-CBC for some recipients and
+   AES-GCM for others.
+
+   o  Key Management Algorithms
+
+   For key transport, implementations MUST support RSA with a minimum key
+   length of 2048 bits. Implementations SHOULD support RSA-OAEP as defined
+   in [RFC3560]. Implementations MAY support key agreement algorithms such
+   as Diffie-Hellman or Elliptic Curve Diffie-Hellman (ECDH) as specified
+   in [RFC5753]. When using elliptic curves, implementations SHOULD support
+   NIST P-256 (secp256r1) or stronger curves.
 
    o  Permutation Summary
 
@@ -525,59 +570,59 @@ With Compression (12 permutations)
 
    o Users may choose any of these twenty-four possibilities, but only the final example (24), when compression, signing, encryption,
      and a signed receipt are all used, offers the full suite of security and efficiency features described in
-    [Section 2.3.1](#the-secure-transmission-loop){:format="none"}, “The Secure Transmission Loop.”
+    [Section 2.3.1](#the-secure-transmission-loop), “The Secure Transmission Loop.”
 
    o As with the original permutations, the receipts may be either synchronous or asynchronous, and the choice does not change the nature of
      the secure transmission loop in support of NRR.
 
 # Referenced RFCs and Their Contributions
 
-##  RFC 2616 HTTP v1.1 [RFC2616]
+##  RFC 2616 HTTP v1.1
 
-   This document specifies how data is transferred using HTTP.
+   [RFC2616] specifies how data is transferred using HTTP.
 
-##  RFC 1847 MIME Security Multiparts [RFC1847]
+##  RFC 1847 MIME Security Multiparts
 
-   This document defines security multipart for MIME:
+   [RFC1847] defines security multipart for MIME:
    multipart/encrypted and multipart/signed.
 
-##  RFC 3462 Multipart/Report [RFC3462]
+##  RFC 3462 Multipart/Report
 
-   This RFC defines the use of the multipart/report content type,
+   [RFC3462] defines the use of the multipart/report content type,
    something that the MDN RFC 3798 builds upon.
 
-##  RFC 1767 EDI Content [RFC1767]
+##  RFC 1767 EDI Content
 
-   This RFC defines the use of content type "application" for ANSI X12
+   [RFC1767] defines the use of content type "application" for ANSI X12
    (application/EDI-X12), EDIFACT (application/EDIFACT), and mutually
    defined EDI (application/EDI-Consent).
 
-##  RFC 2045, 2046, and 2049 MIME   [RFC2045], [RFC2046], and [RFC2049]
+##  RFC 2045, 2046, and 2049 MIME
 
-   These are the basic MIME standards, upon which all MIME related RFCs
-   build, including this one. Key contributions include definitions of
-   "content type", "sub-type", and "multipart", as well as encoding
-   guidelines, which establish 7-bit US-ASCII as the canonical character
-   set to be used in Internet messaging.
+   [RFC2045], [RFC2046], and [RFC2049] are the basic MIME standards, upon
+   which all MIME related RFCs build, including this one. Key contributions
+   include definitions of "content type", "sub-type", and "multipart", as
+   well as encoding guidelines, which establish 7-bit US-ASCII as the
+   canonical character set to be used in Internet messaging.
 
-##  RFC 3798 Message Disposition Notification [RFC3798]
+##  RFC 3798 Message Disposition Notification
 
-   This Internet RFC defines how an MDN is requested, and the format and
+   [RFC3798] defines how an MDN is requested, and the format and
    syntax of the MDN. The MDN is the basis upon which receipts and
    signed receipts are defined in this specification.
 
-##  RFC 3851 and 3852 S/MIME Version 3.1 Message Specifications and Cryptographic Message Syntax (CMS) [RFC3851] / [RFC3852]
+##  RFC 3851 and 3852 S/MIME Version 3.1 Message Specifications and Cryptographic Message Syntax (CMS)
 
-   This specification describes how S/MIME will carry CMS Objects.
+   [RFC3851] and [RFC3852] describe how S/MIME carries CMS Objects.
 
-##  RFC 3023 XML Media Types [RFC3023]
+##  RFC 3023 XML Media Types
 
-   This RFC defines the use of content type "application" for XML
+   [RFC3023] defines the use of content type "application" for XML
    (application/xml).
 
-##  RFC 3274 Compressed Data Content Type for Cryptographic Message Syntax (CMS) [RFC3274]
+##  RFC 3274 Compressed Data Content Type for Cryptographic Message Syntax (CMS)
 
-   This RFC defines a mechanism for compressing data within the Cryptographic Message Syntax (CMS),
+   [RFC3274] defines a mechanism for compressing data within the Cryptographic Message Syntax (CMS),
    which is the foundation for Secure/Multipurpose Internet Mail Extensions (S/MIME).
    It specifies a CompressedData content type that allows data to be compressed prior to being
    signed or encrypted. This reduces the size of transmitted messages and improves efficiency without
@@ -710,7 +755,7 @@ trading partners.
 
    When using Transport Layer Security (TLS), the request-URI MUST
    indicate the appropriate scheme value, HTTPS. Implementations MUST
-   support TLS 1.2 or higher and SHOULD follow the guidance in [Section 10.1](#https-tls-reqs){:format="none"}.
+   support TLS 1.2 or higher and SHOULD follow the guidance in [Section 10.1](#https-tls-reqs).
    Encrypted message bodies MAY be used in addition to TLS when required
    by business policy.
 
@@ -745,7 +790,7 @@ trading partners.
    chunking entities to be transferred, and Section 8.1.2.2 describes a pipelining
    option that is useful for segmenting large amounts of data.
    These clarifications are consistent with existing AS2 practice and maintain full
-   backward compatibility (see [Section 1.2](#backward-compatibility-and-interoperability){:format="none"}).
+   backward compatibility (see [Section 1.2](#backward-compatibility-and-interoperability)).
 
 ##  Modification of MIME or Other Headers or Parameters Used
 
@@ -826,11 +871,11 @@ trading partners.
    Use of 102 (Processing) is OPTIONAL.  It has been deprecated in later
    HTTP specifications and **MUST NOT** be used with HTTP/2 or HTTP/3,
    where interim responses have different semantics.  Implementations
-   Implementations that do not receive a 102 response MUST NOT assume that
-   a failure has occurred solely because no interim status was returned.
-   They SHOULD continue waiting for the final status response for at least
-   the duration of their configured HTTP read timeout or any timeout agreed
-   upon between trading partners.
+   that do not receive a 102 response MUST NOT assume that a failure has
+   occurred solely because no interim status was returned. They SHOULD
+   continue waiting for the final status response for at least the duration
+   of their configured HTTP read timeout or any timeout agreed upon between
+   trading partners.
 
    To minimize the risk of network timeouts during lengthy message
    processing, receivers SHOULD return an appropriate transfer-layer
@@ -949,43 +994,60 @@ AS2 MDNs. [RFC3335].
 
 ~~~text
 
-   AS2-Version: 1.0  - All implementations of this specification MUST support and
-                       advertise "AS2-Version: 1.0". Versions in the range "1.0"
-                       through "1.9" MAY be used. All implementations MUST interpret
-                       any value in that range as conforming to this specification,
-                       with no differences in baseline behavior. In other words, only
-                       the major version digit ("1") defines compatibility for implementations
-                       that do not support additional, non-AS2-specified functionality.
+   AS2-Version: 1.0  - All implementations of this specification MUST
+                       support and advertise "AS2-Version: 1.0".
+                       Versions in the range "1.0" through "1.9" MAY be
+                       used. All implementations MUST interpret any value
+                       in that range as conforming to this specification,
+                       with no differences in baseline behavior. In other
+                       words, only the major version digit ("1") defines
+                       compatibility for implementations that do not
+                       support additional, non-AS2-specified
+                       functionality.
 
-                       Implementations MAY use "1.1" through "1.9" to signal extensions of
-                       this specification. Any such extensions MUST be fully transparent to
-                       implementations that recognize only "AS2-Version: 1.0".
+                       Implementations MAY use "1.1" through "1.9" to
+                       signal extensions of this specification. Any such
+                       extensions MUST be fully transparent to
+                       implementations that recognize only
+                       "AS2-Version: 1.0".
 
-   AS2-Version: 1.1  - Designates those implementations that MUST support compression as
-                       defined by RFC 3274.
+   AS2-Version: 1.1  - Designates those implementations that MUST support
+                       compression as defined by RFC 3274.
 
-   AS2-Version: 1.2  - Indicates those implementations that include an EDIINT-Features header
-                       as defined in RFC 6017. The values in an EDIINT-Features header specify
-                       the features supported by the AS2 implementation. Examples may include
-                       CEM, AS2-Reliability and multiple-attachments, however others may also be included.
-                       A receiving implementation MUST NOT fail if it does not support or understand
-                       any of the supported values contained within an EDIINT-Features header.
+   AS2-Version: 1.2  - Indicates those implementations that include an
+                       EDIINT-Features header as defined in RFC 6017. The
+                       values in an EDIINT-Features header specify the
+                       features supported by the AS2 implementation.
+                       Examples may include CEM, AS2-Reliability and
+                       multiple-attachments, however others may also be
+                       included. A receiving implementation MUST NOT fail
+                       if it does not support or understand any of the
+                       supported values contained within an
+                       EDIINT-Features header.
 
-   AS2-Version: 1.3  - Indicates those implementations that support the modernization defined
-                       by this specification, including updated algorithm requirements (e.g.,
-                       SHA-256 for MIC/signatures; AES as the encryption baseline per [RFC8551]),
-                       alignment with MDN handling as specified in [RFC8098], and support for
-                       multiple-recipient encryption as described in [Section 7.2](#encryption-algorithms){:format="none"}
-                       of this specification.
+   AS2-Version: 1.3  - Indicates those implementations that support the
+                       modernization defined by this specification,
+                       including updated algorithm requirements (e.g.,
+                       SHA-256 for MIC/signatures; AES as the encryption
+                       baseline per RFC 8551), alignment with MDN
+                       handling as specified in RFC 8098, and support for
+                       multiple-recipient encryption as described in
+                       Section 7.2 of this specification.
 
-                       When both partners are configured for AS2 version 1.3, weak algorithms (e.g., SHA-1,
-                       3DES, RC2, MD5) MUST NOT be generated by conformant implementations. When interoperating
-                       with a legacy partner that operates at AS2 version 1.2 or lower, implementations MAY apply
-                       the legacy interoperability clarifications described in Appendix B (non-normative).
+                       When both partners are configured for AS2 version
+                       1.3, weak algorithms (e.g., SHA-1, 3DES, RC2, MD5)
+                       MUST NOT be generated by conformant
+                       implementations. When interoperating with a legacy
+                       partner that operates at AS2 version 1.2 or lower,
+                       implementations MAY apply the legacy
+                       interoperability clarifications described in
+                       Appendix B (non-normative).
 
-                       Future minor versions (1.x) may designate additional extensions or clarifications
-                       that remain backward-compatible with AS2 version 1.0. A major version update
-                       (2.0 or higher) would indicate a non-backward-compatible revision.
+                       Future minor versions (1.x) may designate
+                       additional extensions or clarifications that remain
+                       backward-compatible with AS2 version 1.0. A major
+                       version update (2.0 or higher) would indicate a
+                       non-backward-compatible revision.
 ~~~
 
 ## AS2 Product header
@@ -1121,6 +1183,33 @@ The string definitions given above are in ABNF format [RFC2234].
    Triple DES (3DES) and RC2 are deprecated and MUST NOT be generated by
    conformant implementations.
 
+### EnvelopedData vs AuthEnvelopedData
+
+   The choice between EnvelopedData and AuthEnvelopedData depends on the
+   content encryption algorithm selected:
+
+   - **AuthEnvelopedData** MUST be used when employing authenticated
+     encryption algorithms such as AES-GCM or AES-CCM. These algorithms
+     provide both confidentiality and integrity protection in a single
+     cryptographic operation. AuthEnvelopedData was introduced in
+     S/MIME 4.0 [RFC8551] specifically to support these modes.
+
+   - **EnvelopedData** MUST be used when employing non-authenticated
+     encryption algorithms such as AES-CBC or when maintaining backward
+     compatibility with S/MIME 3.2 implementations [RFC5751]. When using
+     EnvelopedData, integrity protection MUST be provided separately
+     through digital signatures (multipart/signed).
+
+   Implementations MUST NOT mix content encryption algorithms for
+   different recipients of the same message. A single content encryption
+   algorithm MUST be selected and used for all recipients. For example,
+   if a message is encrypted with AES-128-GCM, all recipient information
+   MUST use AES-128-GCM; it is not permitted to encrypt the content-
+   encryption key with AES-CBC for some recipients and AES-GCM for
+   others.
+
+### Multiple-Recipient Encryption
+
    To support recoverable decryption and regulatory requirements,
    implementations SHOULD support multiple-recipient encryption of the
    content-encryption key (CEK), consistent with [RFC8551] Section 3.3.
@@ -1148,7 +1237,7 @@ RFC 3798 for backward compatibility.
    message.
 
    The requirements in this section update but do not alter the compatibility
-   of MDN formats with existing AS2 implementations (see [Section 1.2](#backward-compatibility-and-interoperability){:format="none"}).
+   of MDN formats with existing AS2 implementations (see [Section 1.2](#backward-compatibility-and-interoperability)).
    This ensures interoperability with both RFC 3798 and RFC 8098 implementations.
 
    The following support for signed receipts is REQUIRED:
@@ -1358,7 +1447,7 @@ RFC 3798 for backward compatibility.
    a fully qualified domain name, an AS2 identifier, or any other implementation-specific string.
    Implementations MUST NOT reject a message based on the syntax of this field. This document
    relaxes the original requirement from RFC 4130, which mandated an email address, in order to
-   reflect current AS2 practice while maintaining backward compatibility (see [Section 1.2](#backward-compatibility-and-interoperability){:format="none"}).
+   reflect current AS2 practice while maintaining backward compatibility (see [Section 1.2](#backward-compatibility-and-interoperability)).
 
    When requesting MDN-based receipts, the originator supplies
    additional extension headers that precede the message body.  These
@@ -1494,7 +1583,7 @@ RFC 3798 for backward compatibility.
 
         o MD5 is obsolete and MUST NOT be generated.
 
-      See [Section 10](#security-considerations){:format="none"} for additional algorithm requirements
+      See [Section 10](#security-considerations) for additional algorithm requirements
       and deprecation timelines.
 
       Both the "signed-receipt-protocol" and the "signed-receipt-micalg"
@@ -1524,7 +1613,7 @@ RFC 3798 for backward compatibility.
 
       The returned MDN will contain information on the disposition of
       the message and on why the MDN could not be signed. See the
-      Disposition field in [Section 8.5](#disposition-mode-type-and-modifier){:format="none"}
+      Disposition field in [Section 8.5](#disposition-mode-type-and-modifier)
       for more information.
 
       Within an EDI trading relationship, if a signed receipt is
@@ -1748,7 +1837,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    message-digest computed over the received message using a hash
    function. This field is required for signed receipts but optional
    for unsigned receipts. For details defining the specific content
-   over which the message digest is to be computed, see [Section 8.3.1](#signed-receipt-considerations){:format="none"}
+   over which the message digest is to be computed, see [Section 8.3.1](#signed-receipt-considerations)
    of this document.
 
    For signed messages, the algorithm used to calculate the MIC MUST be
@@ -1917,7 +2006,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    specific, well-known error. Further information about the error may
    be contained in an error field.
 
-   For internet EDI use, the following "error" AS2-disposition-modifier
+   For Internet EDI use, the following "error" AS2-disposition-modifier
    values are defined:
 
 ~~~text
@@ -2140,15 +2229,20 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    * **TLS Certificates** are used solely to secure the HTTPS transport
      channel. They establish session-level confidentiality and integrity and
      SHOULD be issued by a trusted certification authority (CA) in production
-     environments. Self-signed TLS certificates MAY be used for testing or by
-     explicit agreement between trading partners, provided they include a
-     **Subject Alternative Name (SAN)** extension containing the hostname
-     and/or IP address. The SAN extension MUST be marked as non-critical.
+     environments. For public-facing servers, TLS certificates SHOULD comply
+     with the CA/Browser Forum Baseline Requirements
+     (https://cabforum.org/baseline-requirements-documents/). Self-signed
+     TLS certificates MAY be used for testing or by explicit agreement
+     between trading partners, provided they include a **Subject Alternative
+     Name (SAN)** extension containing the hostname and/or IP address. The
+     SAN extension MUST be marked as non-critical.
 
    * **AS2 Certificates** are used for signing and encrypting AS2 messages
-     and SHOULD NOT be the same as the TLS certificate. Separation ensures that
+     and MUST NOT be the same as the TLS certificate. Separation ensures that
      a compromise of the transport layer does not affect message-level
-     security. AS2 certificates MAY be CA-issued or self-signed, depending on
+     security, and vice versa. Using the same certificate for both purposes
+     creates security dependencies and operational risks that MUST be avoided.
+     AS2 certificates MAY be CA-issued or self-signed, depending on
      organizational policy and trading-partner agreements.
 
    AS2 certificates MUST use a key length of at least **2048 bits for RSA
@@ -2171,21 +2265,28 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    MUST ensure integrity and authentication of keys prior to activation.
 
    The **AS2 GET** method MAY be used for initial retrieval of partner
-   certificates if protected by appropriate authentication (for example,
-   Basic Authentication). Implementations using AS2 GET MUST ensure that
-   certificate delivery is integrity-protected and that access is restricted
-   to authorized partners.
+   certificates. Implementations using AS2 GET MUST ensure that certificate
+   retrieval is authenticated (to verify the requester's identity) and
+   authorized (to ensure only legitimate trading partners can access
+   certificates). While certificates themselves are digitally signed by their
+   issuer and thus tamper-evident, authentication and authorization are
+   required to prevent unauthorized parties from obtaining certificates and
+   using them to identify legitimate trading partners or map relationships.
+   For self-signed certificates, additional out-of-band verification (such as
+   fingerprint confirmation via secure channel) is REQUIRED to establish
+   initial trust before use in production.
 
 ## Operational Guidance
 
-   * TLS and AS2 certificates MUST be managed separately.
+   * TLS and AS2 certificates MUST be managed separately and MUST NOT be
+     the same certificate.
    * CEM SHOULD be supported to reduce manual errors and configuration drift.
    * Self-signed certificates SHOULD include SAN extensions for clarity and
      validation consistency.
    * Implementations SHOULD support configurable expiration and notification
      mechanisms for certificate renewal.
-   * Administrators SHOULD avoid reusing TLS certificates as AS2 certificates,
-     even when technically possible.
+   * Administrators MUST NOT reuse TLS certificates as AS2 certificates to
+     maintain separation of security domains.
 
    For security and algorithm lifecycle considerations, see
    [Section 7](#algorithm-requirements) and
@@ -2199,7 +2300,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    Cryptographic algorithms used for signatures, MIC calculations, and
    encryption are subject to modernization and deprecation guidance.
    The definitive algorithm requirements (for hash functions and
-   encryption) are specified in [Section 7](#algorithm-requirements){:format="none"}.
+   encryption) are specified in [Section 7](#algorithm-requirements).
    This section provides security rationale and additional guidance.
 
    Legacy algorithms such as SHA-1, MD5, 3DES, and RC2 are deprecated
@@ -2218,8 +2319,8 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    failures. Administrators are encouraged to monitor IETF and NIST
    publications for algorithm lifecycle updates and to update deployed
    systems accordingly. These compatibility allowances are described in more detail in
-   [Section 1.2](#backward-compatibility-and-interoperability){:format="none"} and
-   [Appendix B](#legacy-interoperability-non-normative){:format="none"}.
+   [Section 1.2](#backward-compatibility-and-interoperability) and
+   [Appendix B](#legacy-interoperability-non-normative).
 
    When processing certificates, failures such as expired, revoked, or
    untrusted certificates MUST result in immediate and noticeable error
@@ -2346,7 +2447,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    returned unsigned, evidentiary requirements for NRR are weak; some
    authentication of the identity of the receiver is needed.
 
-   If TLS is used for transport, the guidance in [Section 10.1](#https-tls-reqs){:format="none"} applies.
+   If TLS is used for transport, the guidance in [Section 10.1](#https-tls-reqs) applies.
 
 ## Replay Remark
 
@@ -2379,8 +2480,8 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 
 ~~~text
    Parameter-name:  warning
-   Semantics: See [Section 8.4.3](#as2-mdn-fields){:format="none"} and
-   [Section 8.5.5](#processing-warnings){:format="none"} in this document.
+   Semantics: See [Section 8.4.3](#as2-mdn-fields) and
+   [Section 8.5.5](#processing-warnings) in this document.
 ~~~
 
 # Acknowledgments
@@ -2402,7 +2503,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    examples (e.g., in the `Disposition-Notification-To` field) reflect
    one valid option but are not required. In AS2, this field may also
    contain a URL, a fully qualified host name, an AS2 identifier, or
-   another implementation-specific string, as described in [Section 8.3](#requesting-a-signed-receipt){:format="none"}.
+   another implementation-specific string, as described in [Section 8.3](#requesting-a-signed-receipt).
 
 ## Signed Message Requesting a Signed, Synchronous Receipt
 ~~~text
@@ -2634,7 +2735,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
       messages encrypted with 3DES from legacy partners. However, 3DES
       MUST NOT be generated by conformant implementations. AES (128-bit
       or stronger) remains the normative requirement in
-      [Section 7.2](#encryption-algorithms){:format="none"}.
+      [Section 7.2](#encryption-algorithms).
 
       Note: NIST withdrew the 3DES specification on 1 January 2024, and
       disallowed the two-key variant in 2017. Any residual use of 3DES is
@@ -2662,7 +2763,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    These clarifications are provided for reference and consistency
    across vendors. They are non-normative and are not intended to
    redefine [RFC4130] or to weaken the algorithm requirements of this
-   specification. see [Section 1.2](#backward-compatibility-and-interoperability){:format="none"}
+   specification. see [Section 1.2](#backward-compatibility-and-interoperability)
    for discussion of backward compatibility principles, and Section 7
    for normative algorithm requirements.
 
@@ -2683,8 +2784,14 @@ from the original RFC 4130 draft toward the current version of this document.
 
 ## Changes affecting Section 1.2 - Backward Compatibility and Interoperability
 - Expanded to explicitly state the dual-reference policy:
-  * Implementations MAY interoperate with S/MIME v3.1 (RFC 3851/3852).
-  * Conformant implementations MUST also support S/MIME v4.0 (RFC 8551).
+  * Implementations MAY interoperate with S/MIME v3.2 (RFC 5751, which
+    obsoletes RFC 3851/3852).
+  * Conformant implementations MUST also support S/MIME v4.0 (RFC 8551,
+    which obsoletes RFC 5751).
+- **UPDATED (Technical Review)**: Clarified that S/MIME 4.0 is the baseline
+  for conformant implementations, with explicit guidance on when to use
+  AuthEnvelopedData (S/MIME 4.0 with AES-GCM/AES-CCM) versus EnvelopedData
+  (S/MIME 3.2 with AES-CBC or for backward compatibility).
 - Added explicit pointer to Appendix B for legacy interoperability
   clarifications.
 - Clarified that RFC 8551 forms the baseline for new implementations.
@@ -2751,6 +2858,19 @@ from the original RFC 4130 draft toward the current version of this document.
   * RECOMMENDED to support AES-GCM and AES-CCM modes.
   * 3DES and RC2 deprecated; MUST NOT be generated.
   * SHOULD support multiple-recipient encryption (per RFC 8551 §3.3).
+- **UPDATED (Technical Review)**: Added comprehensive key management algorithm
+  requirements:
+  * MUST support RSA with minimum 2048-bit key length
+  * SHOULD support RSA-OAEP (RFC 3560)
+  * MAY support ECDH and Diffie-Hellman (RFC 5753)
+  * For elliptic curves, SHOULD support NIST P-256 or stronger
+- **UPDATED (Technical Review)**: Added new Section 7.2 subsections:
+  * "EnvelopedData vs AuthEnvelopedData" - Explicit rules for when to use each:
+    - AuthEnvelopedData MUST be used with AES-GCM and AES-CCM
+    - EnvelopedData MUST be used with AES-CBC and for S/MIME 3.2 compatibility
+    - Single content encryption algorithm MUST be used for all recipients
+  * "Multiple-Recipient Encryption" - Explains support for multiple recipients
+    of the same content-encryption key
 - Added explicit cross-references to Appendix B for legacy interoperability.
 
 ## Changes affecting Section 8 - MDN Processing
@@ -2798,8 +2918,10 @@ from the original RFC 4130 draft toward the current version of this document.
 - Expanded the section to clarify separate roles and lifecycle management
   for **TLS certificates** (transport security) and **AS2 certificates**
   (message signing and encryption).
-- Stated that TLS and AS2 certificates **SHOULD NOT** be reused or shared to
-  prevent cross-impact if one certificate is compromised.
+- **UPDATED (Technical Review)**: Strengthened requirement that TLS and AS2
+  certificates **MUST NOT** be the same certificate (changed from SHOULD NOT).
+  Using the same certificate for both purposes creates security dependencies
+  and operational risks that must be avoided.
 - Required a **minimum RSA key length of 2048 bits** (or equivalent elliptic-curve
   strength such as P-256).
 - Clarified that:
@@ -2807,20 +2929,29 @@ from the original RFC 4130 draft toward the current version of this document.
     certificates MAY be used in test environments or by partner agreement,
     provided they include a **Subject Alternative Name (SAN)** extension
     with hostname and/or IP address.
+  * **UPDATED (Technical Review)**: Added reference to CA/Browser Forum
+    Baseline Requirements (https://cabforum.org/baseline-requirements-documents/)
+    for public-facing TLS certificates.
   * **AS2 certificates** MAY be CA-issued or self-signed per partner policy.
 - Added guidance that **AS2 certificate lifetimes** need not mirror the
   short renewal cycles of TLS certificates; renewal policies SHOULD be
   independent.
 - Recommended **CEM** for automated certificate exchange between partners
   to reduce manual errors and downtime.
-- Introduced optional support for **AS2 GET** to retrieve partner
-  certificates, provided retrieval is authenticated (for example, Basic Auth
-  or mutual TLS) and integrity-protected.
+- **UPDATED (Technical Review)**: Clarified AS2 GET certificate retrieval
+  requirements to focus on authentication (verify requester identity) and
+  authorization (ensure only legitimate partners can access certificates)
+  rather than just integrity protection. While certificates are digitally
+  signed and thus tamper-evident, authentication and authorization prevent
+  unauthorized parties from obtaining certificates and mapping trading
+  partner relationships. For self-signed certificates, added requirement
+  for out-of-band fingerprint verification before production use.
 - Added operational recommendations:
   * Maintain separate TLS / AS2 certificates.
   * Include SAN extensions in all self-signed certificates.
   * Support configurable expiry-notification mechanisms.
-  * Avoid reusing TLS certificates for AS2 message security.
+  * **UPDATED (Technical Review)**: Administrators MUST NOT (strengthened
+    from SHOULD NOT) reuse TLS certificates for AS2 message security.
 
 ## Changes affecting Section 10 - Security Considerations
 - Provided guidance for the usgae of HTTPS and the minimum and recommended usage of TLS versions.
@@ -2843,4 +2974,44 @@ from the original RFC 4130 draft toward the current version of this document.
   * Explicit note: 3DES withdrawn by NIST in 2024; MAY only be accepted for
     backward compatibility, MUST NOT be generated.
 - **Appendix C**: This Change Log.
+
+## Formatting and Editorial Updates (Technical Review - January 2025)
+
+The following formatting and editorial improvements were made based on
+technical review feedback:
+
+- **Section 1.1 (Applicable RFCs)**:
+  * Updated RFC references to reflect proper obsolescence chain (RFC 3851 ->
+    RFC 5751 -> RFC 8551)
+  * Added RFC 5751 to normative references
+  * Added explicit explanation of when to use AuthEnvelopedData vs
+    EnvelopedData based on encryption algorithm choice
+
+- **Section 1.3 (Algorithm Coverage)**:
+  * Expanded hash function section to include encryption algorithms
+  * Added key management algorithm requirements (RSA-OAEP, ECDH)
+  * Added RFC 3560 and RFC 5753 to informative references
+
+- **Section 6 (AS2-Specific HTTP Headers)**:
+  * Reformatted AS2-Version header descriptions to comply with RFC
+    formatting requirements (72-character line limit)
+  * Removed markdown artifacts `{:format="none"}` from all cross-references
+    throughout the document (24 instances)
+
+- **RFC Reference Sections**:
+  * Moved RFC citations from section titles to first sentence of each
+    section (9 sections in "Referenced RFCs and Their Contributions")
+  * Example: "## RFC 2616 HTTP v1.1 [RFC2616]" became
+    "## RFC 2616 HTTP v1.1" with "[RFC2616] specifies..." in text
+
+- **Capitalization**:
+  * Corrected "internet" to "Internet" (2 instances)
+  * Ensured consistent capitalization throughout document
+
+- **Cross-References**:
+  * Standardized all internal section references to use plain markdown
+    format without formatting directives
+
+These updates improve RFC formatting compliance and document clarity while
+maintaining all technical content and backward compatibility requirements.
 
