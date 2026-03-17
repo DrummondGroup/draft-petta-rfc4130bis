@@ -4,8 +4,8 @@
 
 Network Working Group                                           D. Petta
 Internet-Draft                                       Drummond Group, LLC
-Intended status: Informational                              3 March 2026
-Expires: 4 September 2026
+Intended status: Informational                             17 March 2026
+Expires: 18 September 2026
 
 
                     AS2 Specification Modernization
@@ -22,10 +22,10 @@ Abstract
    structured data formats.  The data is packaged using standard MIME
    structures.  Authentication and data confidentiality are obtained by
    using Cryptographic Message Syntax with S/MIME security body parts
-   (see Section 10.1 (Section 10.1)).  Authenticated acknowledgements
-   make use of multipart/signed Message Disposition Notification (MDN)
-   responses to the original HTTP message.  This applicability statement
-   is informally referred to as "AS2" because it is the second
+   (see Section 10.1).  Authenticated acknowledgements make use of
+   multipart/signed Message Disposition Notification (MDN) responses to
+   the original HTTP message.  This applicability statement is
+   informally referred to as "AS2" because it is the second
    applicability statement, produced after "AS1" (RFC 3335).  This
    document obsoletes RFC 4130 and stands on its own without reference
    to AS1 or SMTP, except where required for IANA registry updates.
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2026.
+   This Internet-Draft will expire on 18 September 2026.
 
 Copyright Notice
 
@@ -81,6 +81,7 @@ Table of Contents
    1.  Introduction
      1.1.  Applicable RFCs
      1.2.  Backward Compatibility and Interoperability
+       1.2.1.  Legacy Interoperability (Non-Normative)
      1.3.  Rationale
      1.4.  Terms
    2.  Overview
@@ -170,26 +171,25 @@ Table of Contents
      A.3.  Signed, Encrypted Message Requesting a Signed, Asynchronous
            Receipt
      A.4.  Asynchronous MDN for Message in A.3, Above
-   Appendix B.  Legacy Interoperability (Non-Normative)
-   Appendix C.  Change Log (Non-Normative)
-     C.1.  General
-     C.2.  Changes affecting Section 1.2 - Backward Compatibility and
+   Appendix B.  Change Log (Non-Normative)
+     B.1.  General
+     B.2.  Changes affecting Section 1.2 - Backward Compatibility and
             Interoperability
-     C.3.  Changes affecting Section 5.1 - AS2-Version Header
-     C.4.  Changes affecting Section 5.3.3 — Message-Id and
+     B.3.  Changes affecting Section 5.1 - AS2-Version Header
+     B.4.  Changes affecting Section 5.3.3 — Message-Id and
             Original-Message-Id
-     C.5.  Changes affecting Sections 5.4 and 5.5 — Reliability and
+     B.5.  Changes affecting Sections 5.4 and 5.5 — Reliability and
             Restart
-     C.6.  Changes affecting Section 6 — Additional AS2-Specific HTTP
+     B.6.  Changes affecting Section 6 — Additional AS2-Specific HTTP
             Headers
-     C.7.  Changes affecting Section 7 - Algorithm Requirements
-     C.8.  Changes affecting Section 8 - MDN Processing
-     C.9.  Changes affecting Section 9 — Public Key Certificate
+     B.7.  Changes affecting Section 7 - Algorithm Requirements
+     B.8.  Changes affecting Section 8 - MDN Processing
+     B.9.  Changes affecting Section 9 — Public Key Certificate
             Handling
-     C.10. Changes affecting Section 10 - Security Considerations
-     C.11. Changes affecting Section 11 - IANA Considerations
-     C.12. Appendices
-     C.13. Formatting and Editorial Updates (Technical Review -
+     B.10. Changes affecting Section 10 - Security Considerations
+     B.11. Changes affecting Section 11 - IANA Considerations
+     B.12. Updated Message Examples
+     B.13. Formatting and Editorial Updates (Technical Review -
             January 2025)
    Author's Address
 
@@ -207,7 +207,7 @@ Table of Contents
    under this specification, and no breaking changes are introduced.  In
    addition, this document updates existing IANA registrations from RFC
    3335 and RFC 4130.  The specific IANA actions are described in
-   Section 11 (Section 11).
+   Section 11.
 
    Note to readers: Some contributors have suggested that this work
    could eventually be split into two documents: a minimal RFC4130bis
@@ -250,8 +250,7 @@ Table of Contents
    from S/MIME 3.2 [RFC5751] when using algorithms such as AES-CBC that
    require separate integrity protection.  The choice between
    AuthEnvelopedData and EnvelopedData is determined by the content
-   encryption algorithm selected (see Section 7.2 (Section 7.2) for
-   details).
+   encryption algorithm selected (see Section 7.2 for details).
 
    Our intent here is to define clearly and precisely how these are used
    together, and what is required by user agents to be compliant with
@@ -283,13 +282,13 @@ Table of Contents
    This specification establishes S/MIME Version 4.0 [RFC8551] as the
    baseline for conformant implementations.  Implementations MUST
    support S/MIME 4.0 message formats (including AuthEnvelopedData) and
-   the algorithm requirements specified in Section 7 (Section 7).
-   Implementations MAY also support S/MIME Version 3.2 [RFC5751] for
-   backward compatibility with legacy trading partners that have not yet
-   migrated to S/MIME 4.0.  When both partners support S/MIME 4.0,
+   the algorithm requirements specified in Section 7.  Implementations
+   SHOULD also support S/MIME Version 3.2 [RFC5751] for backward
+   compatibility with legacy trading partners that have not yet migrated
+   to S/MIME 4.0.  When both partners support S/MIME 4.0,
    implementations SHOULD use AuthEnvelopedData with authenticated
    encryption algorithms (AES-GCM, AES-CCM) for improved security.  When
-   interoperating with S/MIME 3.2 systems, implementations MAY use
+   interoperating with S/MIME 3.2 systems, implementations SHOULD use
    EnvelopedData with algorithms such as AES-CBC that require separate
    integrity protection via digital signatures.
 
@@ -300,10 +299,66 @@ Table of Contents
    scope.
 
    When interoperability with RFC 4130 systems is required, implementers
-   SHOULD apply the clarifications provided in Appendix B (Appendix B)
-   (Legacy Interoperability).  Appendix B is non-normative and does not
-   alter the algorithm requirements defined in Section 7, but records
-   expected behavior when communicating with legacy systems.
+   SHOULD apply the clarifications provided in Section 1.2.1 (Legacy
+   Interoperability).  Section 1.2.1 is non-normative and does not alter
+   the algorithm requirements defined in Section 7, but records expected
+   behavior when communicating with legacy systems.
+
+1.2.1.  Legacy Interoperability (Non-Normative)
+
+   This section provides the conditions for interoperability with legacy
+   AS2 implementations conforming to [RFC4130].  These provisions apply
+   only when a modern AS2 implementation communicates with a partner
+   that has not migrated to this specification.  In such cases, both
+   parties are effectively operating under [RFC4130], not this document.
+
+   These notes are provided to reduce ambiguity and ensure consistent
+   behavior across implementations.  They do not alter the algorithm
+   requirements specified in Section 7, nor do they extend the use of
+   deprecated algorithms.
+
+   Examples of legacy considerations include:
+
+   o *Message Integrity Checks (MICs):* Implementations may continue to
+   accept SHA-1 for MIC calculations when required by legacy partners.
+   SHA-1 SHOULD NOT be generated by conformant modern implementations,
+   but SHA-1 values SHOULD continue to be used to maintain backward
+   compatibility.
+
+   o *Encryption Algorithms:* Implementations may accept inbound
+   messages encrypted with 3DES from legacy partners.  However, 3DES
+   SHOULD NOT be generated by conformant implementations.  AES (128-bit
+   or stronger) remains the normative requirement in Section 7.2.
+
+     Note: NIST withdrew the 3DES specification on 1 January 2024, and
+     disallowed the two-key variant in 2017. Any residual use of 3DES is
+     for backward compatibility only and SHOULD NOT be generated by
+     conformant implementations.
+
+   o *Multiple-Recipient Encryption:* RFC 4130 did not clearly specify
+   expected behavior for multiple-recipient support.  Modern
+   implementations SHOULD support recoverable encryption by including a
+   copy of the content-encryption key (CEK) for each recipient, and
+   SHOULD include one for the originator when feasible.  Legacy
+   implementations may omit this; modern systems should tolerate it.
+
+   o *Error Handling:* When encountering unsupported algorithms or
+   malformed cryptographic structures in legacy exchanges,
+   implementations SHOULD generate a clear error condition (e.g., an
+   unsigned MDN reporting "unsupported-mic-algorithm").  Silent fallback
+   to weaker algorithms is NOT RECOMMENDED.
+
+   o *Profile Selection:* Implementations may provide administrators the
+   ability to select profiles (e.g., "AS2-1.2 legacy mode" versus
+   "AS2-1.3 modern mode") for specific trading partner agreements,
+   ensuring predictable behavior without runtime handshakes.
+
+   These clarifications are provided for reference and consistency
+   across vendors.  They are non-normative and are not intended to
+   redefine [RFC4130] or to weaken the algorithm requirements of this
+   specification.  Refer to Section 1.2 for discussion of backward
+   compatibility principles, and Section 7 for normative algorithm
+   requirements.
 
 1.3.  Rationale
 
@@ -410,16 +465,14 @@ Table of Contents
    This request/reply transactional interchange can provide secure,
    reliable, and authenticated transport for EDI or other business data
    using HTTP as a transfer protocol.  HTTPS is RECOMMENDED as the
-   default transport for new implementations (see Section 10.1
-   (Section 10.1)).
+   default transport for modern implementations (see Section 10.1).
 
    The security protocols and structures used also support auditable
    records of these document data transmissions, acknowledgements, and
    authentication.
 
    The message formats and processing requirements described below
-   maintain strict backward compatibility (see Section 1.2
-   (Section 1.2)).
+   maintain strict backward compatibility (see Section 1.2).
 
 2.2.  Purpose of a Security Guideline for MIME EDI
 
@@ -486,7 +539,7 @@ Table of Contents
    receipt make use of digital signatures.  See the Security
    Considerations section for some cautions regarding NRR.  For
    information on how to format and process receipts in AS2, refer to
-   refer to Section 8 (Section 8).
+   refer to Section 8.
 
 2.4.  Assumptions
 
@@ -581,15 +634,15 @@ Table of Contents
    o Encryption Algorithms
 
    For content encryption, implementations MUST support AES-128-CBC and
-   SHOULD support AES-256-CBC.  Implementations are RECOMMENDED to
-   support authenticated encryption modes such as AES-GCM and AES-CCM,
-   which use AuthEnvelopedData (S/MIME 4.0).  When using AES-GCM or AES-
-   CCM, implementations MUST use AuthEnvelopedData.  When using AES-CBC
-   or other non-authenticated modes, implementations MUST use
-   EnvelopedData with separate integrity protection via digital
-   signatures.  Triple-DES (3DES) and RC2 are deprecated and MUST NOT be
-   generated by conformant implementations, though they MAY be accepted
-   for backward compatibility with legacy systems.  A single content
+   AES-256-CBC.  Implementations are RECOMMENDED to support
+   authenticated encryption modes such as AES-GCM and AES-CCM, which use
+   AuthEnvelopedData (S/MIME 4.0).  When using AES-GCM or AES-CCM,
+   implementations MUST use AuthEnvelopedData.  When using AES-CBC or
+   other non-authenticated modes, implementations MUST use EnvelopedData
+   with separate integrity protection via digital signatures.  Triple-
+   DES (3DES) and RC2 are deprecated and SHOULD NOT be generated by
+   conformant implementations, though they SHOULD be accepted for
+   backward compatibility with legacy systems.  A single content
    encryption algorithm MUST be used for all recipients of a given
    message; it is not permitted to encrypt the same message with AES-CBC
    for some recipients and AES-GCM for others.
@@ -597,8 +650,7 @@ Table of Contents
    o Key Management Algorithms
 
    For key transport, implementations MUST support RSA with a minimum
-   key length of 2048 bits.  Implementations SHOULD support RSA-OAEP as
-   defined in [RFC3560].  Implementations MAY support key agreement
+   key length of 2048 bits.  Implementations MAY support key agreement
    algorithms such as Diffie-Hellman or Elliptic Curve Diffie-Hellman
    (ECDH) as specified in [RFC5753].  When using elliptic curves,
    implementations SHOULD support NIST P-256 (secp256r1) or stronger
@@ -701,8 +753,8 @@ Table of Contents
    o Users may choose any of these twenty-four possibilities, but only
    the final example (24), when compression, signing, encryption, and a
    signed receipt are all used, offers the full suite of security and
-   efficiency features described in Section 2.3.1 (Section 2.3.1), “The
-   Secure Transmission Loop.”
+   efficiency features described in Section 2.3.1, “The Secure
+   Transmission Loop.”
 
    o As with the original permutations, the receipts may be either
    synchronous or asynchronous, and the choice does not change the
@@ -896,8 +948,8 @@ Table of Contents
    When using Transport Layer Security (TLS), the request-URI MUST
    indicate the appropriate scheme value, HTTPS.  Implementations MUST
    support TLS 1.2 or higher and SHOULD follow the guidance in
-   Section 10.1 (Section 10.1).  Encrypted message bodies MAY be used in
-   addition to TLS when required by business policy.
+   Section 10.1.  Encrypted message bodies MAY be used in addition to
+   TLS when required by business policy.
 
    The receiving AS2 system MAY disconnect from the sending AS2 system
    before completing the reception of the entire entity if it determines
@@ -931,7 +983,7 @@ Table of Contents
    Section 8.1.2.2 describes a pipelining option that is useful for
    segmenting large amounts of data.  These clarifications are
    consistent with existing AS2 practice and maintain full backward
-   compatibility (see Section 1.2 (Section 1.2)).
+   compatibility (see Section 1.2).
 
 5.3.  Modification of MIME or Other Headers or Parameters Used
 
@@ -1134,7 +1186,8 @@ Table of Contents
    version digits designate feature sets, clarifications, or extensions
    that remain compatible within the same major version.  Thus, all
    values in the "1.x" range are compatible with AS2-Version 1.0, while
-   a future "2.0" would indicate a non-backward-compatible revision.
+   a potential future "2.0" version would indicate a non-backward-
+   compatible revision.
 
    Receiving systems MUST NOT fail due to the absence of the AS2-Version
    header.  Its absence MUST be assumed to be equivalent to the default
@@ -1182,18 +1235,17 @@ Table of Contents
 
                           When both partners are configured for AS2 version
                           1.3, weak algorithms (e.g., SHA-1, 3DES, RC2, MD5)
-                          MUST NOT be generated by conformant
-                          implementations. When interoperating with a legacy
-                          partner that operates at AS2 version 1.2 or lower,
-                          implementations MAY apply the legacy
-                          interoperability clarifications described in
-                          Appendix B (non-normative).
+                          MUST NOT be generated by conformant implementations.
+                          When interoperating with a legacy partner that operates
+                          at AS2 version 1.2 or lower, implementations SHOULD
+                          apply the legacy interoperability clarifications described
+                          in {{backward-compatibility-and-interoperability}}.1 (non-normative).
 
                           Future minor versions (1.x) may designate
                           additional extensions or clarifications that remain
                           backward-compatible with AS2 version 1.0. A major
                           version update (2.0 or higher) would indicate a
-                          non-backward-compatible revision.
+                          non-backward-compatible revision and may come later.
 
 6.2.  AS2 Product header
 
@@ -1205,7 +1257,7 @@ Table of Contents
 
    The AS2-Product header value is OPTIONAL for AS2-Version 1.x systems
    but MUST be included in messages generated by implementations
-   declaring *AS2-Version: 1.3 or 2.0* (or later).
+   declaring *AS2-Version: 1.3* (or later).
 
    The header field value MUST follow the format:
 
@@ -1217,7 +1269,7 @@ Table of Contents
       Examples:
 
          AS2-Product: biztalk:2025.1
-         AS2-Product: drummond-connect:4.2.3
+         AS2-Product: acme-connect:4.2.3
 
    Implementations *MUST NOT* use arbitrary identifiers or vendor
    aliases that do not reflect the actual product in use.  The value is
@@ -1229,7 +1281,7 @@ Table of Contents
    interoperability tuning or to apply compatibility workarounds for
    known product versions.  However, this field is not intended for
    feature-negotiation purposes; supported feature tokens belong in the
-   EDIINT-Features header.
+   EDIINT-Features header, as defined in RFC 6017.
 
 6.3.  AS2 System Identifiers
 
@@ -1304,30 +1356,29 @@ Table of Contents
    algorithms used in AS2.  These requirements apply to all conformant
    implementations.  Guidance on interoperability with legacy AS2
    systems that continue to use older algorithms is provided separately
-   in Appendix B.
+   in Section 1.2.1.
 
 7.1.  Hash Algorithms
 
    Implementations MUST support SHA-256 for message integrity check
    (MIC) calculations and digital signatures.  Implementations SHOULD
    support SHA-384 or stronger algorithms.  SHA-1 and MD5 are deprecated
-   due to known weaknesses and MUST NOT be generated by conformant
+   due to known weaknesses and SHOULD NOT be generated by conformant
    implementations.
 
-   See Appendix B for clarifications on handling legacy algorithms when
-   interoperating with RFC 4130 systems.
+   See Section 1.2.1 for clarifications on handling legacy algorithms
+   when interoperating with RFC 4130 systems.
 
 7.2.  Encryption Algorithms
 
    Implementations MUST support AES encryption algorithms as defined in
-   S/MIME Version 4.0 [RFC8551].  At a minimum, AES-128-CBC MUST be
-   supported, and AES-256-CBC SHOULD be supported.  Implementations are
-   also RECOMMENDED to support AES-128-GCM and AES-256-GCM.  Support for
-   AES-CCM is also RECOMMENDED for environments requiring authenticated
-   encryption.
+   S/MIME Version 4.0 [RFC8551].  At a minimum, AES-128-CBC and AES-
+   256-CBC MUST be supported.  Implementations are also RECOMMENDED to
+   support AES-128-GCM and AES-256-GCM.  Support for AES-CCM is also
+   RECOMMENDED for environments requiring authenticated encryption.
 
-   Triple DES (3DES) and RC2 are deprecated and MUST NOT be generated by
-   conformant implementations.
+   Triple DES (3DES) and RC2 are deprecated and SHOULD NOT be generated
+   by conformant implementations.
 
 7.2.1.  EnvelopedData vs AuthEnvelopedData
 
@@ -1364,7 +1415,7 @@ Table of Contents
    included in the EnvelopedData, and the same principle applies to
    AuthEnvelopedData when using AES-CCM or AES-GCM.
 
-   See Appendix B for guidance on handling 3DES and other weak
+   See Section 1.2.1 for guidance on handling 3DES and other weak
    algorithms when interoperating with legacy AS2 systems.
 
 8.  Structure and Processing of an MDN Message
@@ -1385,8 +1436,8 @@ Table of Contents
 
    The requirements in this section update but do not alter the
    compatibility of MDN formats with existing AS2 implementations (see
-   Section 1.2 (Section 1.2)).  This ensures interoperability with both
-   RFC 3798 and RFC 8098 implementations.
+   Section 1.2).  This ensures interoperability with both RFC 3798 and
+   RFC 8098 implementations.
 
    The following support for signed receipts is REQUIRED:
 
@@ -1598,7 +1649,7 @@ Table of Contents
    message based on the syntax of this field.  This document relaxes the
    original requirement from RFC 4130, which mandated an email address,
    in order to reflect current AS2 practice while maintaining backward
-   compatibility (see Section 1.2 (Section 1.2)).
+   compatibility (see Section 1.2).
 
    When requesting MDN-based receipts, the originator supplies
    additional extension headers that precede the message body.  These
@@ -1608,7 +1659,7 @@ Table of Contents
    that an Original-Message-Id value can be returned in the body part of
    MDN.  Other headers, especially "Subject" and "Date", SHOULD be
    supplied; the values of these headers are often mentioned in the
-   human-readable section of a MDN to aid in identifying the original
+   human-readable portion of a MDN to aid in identifying the original
    message.
 
    MDNs will be returned in the HTTP response when requested, unless an
@@ -1732,13 +1783,13 @@ Table of Contents
        o Implementations *SHOULD* support SHA-384 or stronger.
 
        o SHA-1 *MAY* be accepted only when required for interoperability
-       with legacy partners and MUST NOT be generated for new
-       deployments once both parties support stronger algorithms.
+       with legacy partners and SHOULD NOT be generated for modern
+       implementations once both parties support stronger algorithms.
 
        o MD5 is obsolete and MUST NOT be generated.
 
-       See Section 10 (Section 10) for additional algorithm requirements
-       and deprecation timelines.
+       See Section 10 for additional algorithm requirements and
+       deprecation timelines.
 
        Both the "signed-receipt-protocol" and the "signed-receipt-
        micalg" option parameters are REQUIRED when requesting a signed
@@ -1768,8 +1819,7 @@ Table of Contents
 
        The returned MDN will contain information on the disposition of
        the message and on why the MDN could not be signed.  See the
-       Disposition field in Section 8.5 (Section 8.5) for more
-       information.
+       Disposition field in Section 8.5 for more information.
 
        Within an EDI trading relationship, if a signed receipt is
        expected and is not returned, then the validity of the
@@ -1964,9 +2014,11 @@ Table of Contents
        ; i.e., base64(message-digest)
 
    digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
-                    ; The "sha1" is a legacy spelling of the "sha-1" defined hash in the IANA Textual Names Registry
-                    ; It should be maintained for backwards compatibility
-                    ; sha1 | sha-1 should only be used by legacy deployments that cannot support sha-256 or greater
+                    ; The "sha1" is a legacy representation of the "sha-1"
+                    ; defined hash in the IANA Textual Names Registry.
+                    ; It should be maintained for backwards compatibility;
+                    ; sha1 | sha-1 should only be used by legacy deployments
+                    ; that cannot support sha-256 or greater
 
    To improve error reporting and interoperability, this specification
    introduces additional standardized disposition modifiers beyond those
@@ -1974,26 +2026,26 @@ Table of Contents
 
    These modifiers are used to indicate specific failure conditions that
    cannot be adequately represented by the existing error codes and may
-   not be compatible with earlier implementations of AS2 Implementations
-   MUST include a human-readable explanation in the MDN Explanation
-   field when returning these modifiers.
+   not be compatible with earlier implementations of AS2.
+   Implementations MUST include a human-readable explanation in the MDN
+   Explanation field when returning these modifiers.
 
    Future modifiers may be registered through the IANA registry for AS2
    Disposition Values and Modifiers (see Section 11).
 
    The "Received-content-MIC" extension field is set when the integrity
-   of the received message is verified.  The MIC is the base64-encoded
-   message-digest computed over the received message using a hash
-   function.  This field is required for signed receipts but optional
-   for unsigned receipts.  For details defining the specific content
-   over which the message digest is to be computed, see Section 8.3.1
-   (Section 8.3.1) of this document.
+   of the received message is verified.  The MIC value is the
+   base64-encoded message-digest computed over the received message
+   using a hash function.  This field is required for signed receipts
+   but optional for unsigned receipts.  For details defining the
+   specific content over which the message digest is to be computed, see
+   Section 8.3.1 of this document.
 
    For signed messages, the algorithm used to calculate the MIC MUST be
    the same as that used on the message that was signed.  If the message
    is not signed, then the SHA-256 algorithm SHOULD be used.  SHA-1 MAY
-   be used only for legacy interoperability (see Appendix B).  This
-   field is set only when the contents of the message are processed
+   be used only for legacy interoperability (see Section 1.2.1).  This
+   field is set only when the content of the message is processed
    successfully.  This field is used in conjunction with the recipient's
    signature on the MDN so that the sender can verify non-repudiation of
    receipt.
@@ -2385,7 +2437,7 @@ Table of Contents
       documents/).  Self-signed TLS certificates MAY be used for testing
       or by explicit agreement between trading partners, provided they
       include a *Subject Alternative Name (SAN)* extension containing
-      the hostname and/or IP address.  The SAN extension MUST be marked
+      the DNS name and/or IP address.  The SAN extension MUST be marked
       as non-critical.
 
    *  *AS2 Certificates* are used for signing and encrypting AS2
@@ -2413,10 +2465,10 @@ Table of Contents
 
    Automated certificate management significantly reduces operational
    risk.  Implementations SHOULD support *Certificate Exchange Messaging
-   (CEM)* [RFC6017] to enable secure, automated exchange of AS2
-   certificates between trading partners.  When CEM is not available,
-   manual exchange processes MUST ensure integrity and authentication of
-   keys prior to activation.
+   (CEM)* [I-D.draft-meadors-certificate-exchange-14] to enable secure,
+   automated exchange of AS2 certificates between trading partners.
+   When CEM is not available, manual exchange processes MUST ensure
+   integrity and authentication of keys prior to activation.
 
    The *AS2 GET* method MAY be used for initial retrieval of partner
    certificates.  Implementations using AS2 GET MUST ensure that
@@ -2449,7 +2501,7 @@ Table of Contents
       to maintain separation of security domains.
 
    For security and algorithm lifecycle considerations, see Section 7
-   (Section 7) and Section 10 (Section 10).
+   and Section 10.
 
 10.  Security Considerations
 
@@ -2459,15 +2511,15 @@ Table of Contents
    Cryptographic algorithms used for signatures, MIC calculations, and
    encryption are subject to modernization and deprecation guidance.
    The definitive algorithm requirements (for hash functions and
-   encryption) are specified in Section 7 (Section 7).  This section
-   provides security rationale and additional guidance.
+   encryption) are specified in Section 7.  This section provides
+   security rationale and additional guidance.
 
    Legacy algorithms such as SHA-1, MD5, 3DES, and RC2 are deprecated
-   due to known weaknesses.  Implementations MUST NOT generate these
-   algorithms in new deployments.  However, legacy use cases may still
-   be encountered when interoperating with older systems conforming to
-   [RFC4130].  See Appendix B for clarifications on legacy
-   interoperability.
+   due to known weaknesses.  Implementations SHOULD NOT generate these
+   algorithms in modern implementations.  However, legacy use cases may
+   still be encountered when interoperating with older systems
+   conforming to [RFC4130].  See Section 1.2.1 for clarifications on
+   legacy interoperability.
 
    Modern implementations are expected to support strong algorithms such
    as SHA-256 or stronger for MIC calculations, and AES (128-bit or
@@ -2479,14 +2531,14 @@ Table of Contents
    failures.  Administrators are encouraged to monitor IETF and NIST
    publications for algorithm lifecycle updates and to update deployed
    systems accordingly.  These compatibility allowances are described in
-   more detail in Section 1.2 (Section 1.2) and Appendix B (Appendix B).
+   more detail in Section 1.2 and Section 1.2.1.
 
    When processing certificates, failures such as expired, revoked, or
    untrusted certificates MUST result in immediate and noticeable error
    reporting.  See [RFC3280] and [RFC8551] for guidance on certificate
    path validation.  For guidance on certificate management, key
    exchange, and renewal, including use of Certificate Exchange
-   Messaging (CEM) and AS2 GET, see Section 9 (Section 9).
+   Messaging (CEM) and AS2 GET, see Section 9 and Section 9.2.
 
 10.1.  HTTPS and TLS Requirements
 
@@ -2556,7 +2608,7 @@ Table of Contents
    certificate path validation) SHOULD be performed unless an out-of-
    band trust model has been explicitly agreed upon by trading partners.
    If a self-signed TLS certificate is used, it SHOULD contain a Subject
-   Alternative Name (SAN) extension that includes the hostname and/or IP
+   Alternative Name (SAN) extension that includes the DNS name and/or IP
    address of the sender.  If included, this certificate extension MUST
    be marked as non-critical.
 
@@ -2615,8 +2667,7 @@ Table of Contents
    returned unsigned, evidentiary requirements for NRR are weak; some
    authentication of the identity of the receiver is needed.
 
-   If TLS is used for transport, the guidance in Section 10.1
-   (Section 10.1) applies.
+   If TLS is used for transport, the guidance in Section 10.1 applies.
 
 10.4.  Replay Remark
 
@@ -2650,8 +2701,8 @@ Table of Contents
 11.1.1.  Disposition Modifier 'warning'
 
       Parameter-name:  warning
-      Semantics: See [Section 8.4.3](#as2-mdn-fields) and
-      [Section 8.5.5](#processing-warnings) in this document.
+      Semantics: See (#as2-mdn-fields) and
+      (#processing-warnings) in this document.
 
 12.  Acknowledgments
 
@@ -2800,6 +2851,14 @@ Table of Contents
               26 January 2011, <https://datatracker.ietf.org/doc/html/
               draft-harding-as2-restart-02>.
 
+   [I-D.draft-meadors-certificate-exchange-14]
+              Meadors, K. and D. Moberg, "Certificate Exchange Messaging
+              for EDIINT draft-meadors-certificate-exchange-14.txt
+              Abstract", Work in Progress, Internet-Draft, draft-
+              meadors-certificate-exchange-14, 22 December 2011,
+              <https://datatracker.ietf.org/doc/html/draft-meadors-
+              certificate-exchange-14>.
+
    [RFC2246]  Dierks, T. and C. Allen, "The TLS Protocol Version 1.0",
               RFC 2246, DOI 10.17487/RFC2246, January 1999,
               <https://www.rfc-editor.org/rfc/rfc2246>.
@@ -2828,7 +2887,7 @@ Appendix A.  Message Examples
    reflect one valid option but are not required.  In AS2, this field
    may also contain a URL, a fully qualified host name, an AS2
    identifier, or another implementation-specific string, as described
-   in Section 8.3 (Section 8.3).
+   in Section 8.3.
 
 A.1.  Signed Message Requesting a Signed, Synchronous Receipt
 
@@ -3028,69 +3087,13 @@ A.4.  Asynchronous MDN for Message in A.3, Above
 
       ------=_Part_337_6452266.1040310218750-
 
-Appendix B.  Legacy Interoperability (Non-Normative)
-
-   This appendix records clarifications for interoperability with legacy
-   AS2 implementations conforming to [RFC4130].  These provisions apply
-   only when a modern AS2 implementation communicates with a partner
-   that has not migrated to this specification.  In such cases, both
-   parties are effectively operating under [RFC4130], not this document.
-
-   These notes are provided to reduce ambiguity and ensure consistent
-   behavior across implementations.  They do not alter the algorithm
-   requirements specified in Section 7, nor do they extend the use of
-   deprecated algorithms.
-
-   Examples of legacy considerations include:
-
-   o *Message Integrity Checks (MICs):* Implementations may continue to
-   accept SHA-1 for MIC calculations when required by legacy partners.
-   SHA-1 MUST NOT be generated by conformant modern implementations, but
-   inbound SHA-1 values may be tolerated to maintain compatibility.
-
-   o *Encryption Algorithms:* Implementations may accept inbound
-   messages encrypted with 3DES from legacy partners.  However, 3DES
-   MUST NOT be generated by conformant implementations.  AES (128-bit or
-   stronger) remains the normative requirement in Section 7.2
-   (Section 7.2).
-
-     Note: NIST withdrew the 3DES specification on 1 January 2024, and
-     disallowed the two-key variant in 2017. Any residual use of 3DES is
-     for backward compatibility only and MUST NOT be generated by
-     conformant implementations.
-
-   o *Multiple-Recipient Encryption:* RFC 4130 did not clearly specify
-   expected behavior for multiple-recipient support.  Modern
-   implementations SHOULD support recoverable encryption by including a
-   copy of the content-encryption key (CEK) for each recipient, and
-   SHOULD include one for the originator when feasible.  Legacy
-   implementations may omit this; modern systems should tolerate it.
-
-   o *Error Handling:* When encountering unsupported algorithms or
-   malformed cryptographic structures in legacy exchanges,
-   implementations SHOULD generate a clear error condition (e.g., an
-   unsigned MDN reporting "unsupported-mic-algorithm").  Silent fallback
-   to weaker algorithms is NOT RECOMMENDED.
-
-   o *Profile Selection:* Implementations may provide administrators the
-   ability to select profiles (e.g., "AS2-1.2 legacy mode" versus
-   "AS2-2.0 modern mode") for specific trading partner agreements,
-   ensuring predictable behavior without runtime handshakes.
-
-   These clarifications are provided for reference and consistency
-   across vendors.  They are non-normative and are not intended to
-   redefine [RFC4130] or to weaken the algorithm requirements of this
-   specification. see Section 1.2 (Section 1.2) for discussion of
-   backward compatibility principles, and Section 7 for normative
-   algorithm requirements.
-
-Appendix C.  Change Log (Non-Normative)
+Appendix B.  Change Log (Non-Normative)
 
    This appendix records the substantive changes made during the
    revision from the original RFC 4130 draft toward the current version
    of this document.
 
-C.1.  General
+B.1.  General
 
    *  Removed all references to AS1/SMTP throughout the draft.
 
@@ -3104,13 +3107,13 @@ C.1.  General
       "Section X.Y" references are properly linked in HTML and XML
       output.
 
-   *  Moved legacy interoperability clarifications to Appendix B to
+   *  Moved legacy interoperability clarifications to Section 1.2.1 to
       avoid confusion with normative text.
 
    *  Clarified that appendices are non-normative unless otherwise
       indicated.
 
-C.2.  Changes affecting Section 1.2 - Backward Compatibility and
+B.2.  Changes affecting Section 1.2 - Backward Compatibility and
       Interoperability
 
    *  Expanded to explicitly state the dual-reference policy:
@@ -3127,13 +3130,21 @@ C.2.  Changes affecting Section 1.2 - Backward Compatibility and
       versus EnvelopedData (S/MIME 3.2 with AES-CBC or for backward
       compatibility).
 
-   *  Added explicit pointer to Appendix B for legacy interoperability
-      clarifications.
+   *  Added explicit pointer to Section 1.2.1 for legacy
+      interoperability clarifications.
 
    *  Clarified that RFC 8551 forms the baseline for new
       implementations.
 
-C.3.  Changes affecting Section 5.1 - AS2-Version Header
+   *  Added new *Section 1.2.1*: Legacy Interoperability (non-normative
+      clarifications):
+
+      -  Captures behavior when interoperating with RFC 4130 systems.
+
+      -  Explicit note: 3DES withdrawn by NIST in 2024; MAY only be
+         accepted for backward compatibility, SHOULD NOT be generated.
+
+B.3.  Changes affecting Section 5.1 - AS2-Version Header
 
    *  Retained definitions for AS2-Version 1.0, 1.1, and included the
       previously supported version 1.2.
@@ -3148,17 +3159,17 @@ C.3.  Changes affecting Section 5.1 - AS2-Version Header
       -  Requires support for multiple-recipient encryption
          (Section 7.2).
 
-      -  States weak algorithms (SHA-1, MD5, 3DES, RC2) MUST NOT be
+      -  States weak algorithms (SHA-1, MD5, 3DES, RC2) SHOULD NOT be
          generated by conformant 1.3 implementations.
 
-      -  Points to Appendix B for legacy interoperability when
+      -  Points to Section 1.2.1 for legacy interoperability when
          communicating with 1.2 or earlier partners.
 
    *  Added note about future versioning: minor versions (1.x) remain
       backward compatible; major version (2.0+) would indicate non-
       backward-compatible revisions.
 
-C.4.  Changes affecting Section 5.3.3 — Message-Id and Original-Message-
+B.4.  Changes affecting Section 5.3.3 — Message-Id and Original-Message-
       Id
 
    *  Prohibit spaces and control characters in newly generated Message-
@@ -3175,11 +3186,11 @@ C.4.  Changes affecting Section 5.3.3 — Message-Id and Original-Message-
 
    *  Update normative reference to [RFC5322].
 
-C.5.  Changes affecting Sections 5.4 and 5.5 — Reliability and Restart
+B.5.  Changes affecting Sections 5.4 and 5.5 — Reliability and Restart
 
    *  Expanded Section 5.4 to clarify that HTTP 102 (Processing) MAY be
       used under HTTP/1.1 for progress indication but MUST NOT be used
-      under HTTP/2 or 3.
+      under HTTP/2 or HTTP/3.
 
    *  Changed previous requirement to close connections before retry to
       optional behavior; clarified that 102 is deprecated but still
@@ -3196,14 +3207,14 @@ C.5.  Changes affecting Sections 5.4 and 5.5 — Reliability and Restart
    *  Added explicit normative language about duplicate detection using
       Message-ID.
 
-C.6.  Changes affecting Section 6 — Additional AS2-Specific HTTP Headers
+B.6.  Changes affecting Section 6 — Additional AS2-Specific HTTP Headers
 
    *  Added new AS2-Product header to identify the sending product and
       version.
 
    *  Defined header format as <product-name>:<major.minor[.patch]>.
 
-   *  Required inclusion for AS2-Version 1.3 or 2.0 and later.
+   *  Required inclusion for AS2-Version 1.3 and possibly 2.0 later.
 
    *  Clarified that the header enables interoperability diagnostics and
       implementation-specific workarounds, not capability negotiation.
@@ -3211,7 +3222,7 @@ C.6.  Changes affecting Section 6 — Additional AS2-Specific HTTP Headers
    *  Explicitly stated that arbitrary or misleading product names MUST
       NOT be used.
 
-C.7.  Changes affecting Section 7 - Algorithm Requirements
+B.7.  Changes affecting Section 7 - Algorithm Requirements
 
    *  Introduced a new dedicated section consolidating algorithm
       requirements.
@@ -3222,7 +3233,7 @@ C.7.  Changes affecting Section 7 - Algorithm Requirements
 
       -  SHOULD support SHA-384 or stronger.
 
-      -  SHA-1 and MD5 deprecated; MUST NOT be generated by conformant
+      -  SHA-1 and MD5 deprecated; SHOULD NOT be generated by conformant
          implementations.
 
    *  *Encryption Algorithms*:
@@ -3231,7 +3242,7 @@ C.7.  Changes affecting Section 7 - Algorithm Requirements
 
       -  RECOMMENDED to support AES-GCM and AES-CCM modes.
 
-      -  3DES and RC2 deprecated; MUST NOT be generated.
+      -  3DES and RC2 deprecated; SHOULD NOT be generated.
 
       -  SHOULD support multiple-recipient encryption (per RFC 8551
          §3.3).
@@ -3240,8 +3251,6 @@ C.7.  Changes affecting Section 7 - Algorithm Requirements
       algorithm requirements:
 
       -  MUST support RSA with minimum 2048-bit key length
-
-      -  SHOULD support RSA-OAEP (RFC 3560)
 
       -  MAY support ECDH and Diffie-Hellman (RFC 5753)
 
@@ -3263,10 +3272,10 @@ C.7.  Changes affecting Section 7 - Algorithm Requirements
       -  "Multiple-Recipient Encryption" - Explains support for multiple
          recipients of the same content-encryption key
 
-   *  Added explicit cross-references to Appendix B for legacy
+   *  Added explicit cross-references to Section 1.2.1 for legacy
       interoperability.
 
-C.8.  Changes affecting Section 8 - MDN Processing
+B.8.  Changes affecting Section 8 - MDN Processing
 
    *  Updated to align MDN behavior with RFC 8098 (superseding RFC
       3798).
@@ -3337,7 +3346,7 @@ C.8.  Changes affecting Section 8 - MDN Processing
    *  Clarified that implementations returning these modifiers MUST
       include a human-readable explanation in the MDN Explanation field.
 
-C.9.  Changes affecting Section 9 — Public Key Certificate Handling
+B.9.  Changes affecting Section 9 — Public Key Certificate Handling
 
    *  Revised the opening paragraph to reference the optional *AS2 GET*
       method, in addition to manual partner onboarding.
@@ -3399,7 +3408,7 @@ C.9.  Changes affecting Section 9 — Public Key Certificate Handling
          (strengthened from SHOULD NOT) reuse TLS certificates for AS2
          message security.
 
-C.10.  Changes affecting Section 10 - Security Considerations
+B.10.  Changes affecting Section 10 - Security Considerations
 
    *  Provided guidance for the usgae of HTTPS and the minimum and
       recommended usage of TLS versions.
@@ -3409,35 +3418,25 @@ C.10.  Changes affecting Section 10 - Security Considerations
       -  SHA-1 and MD5 deprecated; 3DES formally withdrawn by NIST
          (2024).
 
-      -  Implementations MUST NOT generate deprecated algorithms.
+      -  Implementations SHOULD NOT generate deprecated algorithms.
 
       -  Migration guidance provided for interoperability.
 
    *  Added explicit references back to Section 7 (Algorithm
-      Requirements) and Appendix B (Legacy Interoperability).
+      Requirements) and Section 1.2.1 (Legacy Interoperability).
 
-C.11.  Changes affecting Section 11 - IANA Considerations
+B.11.  Changes affecting Section 11 - IANA Considerations
 
    *  Clarified that IANA must update existing MDN registries to
       reference this specification (replacing RFC 4130).
 
    *  Added direct links to IANA registry pages for clarity.
 
-C.12.  Appendices
+B.12.  Updated Message Examples
 
    *  *Appendix A*: Updated Message Examples with newer algorithms.
 
-   *  *Appendix B*: Legacy Interoperability (non-normative
-      clarifications):
-
-      -  Captures behavior when interoperating with RFC 4130 systems.
-
-      -  Explicit note: 3DES withdrawn by NIST in 2024; MAY only be
-         accepted for backward compatibility, MUST NOT be generated.
-
-   *  *Appendix C*: This Change Log.
-
-C.13.  Formatting and Editorial Updates (Technical Review - January
+B.13.  Formatting and Editorial Updates (Technical Review - January
        2025)
 
    The following formatting and editorial improvements were made based
@@ -3457,7 +3456,7 @@ C.13.  Formatting and Editorial Updates (Technical Review - January
 
       -  Expanded hash function section to include encryption algorithms
 
-      -  Added key management algorithm requirements (RSA-OAEP, ECDH)
+      -  Added key management algorithm requirements for ECDH
 
       -  Added RFC 3560 and RFC 5753 to informative references
 
