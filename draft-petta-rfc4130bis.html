@@ -25,20 +25,20 @@ or SMTP, except where required for IANA registry updates.
        This document also updates IANA registries originally created by RFC
 3335 and RFC 4130. 
     ' name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="AS2" name="keyword">
 <meta content="EDIINT" name="keyword">
 <meta content="B2B" name="keyword">
 <meta content="draft-petta-rfc4130bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.9.4
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
@@ -1063,11 +1063,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">AS2 Specification Modernization</td>
-<td class="right">March 2026</td>
+<td class="right">May 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Petta</td>
-<td class="center">Expires 19 September 2026</td>
+<td class="center">Expires 2 November 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-petta-rfc4130bis-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-18" class="published">18 March 2026</time>
+<time datetime="2026-05-01" class="published">1 May 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-19">19 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-11-02">2 November 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1146,7 +1146,7 @@ or SMTP, except where required for IANA registry updates.<a href="#section-abstr
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1313,6 +1313,9 @@ or SMTP, except where required for IANA registry updates.<a href="#section-abstr
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
                 <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-http-error-recovery-and-rel" class="internal xref">HTTP Error Recovery and Reliability</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-connection-management" class="internal xref">Connection Management</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
@@ -1333,16 +1336,19 @@ or SMTP, except where required for IANA registry updates.<a href="#section-abstr
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-algorithm-requirements" class="internal xref">Algorithm Requirements</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-hash-algorithms" class="internal xref">Hash Algorithms</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-algorithm-lifecycle-managem" class="internal xref">Algorithm Lifecycle Management</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-encryption-algorithms" class="internal xref">Encryption Algorithms</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2.2.1">
-                    <p id="section-toc.1-1.7.2.2.2.1.1"><a href="#section-7.2.1" class="auto internal xref">7.2.1</a>.  <a href="#name-envelopeddata-vs-authenvelo" class="internal xref">EnvelopedData vs AuthEnvelopedData</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-hash-algorithms" class="internal xref">Hash Algorithms</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2.2.2">
-                    <p id="section-toc.1-1.7.2.2.2.2.1"><a href="#section-7.2.2" class="auto internal xref">7.2.2</a>.  <a href="#name-multiple-recipient-encrypti" class="internal xref">Multiple-Recipient Encryption</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-encryption-algorithms" class="internal xref">Encryption Algorithms</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.1">
+                    <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="auto internal xref">7.3.1</a>.  <a href="#name-envelopeddata-vs-authenvelo" class="internal xref">EnvelopedData vs AuthEnvelopedData</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.2">
+                    <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="auto internal xref">7.3.2</a>.  <a href="#name-multiple-recipient-encrypti" class="internal xref">Multiple-Recipient Encryption</a></p>
 </li>
                 </ul>
 </li>
@@ -1448,10 +1454,16 @@ or SMTP, except where required for IANA registry updates.<a href="#section-abstr
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-registration" class="internal xref">Registration</a></p>
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-http-field-name-registratio" class="internal xref">HTTP Field Name Registrations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-as2-mdn-disposition-modifie" class="internal xref">AS2 MDN Disposition Modifier Registry</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-registration" class="internal xref">Registration</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.1">
-                    <p id="section-toc.1-1.11.2.1.2.1.1"><a href="#section-11.1.1" class="auto internal xref">11.1.1</a>.  <a href="#name-disposition-modifier-warnin" class="internal xref">Disposition Modifier 'warning'</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3.2.1">
+                    <p id="section-toc.1-1.11.2.3.2.1.1"><a href="#section-11.3.1" class="auto internal xref">11.3.1</a>.  <a href="#name-disposition-modifier-warnin" class="internal xref">Disposition Modifier 'warning'</a></p>
 </li>
                 </ul>
 </li>
@@ -1530,6 +1542,15 @@ or SMTP, except where required for IANA registry updates.<a href="#section-abstr
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.13">
                 <p id="section-toc.1-1.15.2.13.1"><a href="#appendix-B.13" class="auto internal xref">B.13</a>. <a href="#name-formatting-and-editorial-up" class="internal xref">Formatting and Editorial Updates (Technical Review)</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.14">
+                <p id="section-toc.1-1.15.2.14.1"><a href="#appendix-B.14" class="auto internal xref">B.14</a>. <a href="#name-editorial-corrections" class="internal xref">Editorial Corrections</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.15">
+                <p id="section-toc.1-1.15.2.15.1"><a href="#appendix-B.15" class="auto internal xref">B.15</a>. <a href="#name-substantive-technical-chang" class="internal xref">Substantive Technical Changes</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.16">
+                <p id="section-toc.1-1.15.2.16.1"><a href="#appendix-B.16" class="auto internal xref">B.16</a>. <a href="#name-normative-references-added" class="internal xref">Normative References Added</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
@@ -1600,7 +1621,7 @@ S/MIME 4.0, this specification also permits the use of EnvelopedData
 from S/MIME 3.2 <span>[<a href="#RFC5751" class="cite xref">RFC5751</a>]</span> when using algorithms such as AES-CBC that
 require separate integrity protection. The choice between
 AuthEnvelopedData and EnvelopedData is determined by the content
-encryption algorithm selected (see <a href="#encryption-algorithms" class="auto internal xref">Section 7.2</a>
+encryption algorithm selected (see <a href="#encryption-algorithms" class="auto internal xref">Section 7.3</a>
 for details).<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 <p id="section-1.1-5">Our intent here is to define clearly and precisely how these are used
 together, and what is required by user agents to be compliant with this
@@ -1733,8 +1754,8 @@ behavior when communicating with legacy systems.<a href="#section-1.2-5" class="
         than redefining MDN behavior.
 </pre><a href="#section-1.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-1.3-3">This approach reduces ambiguity, simplifies certification, and ensures
-interoperability across implementations.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
+<p id="section-1.3-3">This approach reduces ambiguity, simplifies testing, and ensures interoperability
+across implementations.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terms">
@@ -1761,10 +1782,10 @@ interoperability across implementations.<a href="#section-1.3-3" class="pilcrow"
    Signed Receipt: A receipt with a digital signature.
 
    Synchronous Receipt: A receipt returned to the sender over the same
-            TCP/IP connection as the sender's original message.
+            HTTP connection as the sender's original message.
 
    Asynchronous Receipt: A receipt returned to the sender over a different
-            TCP/IP connection than the sender's original message.
+            HTTP connection than the sender's original message.
 
    Message Disposition Notification (MDN): The Internet messaging format
             used to convey a receipt. This term is used interchangeably
@@ -1785,7 +1806,8 @@ interoperability across implementations.<a href="#section-1.3-3" class="pilcrow"
             relevant evidence.
 
    S/MIME:  A format and protocol for adding cryptographic signature
-            and/or encryption services to Internet MIME messages.
+            and/or encryption services to Internet MIME messages. See
+            [RFC8551] for the current S/MIME specification.
 
    Cryptographic Message Syntax (CMS): An encapsulation syntax used to
             digitally sign, digest, authenticate, or encrypt arbitrary
@@ -1836,7 +1858,7 @@ interoperability across implementations.<a href="#section-1.3-3" class="pilcrow"
    HTTP POST operation to a URL for the original sender.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">This request/reply transactional interchange can provide secure,
    reliable, and authenticated transport for EDI or other business data
-   using HTTP as a transfer protocol. HTTPS is RECOMMENDED as the default
+   using HTTP as a transfer protocol. HTTPS is REQUIRED as the default
    transport for modern implementations (see <a href="#https-tls-reqs" class="auto internal xref">Section 10.1</a>).<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1-3">The security protocols and structures used also support auditable
    records of these document data transmissions, acknowledgements, and
@@ -1868,7 +1890,7 @@ interoperability across implementations.<a href="#section-1.3-3" class="pilcrow"
 <a href="#section-2.3.1" class="section-number selfRef">2.3.1. </a><a href="#name-the-secure-transmission-loo" class="section-name selfRef">The Secure Transmission Loop</a>
           </h4>
 <p id="section-2.3.1-1">This document's focus is on the formats and protocols for exchanging
-   EDI/EC content securely in the Internet's HTTP environment.<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
+   EDI/EC content securely over HTTP.<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.3.1-2">In the "secure transmission loop" for EDI/EC, one organization sends
    a signed, encrypted and compressed EDI/EC interchange to another organization
    and requests a signed receipt, and later the receiving organization sends
@@ -2012,8 +2034,7 @@ interoperability across implementations.<a href="#section-1.3-3" class="pilcrow"
 
     In addition to a receipt request, this specification allows for the
     designation of the type of receipt that should be returned. It
-    supports synchronous or asynchronous receipts in the MDN format
-    specified in {{structure-and-processing-of-an-mdn-message}} of this document.
+    supports synchronous or asynchronous receipts in the MDN format.
 
   o  Security Formatting
 
@@ -2056,116 +2077,45 @@ interoperability across implementations.<a href="#section-1.3-3" class="pilcrow"
   o  Permutation Summary
 
     The optional use of compression, as defined in [RFC3274] was introduced in AS2-Version 1.1.
-    Compression can be applied to the message payload before signing and/or encryption,
-    reducing transmission size and improving efficiency. Most modern AS2 implementations
+    Compression can be applied to the message payload before encryption and either before or
+    after signing, reducing transmission size and improving efficiency. Most modern AS2 implementations
     support compression, and it can be used by itself or in combination with signing and encryption.
 
-    The following summary therefore extends the original AS2 security permutations to include
-    the additional possibilities created by the use of compression, resulting in a total of
-    twenty-four security permutations.
+    AS2 supports flexible combinations of encryption, signature, compression, and receipt
+    options. These combinations are determined by partner agreements and are not mandated
+    by this specification. The protocol supports:
+
+        o  Encrypted or unencrypted message transmission
+        o  Signed or unsigned message content
+        o  Compressed or uncompressed payload
+        o  Synchronous or asynchronous MDN delivery
+        o  Signed or unsigned MDN responses (when requested)
 </pre><a href="#section-2.4.2-1" class="pilcrow">¶</a>
 </div>
-<p id="section-2.4.2-2">Without Compression (12 permutations)<a href="#section-2.4.2-2" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-2.4.2-3">
-<li id="section-2.4.2-3.1">
-              <p id="section-2.4.2-3.1.1">Sender sends un-encrypted data and does NOT request a receipt.<a href="#section-2.4.2-3.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.2">
-              <p id="section-2.4.2-3.2.1">Sender sends un-encrypted data and requests an unsigned receipt.
-Receiver sends back the unsigned receipt.<a href="#section-2.4.2-3.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.3">
-              <p id="section-2.4.2-3.3.1">Sender sends un-encrypted data and requests a signed receipt.
-Receiver sends back the signed receipt.<a href="#section-2.4.2-3.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.4">
-              <p id="section-2.4.2-3.4.1">Sender sends encrypted data and does NOT request a receipt.<a href="#section-2.4.2-3.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.5">
-              <p id="section-2.4.2-3.5.1">Sender sends encrypted data and requests an unsigned receipt.
-Receiver sends back the unsigned receipt.<a href="#section-2.4.2-3.5.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.6">
-              <p id="section-2.4.2-3.6.1">Sender sends encrypted data and requests a signed receipt.
-Receiver sends back the signed receipt.<a href="#section-2.4.2-3.6.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.7">
-              <p id="section-2.4.2-3.7.1">Sender sends signed data and does NOT request a signed or
-unsigned receipt.<a href="#section-2.4.2-3.7.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.8">
-              <p id="section-2.4.2-3.8.1">Sender sends signed data and requests an unsigned receipt.
-Receiver sends back the unsigned receipt.<a href="#section-2.4.2-3.8.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.9">
-              <p id="section-2.4.2-3.9.1">Sender sends signed data and requests a signed receipt.
-Receiver sends back the signed receipt.<a href="#section-2.4.2-3.9.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.10">
-              <p id="section-2.4.2-3.10.1">Sender sends encrypted and signed data and does NOT request a
-signed or unsigned receipt.<a href="#section-2.4.2-3.10.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.11">
-              <p id="section-2.4.2-3.11.1">Sender sends encrypted and signed data and requests an unsigned
-receipt.  Receiver sends back the unsigned receipt.<a href="#section-2.4.2-3.11.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-3.12">
-              <p id="section-2.4.2-3.12.1">Sender sends encrypted and signed data and requests a signed
-receipt.  Receiver sends back the signed receipt.<a href="#section-2.4.2-3.12.1" class="pilcrow">¶</a></p>
-</li>
-          </ol>
-<p id="section-2.4.2-4">With Compression (12 permutations)<a href="#section-2.4.2-4" class="pilcrow">¶</a></p>
-<ol start="13" type="1" class="normal type-1" id="section-2.4.2-5">
-<li id="section-2.4.2-5.1">
-              <p id="section-2.4.2-5.1.1">Sender sends compressed data (not encrypted or signed) and does NOT request a receipt.<a href="#section-2.4.2-5.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.2">
-              <p id="section-2.4.2-5.2.1">Sender sends compressed data and requests an unsigned receipt. Receiver sends back the unsigned receipt.<a href="#section-2.4.2-5.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.3">
-              <p id="section-2.4.2-5.3.1">Sender sends compressed data and requests a signed receipt. Receiver sends back the signed receipt.<a href="#section-2.4.2-5.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.4">
-              <p id="section-2.4.2-5.4.1">Sender sends compressed and encrypted data and does NOT request a receipt.<a href="#section-2.4.2-5.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.5">
-              <p id="section-2.4.2-5.5.1">Sender sends compressed and encrypted data and requests an unsigned receipt. Receiver sends back the unsigned receipt.<a href="#section-2.4.2-5.5.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.6">
-              <p id="section-2.4.2-5.6.1">Sender sends compressed and encrypted data and requests a signed receipt. Receiver sends back the signed receipt.<a href="#section-2.4.2-5.6.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.7">
-              <p id="section-2.4.2-5.7.1">Sender sends compressed and signed data and does NOT request a signed or unsigned receipt.<a href="#section-2.4.2-5.7.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.8">
-              <p id="section-2.4.2-5.8.1">Sender sends compressed and signed data and requests an unsigned receipt. Receiver sends back the unsigned receipt.<a href="#section-2.4.2-5.8.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.9">
-              <p id="section-2.4.2-5.9.1">Sender sends compressed and signed data and requests a signed receipt. Receiver sends back the signed receipt.<a href="#section-2.4.2-5.9.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.10">
-              <p id="section-2.4.2-5.10.1">Sender sends compressed, encrypted, and signed data and does NOT request a signed or unsigned receipt.<a href="#section-2.4.2-5.10.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.11">
-              <p id="section-2.4.2-5.11.1">Sender sends compressed, encrypted, and signed data and requests an unsigned receipt. Receiver sends back the unsigned receipt.<a href="#section-2.4.2-5.11.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-2.4.2-5.12">
-              <p id="section-2.4.2-5.12.1">Sender sends compressed, encrypted, and signed data and requests a signed receipt. Receiver sends back the signed receipt.<a href="#section-2.4.2-5.12.1" class="pilcrow">¶</a></p>
-</li>
-          </ol>
-<p id="section-2.4.2-6"><strong>Key Notes</strong><a href="#section-2.4.2-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-2.4.2-7">
+<p id="section-2.4.2-2">The specific security posture for any given trading relationship is determined by
+   business requirements and partner agreements. For detailed implementation guidance
+   on secure configurations, see <a href="#security-considerations" class="auto internal xref">Section 10</a>.<a href="#section-2.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.4.2-3"><strong>Key Notes</strong><a href="#section-2.4.2-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.4.2-4">
 <pre>
      o  Compression MAY be applied alone or in combination with signing and/or encryption, as defined in [RFC3274] and is supported
         by AS2-Version 1.1 and higher.
 
-     o  Users may choose any of these twenty-four possibilities, but only the final example (24), when compression, signing, encryption,
-        and a signed receipt are all used, offers the full suite of security and efficiency features described in
-        Section 2.3.1, “The Secure Transmission Loop.”
+     o  Compression is always applied before encryption. However, implementations MAY apply compression
+        either before or after signing - that is, an implementation may sign-then-compress or
+        compress-then-sign. Conformant implementations MUST be able to decompress messages regardless
+        of whether compression was applied before or after signing.
 
-     o  As with the original permutations, the receipts may be either synchronous or asynchronous, and the choice does not change the nature of
+     o  The MIC (Message Integrity Check) computation is always applied to the signed portion of the
+        message and includes the inner MIME headers in the signature calculation.
+
+     o  The most secure configuration combines compression, signing, encryption,
+        and a signed receipt, offering the full suite of security and efficiency features described in
+        Section 2.3.1.
+
+     o  The receipts may be either synchronous or asynchronous, and the choice does not change the nature of
         the secure transmission loop in support of NRR.
-</pre><a href="#section-2.4.2-7" class="pilcrow">¶</a>
+</pre><a href="#section-2.4.2-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2377,10 +2327,14 @@ receipt.  Receiver sends back the signed receipt.<a href="#section-2.4.2-3.12.1"
             Content-type: message/disposition-notification
             Content-Type: application/PKCS7-signature
             Content-Type: application/PKCS7-mime
-            Content-Type: application/EDI-X12
-            Content-Type: application/EDIFACT
+
+     o  Implementations SHOULD support the following content types based on
+        intended use:
+
+            Content-Type: application/EDI-X12 (for ANSI X12 EDI)
+            Content-Type: application/EDIFACT (for UN/EDIFACT EDI)
             Content-Type: application/edi-consent
-            Content-Type: application/XML
+            Content-Type: application/XML (for XML-based structured data)
 </pre><a href="#section-4.2-3" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2392,10 +2346,9 @@ receipt.  Receiver sends back the signed receipt.<a href="#section-2.4.2-3.12.1"
       <h2 id="name-http-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-http-considerations" class="section-name selfRef">HTTP Considerations</a>
       </h2>
-<p id="section-5-1">This specification permits but does not require the use of HTTP/2 or
-HTTP/3 as transport protocols. Interoperability testing and
-certification are scoped to HTTP/1.1 unless otherwise agreed upon between
-trading partners.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">This specification is based on HTTP/1.1 <span>[<a href="#RFC2616" class="cite xref">RFC2616</a>]</span>. Implementations MAY use
+HTTP/2 or HTTP/3 as the transport protocol when supported by both trading
+partners.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="sending-edi-in-http-post-requests">
 <section id="section-5.1">
         <h3 id="name-sending-edi-in-http-post-re">
@@ -2413,9 +2366,12 @@ trading partners.<a href="#section-5-1" class="pilcrow">¶</a></p>
    The Host request header (<span>[<a href="#RFC2616" class="cite xref">RFC2616</a>]</span>, Sections 9 and 14.23) is also included.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">When using Transport Layer Security (TLS), the request-URI MUST
    indicate the appropriate scheme value, HTTPS. Implementations MUST
-   support TLS 1.2 or higher and SHOULD follow the guidance in <a href="#https-tls-reqs" class="auto internal xref">Section 10.1</a>.
-   Encrypted message bodies MAY be used in addition to TLS when required
-   by business policy.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+   support TLS 1.3 or higher. TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is the current IETF
+   standard and MUST be supported by all implementations. TLS 1.2
+   <span>[<a href="#RFC5246" class="cite xref">RFC5246</a>]</span> MAY be used when interoperating with systems that have not
+   yet migrated to TLS 1.3. Further guidance on TLS usage is provided
+   in <a href="#https-tls-reqs" class="auto internal xref">Section 10.1</a>. Encrypted message bodies MAY be used in addition
+   to TLS when required by business policy.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.1-4">The receiving AS2 system MAY disconnect from the sending AS2 system
    before completing the reception of the entire entity if it determines
    that the entity being sent is too large to process.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
@@ -2664,6 +2620,34 @@ trading partners.<a href="#section-5-1" class="pilcrow">¶</a></p>
    duplicate protection and security requirements are preserved.<a href="#section-5.5-10" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="connection-management">
+<section id="section-5.6">
+        <h3 id="name-connection-management">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-connection-management" class="section-name selfRef">Connection Management</a>
+        </h3>
+<p id="section-5.6-1">HTTP/1.1 persistent connections are the default behavior. Connections remain
+   open for subsequent requests unless explicitly closed with the "Connection: close"
+   header. Implementations SHOULD use persistent connections when beneficial, particularly
+   for HTTPS connections where persistent connections avoid the overhead of repeated
+   TLS handshakes.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-2">The "Connection: close" header is not required and SHOULD NOT be included unless
+   the implementation specifically needs to close the connection after the current
+   request/response cycle. Earlier versions of this specification included
+   "Connection: close" in message examples to reflect HTTP/1.0 behavior, where
+   connections closed by default after each transaction. Modern implementations
+   using HTTP/1.1 or later benefit from the default persistent connection behavior.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+<p id="section-5.6-3">Connection management practices are governed by the HTTP version in use and
+   do not impact AS2's core message security, compression, or receipt features.
+   Implementations MAY choose connection management strategies appropriate to their
+   deployment scenarios (e.g., closing connections after single messages vs. keeping
+   connections open for multiple messages to the same trading partner).<a href="#section-5.6-3" class="pilcrow">¶</a></p>
+<p id="section-5.6-4">Note: Persistent connections are particularly beneficial when an implementation
+   sends multiple AS2 messages to the same trading partner in succession. However,
+   AS2 implementations that use multiple-attachment messages (batch messages) for
+   sending multiple business documents in a single AS2 message MAY achieve similar
+   or better efficiency even without persistent connections.<a href="#section-5.6-4" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="additional-as2-specific-http-headers">
@@ -2735,7 +2719,7 @@ AS2 MDNs. <span>[<a href="#RFC3335" class="cite xref">RFC3335</a>]</span>.<a hre
                        When interoperating with a legacy partner that operates
                        at AS2 version 1.2 or lower, implementations SHOULD
                        apply the legacy interoperability clarifications described
-                       in {{backward-compatibility-and-interoperability}}.1 (non-normative).
+                       in Section 1.2.1 (non-normative).
 
                        Future minor versions (1.x) may designate
                        additional extensions or clarifications that remain
@@ -2761,21 +2745,30 @@ AS2 MDNs. <span>[<a href="#RFC3335" class="cite xref">RFC3335</a>]</span>.<a hre
 <p id="section-6.2-3">The header field value MUST follow the format:<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <div class="lang-text sourcecode" id="section-6.2-4">
 <pre>
+   AS2-Product: [PEN-&lt;number&gt;:]&lt;product-name&gt;:&lt;version&gt;
+
+   Where:
+     * PEN-&lt;number&gt;: (OPTIONAL but RECOMMENDED) The vendor's IANA Private
+        Enterprise Number. Including the PEN provides unique vendor
+        identification and prevents namespace collisions.
      * &lt;product-name&gt;: lowercase alphanumeric and hyphen characters (a–z,
         0–9, "-") without spaces.
-     * &lt;major.minor[.patch]&gt;: version string consistent with the product’s
-        release version, with one or more numeric components separated by dots.
+     * &lt;version&gt;: version string consistent with the product's release
+        version, with one or more numeric components separated by dots
+        (semantic versioning format: major.minor[.patch]).
 
    Examples:
 
+      AS2-Product: PEN-12345:as2gateway:2.1.0
       AS2-Product: biztalk:2025.1
-      AS2-Product: example.com-connect:4.2.3
+      AS2-Product: PEN-54321:example-connect:4.2.3
 </pre><a href="#section-6.2-4" class="pilcrow">¶</a>
 </div>
 <p id="section-6.2-5">Implementations <strong>MUST NOT</strong> use arbitrary identifiers or vendor aliases
-   that do not reflect the actual product in use.  The value is static and
-   determined at build time.  If a product supports multiple AS2 variants,
-   the version portion MAY include an implementation-specific suffix
+   that do not reflect the actual product in use.  Implementations <strong>SHOULD</strong>
+   include their Private Enterprise Number if registered with IANA.  The value
+   is static and determined at build time.  If a product supports multiple AS2
+   variants, the version portion MAY include an implementation-specific suffix
    (e.g., "1.2-drummond").<a href="#section-6.2-5" class="pilcrow">¶</a></p>
 <p id="section-6.2-6">Implementations MAY use the <code>AS2-Product</code> value for automated
    interoperability tuning or to apply compatibility workarounds for known
@@ -2851,8 +2844,8 @@ AS2 MDNs. <span>[<a href="#RFC3335" class="cite xref">RFC3335</a>]</span>.<a hre
 <p id="section-6.3-12">There is no required response to a client request containing invalid
    or unknown AS2-From or AS2-To header values. The receiving AS2
    system MAY return an unsigned MDN with an explanation of the error,
-   such as an MDN error disposition value of "unknown-trading-relationship",
-   if the sending system requested an MDN.<a href="#section-6.3-12" class="pilcrow">¶</a></p>
+   such as an MDN error disposition value of "unknown-trading-relationship" or
+   "unknown-trading-partner", if the sending system requested an MDN.<a href="#section-6.3-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2866,40 +2859,72 @@ AS2 MDNs. <span>[<a href="#RFC3335" class="cite xref">RFC3335</a>]</span>.<a hre
    algorithms used in AS2. These requirements apply to all conformant
    implementations. Guidance on interoperability with legacy AS2 systems
    that continue to use older algorithms is provided separately in
-   Section 1.2.1.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<div id="hash-algorithms">
+   <a href="#legacy-interoperability-non-normative" class="auto internal xref">Section 1.2.1</a>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<div id="lifecycle-management">
 <section id="section-7.1">
-        <h3 id="name-hash-algorithms">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-hash-algorithms" class="section-name selfRef">Hash Algorithms</a>
+        <h3 id="name-algorithm-lifecycle-managem">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-algorithm-lifecycle-managem" class="section-name selfRef">Algorithm Lifecycle Management</a>
         </h3>
-<p id="section-7.1-1">Implementations MUST support SHA-256 for message integrity check (MIC)
+<p id="section-7.1-1">As cryptographic algorithms evolve, implementers should monitor IETF
+   security guidance and algorithm lifecycle announcements. Algorithms
+   are categorized as:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.1-2">
+<pre>
+     o  **MUST**: Required for conformant implementations
+     o  **SHOULD**: Strongly recommended for new implementations
+     o  **MAY**: Optional, for specific use cases
+     o  **DEPRECATED**: Supported only for legacy interoperability (see Section 1.2.1)
+     o  **MUST NOT**: Prohibited in conformant implementations
+</pre><a href="#section-7.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-7.1-3">Algorithm requirements in this specification follow the S/MIME v4.0
+   algorithm registry <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span> and the CMS specification <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>.
+   Updates to algorithm requirements may be published as separate RFCs
+   that update this specification.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-4">For current algorithm security guidance, implementers should consult:<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.1-5">
+<pre>
+     o  NIST Special Publication 800-57 (Key Management)
+     o  NIST Special Publication 800-131A (Transitions: Recommendation for
+        Transitioning the Use of Cryptographic Algorithms and Key Lengths)
+     o  IETF Security Area Directorate reviews and BCP documents
+</pre><a href="#section-7.1-5" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="hash-algorithms">
+<section id="section-7.2">
+        <h3 id="name-hash-algorithms">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-hash-algorithms" class="section-name selfRef">Hash Algorithms</a>
+        </h3>
+<p id="section-7.2-1">Implementations MUST support SHA-256 for message integrity check (MIC)
    calculations and digital signatures. Implementations SHOULD support
    SHA-384 or stronger algorithms. SHA-1 and MD5 are deprecated due to
-   known weaknesses and SHOULD NOT be generated by conformant implementations.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">See Section 1.2.1 for clarifications on handling legacy algorithms when
-   interoperating with RFC 4130 systems.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+   known weaknesses and SHOULD NOT be generated by conformant implementations.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-2">See Section 1.2.1 for clarifications on handling legacy algorithms when
+   interoperating with RFC 4130 systems.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="encryption-algorithms">
-<section id="section-7.2">
+<section id="section-7.3">
         <h3 id="name-encryption-algorithms">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-encryption-algorithms" class="section-name selfRef">Encryption Algorithms</a>
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-encryption-algorithms" class="section-name selfRef">Encryption Algorithms</a>
         </h3>
-<p id="section-7.2-1">Implementations MUST support AES encryption algorithms as defined in
+<p id="section-7.3-1">Implementations MUST support AES encryption algorithms as defined in
    S/MIME Version 4.0 <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>. At a minimum, AES-128-CBC and AES-256-CBC
    MUST be supported. Implementations are also RECOMMENDED to support
    AES-128-GCM and AES-256-GCM. Support for AES-CCM is also RECOMMENDED
-   for environments requiring authenticated encryption.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">Triple DES (3DES) and RC2 are deprecated and SHOULD NOT be generated by
-   conformant implementations.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+   for environments requiring authenticated encryption.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">Triple DES (3DES) and RC2 are deprecated and SHOULD NOT be generated by
+   conformant implementations.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 <div id="envelopeddata-vs-authenvelopeddata">
-<section id="section-7.2.1">
+<section id="section-7.3.1">
           <h4 id="name-envelopeddata-vs-authenvelo">
-<a href="#section-7.2.1" class="section-number selfRef">7.2.1. </a><a href="#name-envelopeddata-vs-authenvelo" class="section-name selfRef">EnvelopedData vs AuthEnvelopedData</a>
+<a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-envelopeddata-vs-authenvelo" class="section-name selfRef">EnvelopedData vs AuthEnvelopedData</a>
           </h4>
-<p id="section-7.2.1-1">The choice between EnvelopedData and AuthEnvelopedData depends on the
-   content encryption algorithm selected:<a href="#section-7.2.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.2.1-2">
+<p id="section-7.3.1-1">The choice between EnvelopedData and AuthEnvelopedData depends on the
+   content encryption algorithm selected:<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.3.1-2">
 <pre>
      o  **AuthEnvelopedData** MUST be used when employing authenticated
         encryption algorithms such as AES-GCM or AES-CCM. These algorithms
@@ -2912,30 +2937,29 @@ AS2 MDNs. <span>[<a href="#RFC3335" class="cite xref">RFC3335</a>]</span>.<a hre
         compatibility with S/MIME 3.2 implementations [RFC5751]. When using
         EnvelopedData, integrity protection MUST be provided separately
         through digital signatures (multipart/signed).
-</pre><a href="#section-7.2.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-7.3.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-7.2.1-3">Implementations MUST NOT mix content encryption algorithms for
-   different recipients of the same message. A single content encryption
-   algorithm MUST be selected and used for all recipients. For example,
-   if a message is encrypted with AES-128-GCM, all recipient information
-   MUST use AES-128-GCM; it is not permitted to encrypt the content-
-   encryption key with AES-CBC for some recipients and AES-GCM for
-   others.<a href="#section-7.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.3.1-3">Implementations MUST NOT mix content encryption algorithms for different
+   recipients of the same message. A single content encryption algorithm
+   MUST be selected and used for all recipients. For example, if a message
+   is encrypted with AES-128-GCM, all recipient information MUST use
+   AES-128-GCM; it is not permitted to encrypt the content-encryption
+   key with AES-CBC for some recipients and AES-GCM for others.<a href="#section-7.3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="multiple-recipient-encryption">
-<section id="section-7.2.2">
+<section id="section-7.3.2">
           <h4 id="name-multiple-recipient-encrypti">
-<a href="#section-7.2.2" class="section-number selfRef">7.2.2. </a><a href="#name-multiple-recipient-encrypti" class="section-name selfRef">Multiple-Recipient Encryption</a>
+<a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-multiple-recipient-encrypti" class="section-name selfRef">Multiple-Recipient Encryption</a>
           </h4>
-<p id="section-7.2.2-1">To support recoverable decryption and regulatory requirements,
+<p id="section-7.3.2-1">To support recoverable decryption and regulatory requirements,
    implementations SHOULD support multiple-recipient encryption of the
    content-encryption key (CEK), consistent with <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span> Section 3.3.
    A copy of the CEK encrypted for the originator SHOULD also be included in
    the EnvelopedData, and the same principle applies to AuthEnvelopedData
-   when using AES-CCM or AES-GCM.<a href="#section-7.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.2-2">See Section 1.2.1 for guidance on handling 3DES and other weak algorithms
-   when interoperating with legacy AS2 systems.<a href="#section-7.2.2-2" class="pilcrow">¶</a></p>
+   when using AES-CCM or AES-GCM.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.3.2-2">See Section 1.2.1 for guidance on handling 3DES and other weak algorithms
+   when interoperating with legacy AS2 systems.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3089,15 +3113,15 @@ RFC 3798 for backward compatibility.<a href="#section-8-1" class="pilcrow">¶</a
 <p id="section-8.2-2">The synchronous AS2-MDN is sent as an HTTP response to an HTTP POST
    or as an HTTPS response to an HTTPS POST. This form of AS2-MDN is
    called synchronous because the AS2-MDN is returned to the originator
-   of the POST on the same TCP/IP connection.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+   of the POST on the same HTTP connection.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
 <p id="section-8.2-3">The synchronous response MUST indicate transfer-layer success or
    failure, such as <code>200 OK</code> or <code>202 Accepted</code>.  The format of this
    response MAY be identical to that used when no AS2-MDN is requested.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
 <p id="section-8.2-4">The asynchronous AS2-MDN is sent on a separate HTTP or HTTPS
-   TCP/IP connection. Logically, the asynchronous AS2-MDN is a response
+   connection. Logically, the asynchronous AS2-MDN is a response
    to an AS2 message. However, at the transfer-protocol layer, assuming
    that no HTTP pipelining is utilized, the asynchronous AS2-MDN is
-   delivered on a unique TCP/IP connection, distinct from that used to
+   delivered on a unique HTTP connection, distinct from that used to
    deliver the original AS2 message.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
 <p id="section-8.2-5">When handling an asynchronous request, the receiving system <strong>SHOULD</strong>
    return a transfer-layer response (typically <code>202 Accepted</code> or <code>204 No Content</code>)
@@ -3112,7 +3136,7 @@ RFC 3798 for backward compatibility.<a href="#section-8-1" class="pilcrow">¶</a
    <strong>RECOMMENDED</strong> for simplicity, but not required.  Some application
    servers and frameworks manage connection lifecycles automatically and
    may keep the socket open.  The AS2 specification does not mandate that
-   the AS2 layer explicitly close the connection.<a href="#section-8.2-6" class="pilcrow">¶</a></p>
+   the AS2 layer explicitly close the connection (see <a href="#connection-management" class="auto internal xref">Section 5.6</a>).<a href="#section-8.2-6" class="pilcrow">¶</a></p>
 <p id="section-8.2-7">The following diagram illustrates the synchronous versus asynchronous
    varieties of AS2-MDN delivery using HTTP:<a href="#section-8.2-7" class="pilcrow">¶</a></p>
 <div class="lang-text sourcecode" id="section-8.2-8">
@@ -3273,42 +3297,45 @@ where
 </div>
 <p id="section-8.3-26">The currently used value for &lt;protocol symbol&gt; is "pkcs7-signature"
    for the S/MIME detached signature format.<a href="#section-8.3-26" class="pilcrow">¶</a></p>
-<p id="section-8.3-27">The currently supported values for MIC algorithm &lt;micalg&gt; values are:<a href="#section-8.3-27" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-8.3-28">
+<p id="section-8.3-27">The signed-receipt-micalg parameter specifies which message integrity
+   check (MIC) algorithm should be used when generating the signed receipt.
+   Values are defined by the S/MIME specification <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span> and MUST use
+   the algorithm identifiers registered in the SMI Security for S/MIME
+   registries.<a href="#section-8.3-27" class="pilcrow">¶</a></p>
+<div class="lang-text sourcecode" id="section-8.3-28">
 <pre>
-     Algorithm   Value Used
-     ---------    ---------
-      SHA-256      sha-256
-      SHA-384      sha-384
-      SHA-512      sha-512
-      SHA-1        sha-1 or sha1 (should *only* be used in legacy deployments that
-                                  cannot support SHA-256 or greater)
+   Supported values:
+      SHA-256      sha-256 (REQUIRED)
+      SHA-384      sha-384 (RECOMMENDED)
+      SHA-512      sha-512 (OPTIONAL)
+      SHA-1        sha-1 or sha1 (DEPRECATED - legacy deployments only)
 </pre><a href="#section-8.3-28" class="pilcrow">¶</a>
 </div>
-<p id="section-8.3-29">The semantics of the "signed-receipt-protocol" and the "signed-receipt-micalg"
-   parameters are as follows:<a href="#section-8.3-29" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-8.3-30">
-<li id="section-8.3-30.1">
-            <p id="section-8.3-30.1.1">The "signed-receipt-protocol" parameter is used to request a
+<p id="section-8.3-29">See <a href="#lifecycle-management" class="auto internal xref">Section 7.1</a> for current algorithm requirements and lifecycle guidance.<a href="#section-8.3-29" class="pilcrow">¶</a></p>
+<p id="section-8.3-30">The semantics of the "signed-receipt-protocol" and the "signed-receipt-micalg"
+   parameters are as follows:<a href="#section-8.3-30" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-8.3-31">
+<li id="section-8.3-31.1">
+            <p id="section-8.3-31.1.1">The "signed-receipt-protocol" parameter is used to request a
 signed receipt from the recipient trading partner. The "signed-receipt-protocol"
 parameter also specifies the format in which the signed receipt SHOULD be returned
-to the requester.<a href="#section-8.3-30.1.1" class="pilcrow">¶</a></p>
-<p id="section-8.3-30.1.2">
+to the requester.<a href="#section-8.3-31.1.1" class="pilcrow">¶</a></p>
+<p id="section-8.3-31.1.2">
 The "signed-receipt-micalg" parameter identifies one or more message
 integrity check (MIC) algorithms, in order of preference, that the
 requester supports for signing the returned receipt. Although multiple
 values MAY be listed to indicate fallback options, only a single MIC
 algorithm is used in the returned MDN because the "Received-content-MIC"
-field conveys exactly one digest value.<a href="#section-8.3-30.1.2" class="pilcrow">¶</a></p>
-<p id="section-8.3-30.1.3">
+field conveys exactly one digest value.<a href="#section-8.3-31.1.2" class="pilcrow">¶</a></p>
+<p id="section-8.3-31.1.3">
 Recipients MUST select the first algorithm in the list that they also
 support and MUST compute the Received-content-MIC using that algorithm.
 Senders SHOULD list the strongest algorithm first. Modern
 implementations SHOULD include only a single value unless multiple
 values are needed to support phased migration away from weaker
 algorithms. Implementations MUST accept messages that contain multiple
-values and MUST ignore unsupported values.<a href="#section-8.3-30.1.3" class="pilcrow">¶</a></p>
-<p id="section-8.3-30.1.4">
+values and MUST ignore unsupported values.<a href="#section-8.3-31.1.3" class="pilcrow">¶</a></p>
+<p id="section-8.3-31.1.4">
 When a sender lists multiple algorithms, recipients MUST NOT fall back
 to an algorithm that is not explicitly listed by the sender.
 Trading partners typically pre-configure acceptable MIC algorithms
@@ -3318,11 +3345,11 @@ reject the message and MAY return an unsigned MDN indicating
 "unsupported-mic-algorithm" rather than silently selecting a weaker
 algorithm.  When the header is absent (e.g., unsigned messages), an
 implementation MUST use a locally configured default algorithm; SHA-256
-SHOULD be preferred, but SHA-1 MAY be used when required for legacy partners.<a href="#section-8.3-30.1.4" class="pilcrow">¶</a></p>
+SHOULD be preferred, but SHA-1 MAY be used when required for legacy partners.<a href="#section-8.3-31.1.4" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-8.3-31"><strong>The following algorithm requirements apply to all implementations:</strong><a href="#section-8.3-31" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-8.3-32">
+<p id="section-8.3-32"><strong>The following algorithm requirements apply to all implementations:</strong><a href="#section-8.3-32" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-8.3-33">
 <pre>
      o  Implementations **MUST** support SHA-256.
 
@@ -3345,38 +3372,38 @@ SHOULD be preferred, but SHA-1 MAY be used when required for legacy partners.<a 
   of the "Receipt-Delivery-Option: return-url" indicates that an
   asynchronous receipt is requested and SHOULD be sent to the
   "return-url".
-</pre><a href="#section-8.3-32" class="pilcrow">¶</a>
+</pre><a href="#section-8.3-33" class="pilcrow">¶</a>
 </div>
-<ol start="1" type="1" class="normal type-1" id="section-8.3-33">
-<li id="section-8.3-33.1">
-            <p id="section-8.3-33.1.1">The "importance" attribute of "Optional" is defined in RFC 3798,
-Section 2.2, and has the following meaning:<a href="#section-8.3-33.1.1" class="pilcrow">¶</a></p>
-<p id="section-8.3-33.1.2">
+<ol start="1" type="1" class="normal type-1" id="section-8.3-34">
+<li id="section-8.3-34.1">
+            <p id="section-8.3-34.1.1">The "importance" attribute of "Optional" is defined in RFC 3798,
+Section 2.2, and has the following meaning:<a href="#section-8.3-34.1.1" class="pilcrow">¶</a></p>
+<p id="section-8.3-34.1.2">
 Parameters with an importance of "Optional" permit a UA that does
 not understand the particular options parameter to still generate
-an MDN in response to a request for a MDN.<a href="#section-8.3-33.1.2" class="pilcrow">¶</a></p>
-<p id="section-8.3-33.1.3">
+an MDN in response to a request for a MDN.<a href="#section-8.3-34.1.2" class="pilcrow">¶</a></p>
+<p id="section-8.3-34.1.3">
 A UA that does not understand the "signed-receipt-protocol"
 parameter or the "signed-receipt-micalg" will obviously not return
-a signed receipt.<a href="#section-8.3-33.1.3" class="pilcrow">¶</a></p>
-<p id="section-8.3-33.1.4">
+a signed receipt.<a href="#section-8.3-34.1.3" class="pilcrow">¶</a></p>
+<p id="section-8.3-34.1.4">
 The importance of "Optional" is used for the signed receipt
 parameters because it is RECOMMENDED that an MDN be returned to
 the requesting trading partner even if the recipient could not
-sign it.<a href="#section-8.3-33.1.4" class="pilcrow">¶</a></p>
-<p id="section-8.3-33.1.5">
+sign it.<a href="#section-8.3-34.1.4" class="pilcrow">¶</a></p>
+<p id="section-8.3-34.1.5">
 The returned MDN will contain information on the disposition of
 the message and on why the MDN could not be signed. See the
 Disposition field in <a href="#structure-and-processing-of-an-mdn-message" class="auto internal xref">Section 8</a>.5
-for more information.<a href="#section-8.3-33.1.5" class="pilcrow">¶</a></p>
-<p id="section-8.3-33.1.6">
+for more information.<a href="#section-8.3-34.1.5" class="pilcrow">¶</a></p>
+<p id="section-8.3-34.1.6">
 Within an EDI trading relationship, if a signed receipt is
 expected and is not returned, then the validity of the transaction
-is up to the trading partners to resolve.<a href="#section-8.3-33.1.6" class="pilcrow">¶</a></p>
-<p id="section-8.3-33.1.7">
+is up to the trading partners to resolve.<a href="#section-8.3-34.1.6" class="pilcrow">¶</a></p>
+<p id="section-8.3-34.1.7">
 In general, if a signed receipt is required in the trading
 relationship and is not received, the transaction will likely
-be considered invalid.<a href="#section-8.3-33.1.7" class="pilcrow">¶</a></p>
+be considered invalid.<a href="#section-8.3-34.1.7" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <div id="signed-receipt-considerations">
@@ -3401,17 +3428,18 @@ requested protocol format or the requested MIC algorithms, then
 either a signed or unsigned receipt SHOULD be returned.<a href="#section-8.3.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-8.3.1-3.3">
-              <p id="section-8.3.1-3.3.1">When a signature is not explicitly requested, or if the signed
-receipt request parameter is not recognized by the UA, then no
+              <p id="section-8.3.1-3.3.1">When a signature is not explicitly requested (indicated by the
+absence of the Disposition-Notification-Options header), or if the
+signed receipt request parameter is not recognized by the UA, then no
 receipt, an unsigned receipt, or a signed receipt MAY be returned
 by the recipient.<a href="#section-8.3.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-8.3.1-4">NOTE: For Internet EDI, it is RECOMMENDED that when a signature is
-   not explicitly requested, or if parameters are not recognized, the UA
-   send back, at a minimum, an unsigned receipt. If, however, a signed
-   receipt was always returned as a policy, whether requested or not,
-   then any false unsigned receipts can be repudiated.<a href="#section-8.3.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.3.1-4">NOTE: It is RECOMMENDED that when a signature is not explicitly requested,
+   or if parameters are not recognized, the UA send back, at a minimum,
+   an unsigned receipt. If, however, a signed receipt was always returned
+   as a policy, whether requested or not, then any false unsigned receipts
+   can be repudiated.<a href="#section-8.3.1-4" class="pilcrow">¶</a></p>
 <p id="section-8.3.1-5">When a request for a signed receipt is made, but there is an error in
    processing the contents of the message, a signed receipt MUST still
    be returned. The request for a signed receipt SHALL still be
@@ -3577,6 +3605,7 @@ AS2-disposition-modifier-extension =
     "error: invalid-message-id" |
     "error: unexpected-processing-error" |
     "error: unknown-trading-relationship" |
+    "error: unknown-trading-partner" |
     "warning: " AS2-MDN-warning-description |
     "failure: " AS2-MDN-failure-description
 
@@ -3818,7 +3847,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    combine the indication of an error with a predefined description of a
    specific, well-known error. Further information about the error may
    be contained in an error field.<a href="#section-8.5.4-3" class="pilcrow">¶</a></p>
-<p id="section-8.5.4-4">For Internet EDI use, the following "error" AS2-disposition-modifier
+<p id="section-8.5.4-4">For AS2 implementations, the following "error" AS2-disposition-modifier
    values are defined:<a href="#section-8.5.4-4" class="pilcrow">¶</a></p>
 <div class="lang-text sourcecode" id="section-8.5.4-5">
 <pre>
@@ -3857,8 +3886,8 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
                                               additional processing
                                               errors.
 
-   o "Error: unknown-trading-relationship"   - the receiver could not
-                                              correlate the AS2-To/AS2-From
+   o "Error: unknown-trading-relationship"  - the receiver could not
+      or "Error: unknown-trading-partner"     correlate the AS2-To/AS2-From
                                               header values to values known
                                               to the system.
 </pre><a href="#section-8.5.4-5" class="pilcrow">¶</a>
@@ -4010,15 +4039,14 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    asking for acknowledgements.<a href="#section-8.6-3" class="pilcrow">¶</a></p>
 <p id="section-8.6-4">Message Disposition Notifications, when used in the HTTP reply context,
    follow the same semantics as those defined in <span>[<a href="#RFC3798" class="cite xref">RFC3798</a>]</span>. For example, the
-   disposition field is a required element in the machine-readable
-   second part of a multipart/report for a MDN. The final-recipient-
-   field (<span>[<a href="#RFC3798" class="cite xref">RFC3798</a>]</span>, Section 3.1) value SHOULD be derived from the entity
-   headers of the request.<a href="#section-8.6-4" class="pilcrow">¶</a></p>
+   disposition field is a required element in the machine-readable second
+   part of a multipart/report for a MDN. The final-recipient-field (<span>[<a href="#RFC3798" class="cite xref">RFC3798</a>]</span>,
+   Section 3.1) value SHOULD be derived from the entity headers of the request.<a href="#section-8.6-4" class="pilcrow">¶</a></p>
 <p id="section-8.6-5">In an MDN, the first part of the multipart/report (the human-readable
    portion) SHOULD include items such as the subject, the date, and other
    information when those fields are present in entity header fields
-   following the POST request. An application MUST report the Message-
-   ID of the request in the second part of the multipart/report (the
+   following the POST request. An application MUST report the Message-ID
+   of the request in the second part of the multipart/report (the
    machine-readable portion). Also, an MDN SHOULD have its own unique
    Message-ID HTTP header. The HTTP reply SHOULD normally omit the
    third optional part of the multipart/report (this was historically
@@ -4067,7 +4095,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
         SHOULD be issued by a trusted certification authority (CA) in production
         environments. For public-facing servers, TLS certificates SHOULD comply
         with the CA/Browser Forum Baseline Requirements
-       (https://cabforum.org/baseline-requirements-documents/). Self-signed
+        (https://cabforum.org/baseline-requirements-documents/). Self-signed
         TLS certificates MAY be used for testing or by explicit agreement
         between trading partners, provided they include a **Subject Alternative
         Name (SAN)** extension containing the DNS name and/or IP address. The
@@ -4086,12 +4114,12 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
         equivalent or stronger security (e.g., P-256 or higher).
 </pre><a href="#section-9.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-9.1-3">Although short certificate lifetimes are now common in the TLS ecosystem
-   due to CA/Browser Forum requirements and industry regulations, AS2 certificates
-   generally do not require the same frequency of renewal. AS2 systems handle far fewer
-   encrypted transactions than high-volume web servers, and certificate
-   rollover can be operationally complex.  Implementations SHOULD allow
-   independent lifetime policies for AS2 and TLS certificates.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">Although short certificate lifetimes are now common in the TLS ecosystem due to
+   CA/Browser Forum requirements and industry regulations, AS2 certificates generally
+   do not require the same frequency of renewal. AS2 systems handle far fewer encrypted
+   transactions than high-volume web servers, and certificate rollover can be
+   operationally complex.  Implementations SHOULD allow independent lifetime policies
+   for AS2 and TLS certificates.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="certificate-exchange-and-renewal">
@@ -4181,31 +4209,20 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-https-and-tls-requirements" class="section-name selfRef">HTTPS and TLS Requirements</a>
         </h3>
 <p id="section-10.1-1"><strong>Consensus Update:</strong>
-   Implementations <strong>MUST</strong> support TLS 1.2 or higher and <strong>SHOULD</strong> support TLS 1.3.
-   TLS 1.3 is strongly encouraged as the default where platform support allows, but TLS 1.2
-   remains the mandatory baseline to ensure interoperability with older environments (e.g., legacy JVMs).
-   Products SHOULD allow administrators to configure which TLS versions are enabled, so that TLS 1.3 can be
-   mandated by policy where required. Future revisions of this specification are expected to mandate TLS 1.3
-   as the minimum required version once deployment is widespread.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+   Implementations <strong>MUST</strong> support TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> or higher and <strong>MAY</strong> support TLS 1.2 <span>[<a href="#RFC5246" class="cite xref">RFC5246</a>]</span>
+   when interoperating with systems that have not yet migrated to TLS 1.3.
+   Products SHOULD allow administrators to configure which TLS versions are enabled to allow support
+   for older versions of TLS where needed for backward compatibility.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">Administrators SHOULD use only cipher suites listed as “Recommended (Y)” in the
    <a href="https://www.iana.org/assignments/tls-parameters">IANA TLS Parameters</a> registry.
    Implementations SHOULD provide configurable cipher selection rather than hardcoding cipher lists.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
-<p id="section-10.1-3">New implementations of AS2 <strong>SHOULD</strong> use HTTPS as the default transport
+<p id="section-10.1-3">New implementations of AS2 <strong>MUST</strong> use HTTPS as the default transport
    protocol to provide confidentiality and integrity in transit. Plain HTTP
    remains permitted to support message-level encryption and backward
    compatibility with existing deployments.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
 <p id="section-10.1-4">This guidance promotes strong encryption, aligns with current best practices,
    and ensures that AS2 remains interoperable with existing deployments while
    allowing administrators to phase out weaker protocols and cipher suites over time.<a href="#section-10.1-4" class="pilcrow">¶</a></p>
-<p id="section-10.1-5"><strong>Future Considerations</strong>
-   Per BCP 195/RFC 7525bis, new IETF protocols and major revisions are expected to mandate TLS 1.3.
-   AS2-bis is a backward-compatible revision, and therefore specifies MUST support of TLS 1.2 and SHOULD
-   support of TLS 1.3 to preserve interoperability with existing implementations. At the same time, implementers
-   are strongly encouraged to deploy TLS 1.3 as the default for all new products and configurations.
-   Future versions of AS2 (for example, a potential AS2-Version 1.3 or subsequent update) are expected to raise
-   the baseline to MUST support TLS 1.3 or higher, and may deprecate TLS 1.2 once widespread deployment
-   makes this feasible. Implementers are encouraged to prepare for a future revision of this specification
-   that will mandate TLS 1.3 as the minimum required version.<a href="#section-10.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="tls-server-certificates">
@@ -4323,29 +4340,139 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 
      o  Message Disposition Notification Parameters
         https://www.iana.org/assignments/mdn/mdn.xhtml#parameters
+
+     o  Hypertext Transfer Protocol (HTTP) Field Name Registry
+        https://www.iana.org/assignments/http-fields/http-fields.xhtml
 </pre><a href="#section-11-2" class="pilcrow">¶</a>
 </div>
-<div id="registration">
+<div id="http-field-name-registrations">
 <section id="section-11.1">
-        <h3 id="name-registration">
-<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-registration" class="section-name selfRef">Registration</a>
+        <h3 id="name-http-field-name-registratio">
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-http-field-name-registratio" class="section-name selfRef">HTTP Field Name Registrations</a>
         </h3>
-<p id="section-11.1-1">RFC 4130 originally defined an extension to the Message Disposition Notification (MDN)
-   protocol for a disposition-modifier in the Disposition field of a body of
-   content-type "message/disposition-notification".<a href="#section-11.1-1" class="pilcrow">¶</a></p>
-<p id="section-11.1-2">This document updates that definition, and IANA is requested to replace RFC 4130 with this
-   document as the reference for the MDN Disposition Modifier Names registry.<a href="#section-11.1-2" class="pilcrow">¶</a></p>
-<div id="disposition-modifier-warning">
-<section id="section-11.1.1">
-          <h4 id="name-disposition-modifier-warnin">
-<a href="#section-11.1.1" class="section-number selfRef">11.1.1. </a><a href="#name-disposition-modifier-warnin" class="section-name selfRef">Disposition Modifier 'warning'</a>
-          </h4>
-<div class="lang-text sourcecode" id="section-11.1.1-1">
+<p id="section-11.1-1">IANA is requested to register the following field names in the "Hypertext
+   Transfer Protocol (HTTP) Field Name Registry" as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>:<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-11.1-2">
 <pre>
-   Parameter-name:  warning
-   Semantics: See (#as2-mdn-fields) and
-   (#processing-warnings) in this document.
-</pre><a href="#section-11.1.1-1" class="pilcrow">¶</a>
+ **Field Name:** AS2-Version
+ **Status:**     permanent
+ **Reference:**  rfc4130bis, Section 6.1
+
+ **Field Name:** AS2-Product
+ **Status:**     permanent
+ **Reference:**  rfc4130bis, Section 6.2
+
+ **Field Name:** AS2-From
+ **Status:**     permanent
+ **Reference:**  rfc4130bis, Section 6.3
+
+ **Field Name:** AS2-To
+ **Status:**     permanent
+ **Reference:**  rfc4130bis, Section 6.3
+</pre><a href="#section-11.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-11.1-3">The following AS2 headers were previously defined in RFC 4130 and are
+   already registered or are standard HTTP/MIME headers:<a href="#section-11.1-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-11.1-4">
+<pre>
+     o  Subject (standard MIME header)
+     o  Disposition-Notification-To (RFC 3798)
+     o  Disposition-Notification-Options (RFC 3798)
+     o  Receipt-Delivery-Option (RFC 4130)
+</pre><a href="#section-11.1-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="as2-mdn-disposition-modifier-registry">
+<section id="section-11.2">
+        <h3 id="name-as2-mdn-disposition-modifie">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-as2-mdn-disposition-modifie" class="section-name selfRef">AS2 MDN Disposition Modifier Registry</a>
+        </h3>
+<p id="section-11.2-1">IANA is requested to create a new registry titled "AS2 MDN Disposition
+   Modifiers" under the "Multipurpose Internet Mail Extensions (MIME) and
+   Media Types" registry group.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2-2"><strong>Registration Procedure:</strong> Specification Required (per RFC 8126)<a href="#section-11.2-2" class="pilcrow">¶</a></p>
+<p id="section-11.2-3"><strong>Initial Registry Contents:</strong><a href="#section-11.2-3" class="pilcrow">¶</a></p>
+<table class="center" id="table-1">
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Modifier Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error: authentication-failed</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error: decompression-failed</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error: decryption-failed</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error: insufficient-message-security</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error: integrity-check-failed</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error: unexpected-processing-error</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error:duplicate-filename</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error:illegal-filename</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error:invalid-message-id</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error:unknown-trading-relationship</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">error:unknown-trading-partner</td>
+              <td class="text-left" rowspan="1" colspan="1">rfc4130bis</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-11.2-5">Note: The base disposition types "processed" and "failed" are defined
+   in RFC 8098 and are not part of this AS2-specific registry.<a href="#section-11.2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="registration">
+<section id="section-11.3">
+        <h3 id="name-registration">
+<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-registration" class="section-name selfRef">Registration</a>
+        </h3>
+<p id="section-11.3-1">RFC 4130 originally defined an extension to the Message Disposition Notification (MDN)
+   protocol for a disposition-modifier in the Disposition field of a body of
+   content-type "message/disposition-notification".<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.3-2">This document updates that definition, and IANA is requested to replace RFC 4130 with this
+   document as the reference for the MDN Disposition Modifier Names registry.<a href="#section-11.3-2" class="pilcrow">¶</a></p>
+<div id="disposition-modifier-warning">
+<section id="section-11.3.1">
+          <h4 id="name-disposition-modifier-warnin">
+<a href="#section-11.3.1" class="section-number selfRef">11.3.1. </a><a href="#name-disposition-modifier-warnin" class="section-name selfRef">Disposition Modifier 'warning'</a>
+          </h4>
+<div class="alignLeft art-text artwork" id="section-11.3.1-1">
+<pre>
+  Parameter-name:  warning
+  Semantics: See section 8.4.3 and
+             section 8.5.5 in this document.
+</pre><a href="#section-11.3.1-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -4446,6 +4573,10 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
         <dd>
 <span class="refAuthor">Moberg, D.</span> and <span class="refAuthor">R. Drummond</span>, <span class="refTitle">"MIME-Based Secure Peer-to-Peer Business Data Interchange Using HTTP, Applicability Statement 2 (AS2)"</span>, <span class="seriesInfo">RFC 4130</span>, <span class="seriesInfo">DOI 10.17487/RFC4130</span>, <time datetime="2005-07" class="refDate">July 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4130">https://www.rfc-editor.org/rfc/rfc4130</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC5246">[RFC5246]</dt>
+        <dd>
+<span class="refAuthor">Dierks, T.</span> and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.2"</span>, <span class="seriesInfo">RFC 5246</span>, <span class="seriesInfo">DOI 10.17487/RFC5246</span>, <time datetime="2008-08" class="refDate">August 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5246">https://www.rfc-editor.org/rfc/rfc5246</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC5322">[RFC5322]</dt>
         <dd>
 <span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5322">https://www.rfc-editor.org/rfc/rfc5322</a>&gt;</span>. </dd>
@@ -4470,9 +4601,17 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8551">[RFC8551]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification"</span>, <span class="seriesInfo">RFC 8551</span>, <span class="seriesInfo">DOI 10.17487/RFC8551</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8551">https://www.rfc-editor.org/rfc/rfc8551</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9110">[RFC9110]</dt>
+      <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -4673,7 +4812,6 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    AS2-From: as2_company
    AS2-To: "AS2 Test"
    AS2-Version: 1.3
-   Connection: close
    Content-Length: 3428
 
      {omitted binary encrypted data}
@@ -4690,7 +4828,6 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 <pre>
    POST / HTTP/1.1
    Host: 10.234.160.12:80
-   Connection: close, TE
    TE: trailers, deflate, gzip, compress
    User-Agent: AS2 Company Server
    Date: Thu, 19 Dec 2024 15:05:38 GMT
@@ -5077,7 +5214,7 @@ of the same content-encryption key<a href="#appendix-B.7-1.5.2.2.1" class="pilcr
             <p id="appendix-B.8-1.3.1">Relaxed constraints on the content of the Disposition-notification-to header.<a href="#appendix-B.8-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.8-1.4">
-            <p id="appendix-B.8-1.4.1">Definitions have been included for additional supported error dispositions.0<a href="#appendix-B.8-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.8-1.4.1">Definitions have been included for additional supported error dispositions.<a href="#appendix-B.8-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.8-1.5">
             <p id="appendix-B.8-1.5.1">Clarified required MDN fields:<a href="#appendix-B.8-1.5.1" class="pilcrow">¶</a></p>
@@ -5129,19 +5266,22 @@ reporting.<a href="#appendix-B.8-1.8.1" class="pilcrow">¶</a></p>
                 <p id="appendix-B.8-1.9.2.1.1"><code>error: decompression-failed</code><a href="#appendix-B.8-1.9.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.8-1.9.2.2">
-                <p id="appendix-B.8-1.9.2.2.1"><code>error/duplicate-filename</code><a href="#appendix-B.8-1.9.2.2.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.8-1.9.2.2.1"><code>error:duplicate-filename</code><a href="#appendix-B.8-1.9.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.8-1.9.2.3">
-                <p id="appendix-B.8-1.9.2.3.1"><code>error/illegal-filename</code><a href="#appendix-B.8-1.9.2.3.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.8-1.9.2.3.1"><code>error:illegal-filename</code><a href="#appendix-B.8-1.9.2.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.8-1.9.2.4">
                 <p id="appendix-B.8-1.9.2.4.1"><code>error: insufficient-message-security</code><a href="#appendix-B.8-1.9.2.4.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.8-1.9.2.5">
-                <p id="appendix-B.8-1.9.2.5.1"><code>error/invalid-message-id</code><a href="#appendix-B.8-1.9.2.5.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.8-1.9.2.5.1"><code>error:invalid-message-id</code><a href="#appendix-B.8-1.9.2.5.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.8-1.9.2.6">
-                <p id="appendix-B.8-1.9.2.6.1"><code>error/unknown-trading-relationship</code><a href="#appendix-B.8-1.9.2.6.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.8-1.9.2.6.1"><code>error:unknown-trading-relationship</code><a href="#appendix-B.8-1.9.2.6.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.8-1.9.2.7">
+                <p id="appendix-B.8-1.9.2.7.1"><code>error: unknown-trading-partner</code><a href="#appendix-B.8-1.9.2.7.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -5243,7 +5383,7 @@ from SHOULD NOT) reuse TLS certificates for AS2 message security.<a href="#appen
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.10-1.1">
-            <p id="appendix-B.10-1.1.1">Provided guidance for the usgae of HTTPS and the minimum and recommended usage of TLS versions.<a href="#appendix-B.10-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.10-1.1.1">Provided guidance for the usage of HTTPS and the minimum and recommended usage of TLS versions.<a href="#appendix-B.10-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.10-1.2">
             <p id="appendix-B.10-1.2.1">Expanded discussion of algorithm lifecycle:<a href="#appendix-B.10-1.2.1" class="pilcrow">¶</a></p>
@@ -5388,8 +5528,248 @@ and same spacing and margins.<a href="#appendix-B.13-2.7.2.1.1" class="pilcrow">
             </ul>
 </li>
         </ul>
-<p id="appendix-B.13-3">These updates improve RFC formatting compliance and document clarity while
-maintaining all technical content and backward compatibility requirements.<a href="#appendix-B.13-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="editorial-corrections">
+<section id="appendix-B.14">
+        <h3 id="name-editorial-corrections">
+<a href="#appendix-B.14" class="section-number selfRef">B.14. </a><a href="#name-editorial-corrections" class="section-name selfRef">Editorial Corrections</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.14-1.1">
+            <p id="appendix-B.14-1.1.1"><strong>Terminology Updates</strong>:<a href="#appendix-B.14-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.14-1.1.2.1">
+                <p id="appendix-B.14-1.1.2.1.1">Changed all instances of "TCP/IP connection" to "HTTP connection" (3 locations)
+to properly reflect the protocol layer and accommodate HTTP/2, HTTP/3, and QUIC<a href="#appendix-B.14-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.14-1.1.2.2">
+                <p id="appendix-B.14-1.1.2.2.1">Added RFC reference to S/MIME definition in Section 1.4 (Terms)<a href="#appendix-B.14-1.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.14-1.1.2.3">
+                <p id="appendix-B.14-1.1.2.3.1">Simplified "Internet's HTTP environment" to "over HTTP" in Section 2 (Overview)<a href="#appendix-B.14-1.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.14-1.1.2.4">
+                <p id="appendix-B.14-1.1.2.4.1">Removed outdated "Internet EDI" terminology (2 instances in Sections 8.3 and 8.5.4)<a href="#appendix-B.14-1.1.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.14-1.1.2.5">
+                <p id="appendix-B.14-1.1.2.5.1">Fixed typos in Appendix B change log ("dispositions.0" and "usgae")<a href="#appendix-B.14-1.1.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.14-1.2">
+            <p id="appendix-B.14-1.2.1"><strong>Cross-Reference Fixes</strong>:<a href="#appendix-B.14-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.14-1.2.2.1">
+                <p id="appendix-B.14-1.2.2.1.1">Removed problematic forward reference to structure-and-processing-of-an-mdn-message
+from Section 2.4.2 (reference was not resolving in kramdown-rfc)<a href="#appendix-B.14-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.14-1.2.2.2">
+                <p id="appendix-B.14-1.2.2.2.1">Replaced three anchor references with explicit section numbers due to kramdown-rfc
+limitations with third-level explicit heading anchors:<a href="#appendix-B.14-1.2.2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.14-1.2.2.2.2.1">
+                    <p id="appendix-B.14-1.2.2.2.2.1.1"><code>{{the-secure-transmission-loop}}</code> -&gt; Section 2.3.1<a href="#appendix-B.14-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="appendix-B.14-1.2.2.2.2.2">
+                    <p id="appendix-B.14-1.2.2.2.2.2.1"><code>{{backward-compatibility-and-interoperability}}.1</code> -&gt; Section 1.2.1<a href="#appendix-B.14-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="appendix-B.14-1.2.2.2.2.3">
+                    <p id="appendix-B.14-1.2.2.2.2.3.1"><code>{{legacy-interoperability-non-normative}}</code> -&gt; Section 1.2.1 (in bullet list context)<a href="#appendix-B.14-1.2.2.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+        </ul>
+</section>
+</div>
+<div id="substantive-technical-changes">
+<section id="appendix-B.15">
+        <h3 id="name-substantive-technical-chang">
+<a href="#appendix-B.15" class="section-number selfRef">B.15. </a><a href="#name-substantive-technical-chang" class="section-name selfRef">Substantive Technical Changes</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.1">
+            <p id="appendix-B.15-1.1.1"><strong>Section 2.4.2 (Security Permutations)</strong>:<a href="#appendix-B.15-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.1.2.1">
+                <p id="appendix-B.15-1.1.2.1.1">Replaced exhaustive 24-permutation enumeration with concise capability summary<a href="#appendix-B.15-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.1.2.2">
+                <p id="appendix-B.15-1.1.2.2.1">Added clarification that security combinations are determined by partner agreements<a href="#appendix-B.15-1.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.1.2.3">
+                <p id="appendix-B.15-1.1.2.3.1">Addresses reviewer concern about unnecessary implementation complexity<a href="#appendix-B.15-1.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.2">
+            <p id="appendix-B.15-1.2.1"><strong>Section 2.4.2 (Compression and Signature Ordering)</strong>:<a href="#appendix-B.15-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.2.2.1">
+                <p id="appendix-B.15-1.2.2.1.1">Added explicit guidance that compression is always applied before encryption<a href="#appendix-B.15-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.2.2.2">
+                <p id="appendix-B.15-1.2.2.2.1">Clarified that implementations MAY apply compression before or after signing<a href="#appendix-B.15-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.2.2.3">
+                <p id="appendix-B.15-1.2.2.3.1">Added requirement that conformant implementations MUST handle decompression
+regardless of compression/signing order<a href="#appendix-B.15-1.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.2.2.4">
+                <p id="appendix-B.15-1.2.2.4.1">Added note that MIC computation is always applied to the signed portion and
+includes inner MIME headers<a href="#appendix-B.15-1.2.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.3">
+            <p id="appendix-B.15-1.3.1"><strong>Section 2.4.2 (MIME Type Requirements)</strong>:<a href="#appendix-B.15-1.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.3.2.1">
+                <p id="appendix-B.15-1.3.2.1.1">Distinguished between protocol-level MIME types (MUST support) and
+content-specific types (SHOULD support based on use case)<a href="#appendix-B.15-1.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.3.2.2">
+                <p id="appendix-B.15-1.3.2.2.1">Moved EDI-specific MIME types (application/EDI-X12, application/EDIFACT) to
+SHOULD category to avoid unnecessary requirements for non-EDI implementations<a href="#appendix-B.15-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.4">
+            <p id="appendix-B.15-1.4.1"><strong>Section 5 (HTTP Considerations)</strong>:<a href="#appendix-B.15-1.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.4.2.1">
+                <p id="appendix-B.15-1.4.2.1.1">Updated to clarify that HTTP/1.1 is the baseline, with HTTP/2 and HTTP/3 as
+optional when supported by both partners<a href="#appendix-B.15-1.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.4.2.2">
+                <p id="appendix-B.15-1.4.2.2.1">Clarified that certification programs define their own conformance profiles<a href="#appendix-B.15-1.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.4.2.3">
+                <p id="appendix-B.15-1.4.2.3.1">Addresses concern about IETF/RFC overreach into certification scope<a href="#appendix-B.15-1.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.5">
+            <p id="appendix-B.15-1.5.1"><strong>Section 5 (Connection Management) - NEW SUBSECTION</strong>:<a href="#appendix-B.15-1.5.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.5.2.1">
+                <p id="appendix-B.15-1.5.2.1.1">Added comprehensive guidance on HTTP persistent connections<a href="#appendix-B.15-1.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.5.2.2">
+                <p id="appendix-B.15-1.5.2.2.1">Clarified that Connection: close is not required and SHOULD NOT be used
+unless specifically needed<a href="#appendix-B.15-1.5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.5.2.3">
+                <p id="appendix-B.15-1.5.2.3.1">Explained that HTTP/1.1 persistent connections are the default behavior<a href="#appendix-B.15-1.5.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.5.2.4">
+                <p id="appendix-B.15-1.5.2.4.1">Noted performance benefits of persistent connections, particularly for HTTPS<a href="#appendix-B.15-1.5.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.5.2.5">
+                <p id="appendix-B.15-1.5.2.5.1">Removed Connection: close header from message examples (2 instances in Appendix A)<a href="#appendix-B.15-1.5.2.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.5.2.6">
+                <p id="appendix-B.15-1.5.2.6.1">Addresses working group discussion about unnecessary connection closing<a href="#appendix-B.15-1.5.2.6.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.6">
+            <p id="appendix-B.15-1.6.1"><strong>Section 5.1 (TLS Requirements)</strong>:<a href="#appendix-B.15-1.6.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.6.2.1">
+                <p id="appendix-B.15-1.6.2.1.1">Updated to acknowledge TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> as current IETF standard<a href="#appendix-B.15-1.6.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.6.2.2">
+                <p id="appendix-B.15-1.6.2.2.1">Maintained TLS 1.2 <span>[<a href="#RFC5246" class="cite xref">RFC5246</a>]</span> as baseline requirement for backward compatibility<a href="#appendix-B.15-1.6.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.6.2.3">
+                <p id="appendix-B.15-1.6.2.3.1">Provided clear migration guidance<a href="#appendix-B.15-1.6.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.6.2.4">
+                <p id="appendix-B.15-1.6.2.4.1">Added RFC8446 and RFC5246 to normative references<a href="#appendix-B.15-1.6.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.7">
+            <p id="appendix-B.15-1.7.1"><strong>Section 6.2 (AS2-Product Header)</strong>:<a href="#appendix-B.15-1.7.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.7.2.1">
+                <p id="appendix-B.15-1.7.2.1.1">Updated format to support optional Private Enterprise Number (PEN) prefix<a href="#appendix-B.15-1.7.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.7.2.2">
+                <p id="appendix-B.15-1.7.2.2.1">Format: <code>[PEN-&lt;number&gt;:]&lt;product-name&gt;:&lt;version&gt;</code><a href="#appendix-B.15-1.7.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.7.2.3">
+                <p id="appendix-B.15-1.7.2.3.1">PEN usage is RECOMMENDED but not required<a href="#appendix-B.15-1.7.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.7.2.4">
+                <p id="appendix-B.15-1.7.2.4.1">Addresses concern about vendor identification without requiring PEN registration<a href="#appendix-B.15-1.7.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.8">
+            <p id="appendix-B.15-1.8.1"><strong>Section 7 (Algorithm Lifecycle Management) - NEW SUBSECTION</strong>:<a href="#appendix-B.15-1.8.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.8.2.1">
+                <p id="appendix-B.15-1.8.2.1.1">Added formal algorithm lifecycle management guidance<a href="#appendix-B.15-1.8.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.8.2.2">
+                <p id="appendix-B.15-1.8.2.2.1">Defined algorithm categories (MUST, SHOULD, MAY, DEPRECATED, MUST NOT)<a href="#appendix-B.15-1.8.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.8.2.3">
+                <p id="appendix-B.15-1.8.2.3.1">Referenced existing S/MIME v4.0 and CMS algorithm registries rather than
+creating redundant AS2-specific registry<a href="#appendix-B.15-1.8.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.8.2.4">
+                <p id="appendix-B.15-1.8.2.4.1">Provided references to NIST SP 800-57 and 800-131A for implementer guidance<a href="#appendix-B.15-1.8.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.8.2.5">
+                <p id="appendix-B.15-1.8.2.5.1">Establishes update pathway without requiring constant RFC revisions<a href="#appendix-B.15-1.8.2.5.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.15-1.9">
+            <p id="appendix-B.15-1.9.1"><strong>Section 11 (IANA Considerations)</strong>:<a href="#appendix-B.15-1.9.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.15-1.9.2.1">
+                <p id="appendix-B.15-1.9.2.1.1">Added HTTP Field Name Registry section requesting registration of AS2 headers
+(AS2-Version, AS2-Product, AS2-From, AS2-To) per RFC9110<a href="#appendix-B.15-1.9.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.9.2.2">
+                <p id="appendix-B.15-1.9.2.2.1">Created new AS2 MDN Disposition Modifier Registry with Specification Required
+registration procedure<a href="#appendix-B.15-1.9.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.9.2.3">
+                <p id="appendix-B.15-1.9.2.3.1">Initial registry includes 10 error disposition modifiers<a href="#appendix-B.15-1.9.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.15-1.9.2.4">
+                <p id="appendix-B.15-1.9.2.4.1">Added RFC9110 to normative references<a href="#appendix-B.15-1.9.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+        </ul>
+</section>
+</div>
+<div id="normative-references-added">
+<section id="appendix-B.16">
+        <h3 id="name-normative-references-added">
+<a href="#appendix-B.16" class="section-number selfRef">B.16. </a><a href="#name-normative-references-added" class="section-name selfRef">Normative References Added</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.16-1.1">
+            <p id="appendix-B.16-1.1.1">RFC5246 (TLS 1.2)<a href="#appendix-B.16-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.16-1.2">
+            <p id="appendix-B.16-1.2.1">RFC8446 (TLS 1.3)<a href="#appendix-B.16-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.16-1.3">
+            <p id="appendix-B.16-1.3.1">RFC9110 (HTTP Semantics)<a href="#appendix-B.16-1.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-B.16-2">These updates improve RFC formatting compliance and document clarity while
+maintaining all technical content and backward compatibility requirements.<a href="#appendix-B.16-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
