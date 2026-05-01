@@ -53,6 +53,9 @@ normative:
   RFC8551: {}
   RFC5322: {}
   RFC6017: {}
+  RFC5246: {}
+  RFC8446: {}
+  RFC9110: {}
 
 informative:
   RFC2246: {}
@@ -267,8 +270,8 @@ The updates in this specification reflect community consensus to:
             newer transport features such as HTTP/2, and by clarifying rather
             than redefining MDN behavior.
 
-This approach reduces ambiguity, simplifies certification, and ensures
-interoperability across implementations.
+This approach reduces ambiguity, simplifies testing, and ensures interoperability
+across implementations.
 
 ## Terms
 
@@ -290,10 +293,10 @@ interoperability across implementations.
    Signed Receipt: A receipt with a digital signature.
 
    Synchronous Receipt: A receipt returned to the sender over the same
-            TCP/IP connection as the sender's original message.
+            HTTP connection as the sender's original message.
 
    Asynchronous Receipt: A receipt returned to the sender over a different
-            TCP/IP connection than the sender's original message.
+            HTTP connection than the sender's original message.
 
    Message Disposition Notification (MDN): The Internet messaging format
             used to convey a receipt. This term is used interchangeably
@@ -314,7 +317,8 @@ interoperability across implementations.
             relevant evidence.
 
    S/MIME:  A format and protocol for adding cryptographic signature
-            and/or encryption services to Internet MIME messages.
+            and/or encryption services to Internet MIME messages. See
+            [RFC8551] for the current S/MIME specification.
 
    Cryptographic Message Syntax (CMS): An encapsulation syntax used to
             digitally sign, digest, authenticate, or encrypt arbitrary
@@ -358,7 +362,7 @@ interoperability across implementations.
 
    This request/reply transactional interchange can provide secure,
    reliable, and authenticated transport for EDI or other business data
-   using HTTP as a transfer protocol. HTTPS is RECOMMENDED as the default
+   using HTTP as a transfer protocol. HTTPS is REQUIRED as the default
    transport for modern implementations (see {{https-tls-reqs}}).
 
    The security protocols and structures used also support auditable
@@ -382,7 +386,7 @@ interoperability across implementations.
 ### The Secure Transmission Loop {#the-secure-transmission-loop}
 
    This document's focus is on the formats and protocols for exchanging
-   EDI/EC content securely in the Internet's HTTP environment.
+   EDI/EC content securely over HTTP.
 
    In the "secure transmission loop" for EDI/EC, one organization sends
    a signed, encrypted and compressed EDI/EC interchange to another organization
@@ -506,8 +510,7 @@ interoperability across implementations.
 
         In addition to a receipt request, this specification allows for the
         designation of the type of receipt that should be returned. It
-        supports synchronous or asynchronous receipts in the MDN format
-        specified in {{structure-and-processing-of-an-mdn-message}} of this document.
+        supports synchronous or asynchronous receipts in the MDN format.
 
       o  Security Formatting
 
@@ -550,87 +553,42 @@ interoperability across implementations.
       o  Permutation Summary
 
         The optional use of compression, as defined in [RFC3274] was introduced in AS2-Version 1.1.
-        Compression can be applied to the message payload before signing and/or encryption,
-        reducing transmission size and improving efficiency. Most modern AS2 implementations
+        Compression can be applied to the message payload before encryption and either before or
+        after signing, reducing transmission size and improving efficiency. Most modern AS2 implementations
         support compression, and it can be used by itself or in combination with signing and encryption.
 
-        The following summary therefore extends the original AS2 security permutations to include
-        the additional possibilities created by the use of compression, resulting in a total of
-        twenty-four security permutations.
+        AS2 supports flexible combinations of encryption, signature, compression, and receipt
+        options. These combinations are determined by partner agreements and are not mandated
+        by this specification. The protocol supports:
 
-   Without Compression (12 permutations)
+            o  Encrypted or unencrypted message transmission
+            o  Signed or unsigned message content
+            o  Compressed or uncompressed payload
+            o  Synchronous or asynchronous MDN delivery
+            o  Signed or unsigned MDN responses (when requested)
 
-   1.  Sender sends un-encrypted data and does NOT request a receipt.
-
-   2.  Sender sends un-encrypted data and requests an unsigned receipt.
-       Receiver sends back the unsigned receipt.
-
-   3.  Sender sends un-encrypted data and requests a signed receipt.
-       Receiver sends back the signed receipt.
-
-   4.  Sender sends encrypted data and does NOT request a receipt.
-
-   5.  Sender sends encrypted data and requests an unsigned receipt.
-       Receiver sends back the unsigned receipt.
-
-   6.  Sender sends encrypted data and requests a signed receipt.
-       Receiver sends back the signed receipt.
-
-   7.  Sender sends signed data and does NOT request a signed or
-       unsigned receipt.
-
-   8.  Sender sends signed data and requests an unsigned receipt.
-       Receiver sends back the unsigned receipt.
-
-   9.  Sender sends signed data and requests a signed receipt.
-       Receiver sends back the signed receipt.
-
-   10. Sender sends encrypted and signed data and does NOT request a
-       signed or unsigned receipt.
-
-   11. Sender sends encrypted and signed data and requests an unsigned
-       receipt.  Receiver sends back the unsigned receipt.
-
-   12. Sender sends encrypted and signed data and requests a signed
-       receipt.  Receiver sends back the signed receipt.
-
-   With Compression (12 permutations)
-
-{: start="13"}
-   13. Sender sends compressed data (not encrypted or signed) and does NOT request a receipt.
-
-   14.  Sender sends compressed data and requests an unsigned receipt. Receiver sends back the unsigned receipt.
-
-   15.  Sender sends compressed data and requests a signed receipt. Receiver sends back the signed receipt.
-
-   16.  Sender sends compressed and encrypted data and does NOT request a receipt.
-
-   17.  Sender sends compressed and encrypted data and requests an unsigned receipt. Receiver sends back the unsigned receipt.
-
-   18.  Sender sends compressed and encrypted data and requests a signed receipt. Receiver sends back the signed receipt.
-
-   19.  Sender sends compressed and signed data and does NOT request a signed or unsigned receipt.
-
-   20.  Sender sends compressed and signed data and requests an unsigned receipt. Receiver sends back the unsigned receipt.
-
-   21.  Sender sends compressed and signed data and requests a signed receipt. Receiver sends back the signed receipt.
-
-   22.  Sender sends compressed, encrypted, and signed data and does NOT request a signed or unsigned receipt.
-
-   23.  Sender sends compressed, encrypted, and signed data and requests an unsigned receipt. Receiver sends back the unsigned receipt.
-
-   24.  Sender sends compressed, encrypted, and signed data and requests a signed receipt. Receiver sends back the signed receipt.
+   The specific security posture for any given trading relationship is determined by
+   business requirements and partner agreements. For detailed implementation guidance
+   on secure configurations, see {{security-considerations}}.
 
    **Key Notes**
 
          o  Compression MAY be applied alone or in combination with signing and/or encryption, as defined in [RFC3274] and is supported
             by AS2-Version 1.1 and higher.
 
-         o  Users may choose any of these twenty-four possibilities, but only the final example (24), when compression, signing, encryption,
-            and a signed receipt are all used, offers the full suite of security and efficiency features described in
-            Section 2.3.1, “The Secure Transmission Loop.”
+         o  Compression is always applied before encryption. However, implementations MAY apply compression
+            either before or after signing - that is, an implementation may sign-then-compress or
+            compress-then-sign. Conformant implementations MUST be able to decompress messages regardless
+            of whether compression was applied before or after signing.
 
-         o  As with the original permutations, the receipts may be either synchronous or asynchronous, and the choice does not change the nature of
+         o  The MIC (Message Integrity Check) computation is always applied to the signed portion of the
+            message and includes the inner MIME headers in the signature calculation.
+
+         o  The most secure configuration combines compression, signing, encryption,
+            and a signed receipt, offering the full suite of security and efficiency features described in
+            Section 2.3.1.
+
+         o  The receipts may be either synchronous or asynchronous, and the choice does not change the nature of
             the secure transmission loop in support of NRR.
 
 # Referenced RFCs and Their Contributions
@@ -785,17 +743,20 @@ interoperability across implementations.
                 Content-type: message/disposition-notification
                 Content-Type: application/PKCS7-signature
                 Content-Type: application/PKCS7-mime
-                Content-Type: application/EDI-X12
-                Content-Type: application/EDIFACT
+
+         o  Implementations SHOULD support the following content types based on
+            intended use:
+
+                Content-Type: application/EDI-X12 (for ANSI X12 EDI)
+                Content-Type: application/EDIFACT (for UN/EDIFACT EDI)
                 Content-Type: application/edi-consent
-                Content-Type: application/XML
+                Content-Type: application/XML (for XML-based structured data)
 
 # HTTP Considerations
 
-This specification permits but does not require the use of HTTP/2 or
-HTTP/3 as transport protocols. Interoperability testing and
-certification are scoped to HTTP/1.1 unless otherwise agreed upon between
-trading partners.
+This specification is based on HTTP/1.1 [RFC2616]. Implementations MAY use
+HTTP/2 or HTTP/3 as the transport protocol when supported by both trading
+partners.
 
 ##  Sending EDI in HTTP POST Requests
 
@@ -813,9 +774,12 @@ trading partners.
 
    When using Transport Layer Security (TLS), the request-URI MUST
    indicate the appropriate scheme value, HTTPS. Implementations MUST
-   support TLS 1.2 or higher and SHOULD follow the guidance in {{https-tls-reqs}}.
-   Encrypted message bodies MAY be used in addition to TLS when required
-   by business policy.
+   support TLS 1.3 or higher. TLS 1.3 [RFC8446] is the current IETF
+   standard and MUST be supported by all implementations. TLS 1.2
+   [RFC5246] MAY be used when interoperating with systems that have not
+   yet migrated to TLS 1.3. Further guidance on TLS usage is provided
+   in {{https-tls-reqs}}. Encrypted message bodies MAY be used in addition
+   to TLS when required by business policy.
 
    The receiving AS2 system MAY disconnect from the sending AS2 system
    before completing the reception of the entire entity if it determines
@@ -1032,6 +996,33 @@ trading partners.
    SHOULD favor successful delivery over strict timing, provided that
    duplicate protection and security requirements are preserved.
 
+##  Connection Management {#connection-management}
+
+   HTTP/1.1 persistent connections are the default behavior. Connections remain
+   open for subsequent requests unless explicitly closed with the "Connection: close"
+   header. Implementations SHOULD use persistent connections when beneficial, particularly
+   for HTTPS connections where persistent connections avoid the overhead of repeated
+   TLS handshakes.
+
+   The "Connection: close" header is not required and SHOULD NOT be included unless
+   the implementation specifically needs to close the connection after the current
+   request/response cycle. Earlier versions of this specification included
+   "Connection: close" in message examples to reflect HTTP/1.0 behavior, where
+   connections closed by default after each transaction. Modern implementations
+   using HTTP/1.1 or later benefit from the default persistent connection behavior.
+
+   Connection management practices are governed by the HTTP version in use and
+   do not impact AS2's core message security, compression, or receipt features.
+   Implementations MAY choose connection management strategies appropriate to their
+   deployment scenarios (e.g., closing connections after single messages vs. keeping
+   connections open for multiple messages to the same trading partner).
+
+   Note: Persistent connections are particularly beneficial when an implementation
+   sends multiple AS2 messages to the same trading partner in succession. However,
+   AS2 implementations that use multiple-attachment messages (batch messages) for
+   sending multiple business documents in a single AS2 message MAY achieve similar
+   or better efficiency even without persistent connections.
+
 # Additional AS2-Specific HTTP Headers
 
 The following headers are to be included in all AS2 messages and all
@@ -1098,7 +1089,7 @@ AS2 MDNs. [RFC3335].
                        When interoperating with a legacy partner that operates
                        at AS2 version 1.2 or lower, implementations SHOULD
                        apply the legacy interoperability clarifications described
-                       in {{backward-compatibility-and-interoperability}}.1 (non-normative).
+                       in Section 1.2.1 (non-normative).
 
                        Future minor versions (1.x) may designate
                        additional extensions or clarifications that remain
@@ -1107,7 +1098,7 @@ AS2 MDNs. [RFC3335].
                        non-backward-compatible revision and may come later.
 ~~~
 
-## AS2 Product header
+## AS2 Product header {#as2-product-header}
 
    The `AS2-Product` header value identifies the AS2 product and version
    used by the sender.  This information enables interoperability testing,
@@ -1121,21 +1112,30 @@ AS2 MDNs. [RFC3335].
    The header field value MUST follow the format:
 
 ~~~text
+   AS2-Product: [PEN-<number>:]<product-name>:<version>
+
+   Where:
+     * PEN-<number>: (OPTIONAL but RECOMMENDED) The vendor's IANA Private
+        Enterprise Number. Including the PEN provides unique vendor
+        identification and prevents namespace collisions.
      * <product-name>: lowercase alphanumeric and hyphen characters (a–z,
         0–9, "-") without spaces.
-     * <major.minor[.patch]>: version string consistent with the product’s
-        release version, with one or more numeric components separated by dots.
+     * <version>: version string consistent with the product's release
+        version, with one or more numeric components separated by dots
+        (semantic versioning format: major.minor[.patch]).
 
    Examples:
 
+      AS2-Product: PEN-12345:as2gateway:2.1.0
       AS2-Product: biztalk:2025.1
-      AS2-Product: example.com-connect:4.2.3
+      AS2-Product: PEN-54321:example-connect:4.2.3
 ~~~
 
    Implementations **MUST NOT** use arbitrary identifiers or vendor aliases
-   that do not reflect the actual product in use.  The value is static and
-   determined at build time.  If a product supports multiple AS2 variants,
-   the version portion MAY include an implementation-specific suffix
+   that do not reflect the actual product in use.  Implementations **SHOULD**
+   include their Private Enterprise Number if registered with IANA.  The value
+   is static and determined at build time.  If a product supports multiple AS2
+   variants, the version portion MAY include an implementation-specific suffix
    (e.g., "1.2-drummond").
 
    Implementations MAY use the `AS2-Product` value for automated
@@ -1207,8 +1207,8 @@ The string definitions given above are in ABNF format [RFC2234].
    There is no required response to a client request containing invalid
    or unknown AS2-From or AS2-To header values. The receiving AS2
    system MAY return an unsigned MDN with an explanation of the error,
-   such as an MDN error disposition value of "unknown-trading-relationship",
-   if the sending system requested an MDN.
+   such as an MDN error disposition value of "unknown-trading-relationship" or
+   "unknown-trading-partner", if the sending system requested an MDN.
 
 # Algorithm Requirements {#algorithm-requirements}
 
@@ -1216,7 +1216,31 @@ The string definitions given above are in ABNF format [RFC2234].
    algorithms used in AS2. These requirements apply to all conformant
    implementations. Guidance on interoperability with legacy AS2 systems
    that continue to use older algorithms is provided separately in
-   Section 1.2.1.
+   {{legacy-interoperability-non-normative}}.
+
+##  Algorithm Lifecycle Management {#lifecycle-management}
+
+   As cryptographic algorithms evolve, implementers should monitor IETF
+   security guidance and algorithm lifecycle announcements. Algorithms
+   are categorized as:
+
+         o  **MUST**: Required for conformant implementations
+         o  **SHOULD**: Strongly recommended for new implementations
+         o  **MAY**: Optional, for specific use cases
+         o  **DEPRECATED**: Supported only for legacy interoperability (see Section 1.2.1)
+         o  **MUST NOT**: Prohibited in conformant implementations
+
+   Algorithm requirements in this specification follow the S/MIME v4.0
+   algorithm registry [RFC8551] and the CMS specification [RFC5652].
+   Updates to algorithm requirements may be published as separate RFCs
+   that update this specification.
+
+   For current algorithm security guidance, implementers should consult:
+
+         o  NIST Special Publication 800-57 (Key Management)
+         o  NIST Special Publication 800-131A (Transitions: Recommendation for
+            Transitioning the Use of Cryptographic Algorithms and Key Lengths)
+         o  IETF Security Area Directorate reviews and BCP documents
 
 ## Hash Algorithms
 
@@ -1256,13 +1280,12 @@ The string definitions given above are in ABNF format [RFC2234].
             EnvelopedData, integrity protection MUST be provided separately
             through digital signatures (multipart/signed).
 
-   Implementations MUST NOT mix content encryption algorithms for
-   different recipients of the same message. A single content encryption
-   algorithm MUST be selected and used for all recipients. For example,
-   if a message is encrypted with AES-128-GCM, all recipient information
-   MUST use AES-128-GCM; it is not permitted to encrypt the content-
-   encryption key with AES-CBC for some recipients and AES-GCM for
-   others.
+   Implementations MUST NOT mix content encryption algorithms for different
+   recipients of the same message. A single content encryption algorithm
+   MUST be selected and used for all recipients. For example, if a message
+   is encrypted with AES-128-GCM, all recipient information MUST use
+   AES-128-GCM; it is not permitted to encrypt the content-encryption
+   key with AES-CBC for some recipients and AES-GCM for others.
 
 ### Multiple-Recipient Encryption
 
@@ -1409,17 +1432,17 @@ RFC 3798 for backward compatibility.
    The synchronous AS2-MDN is sent as an HTTP response to an HTTP POST
    or as an HTTPS response to an HTTPS POST. This form of AS2-MDN is
    called synchronous because the AS2-MDN is returned to the originator
-   of the POST on the same TCP/IP connection.
+   of the POST on the same HTTP connection.
 
    The synchronous response MUST indicate transfer-layer success or
    failure, such as `200 OK` or `202 Accepted`.  The format of this
    response MAY be identical to that used when no AS2-MDN is requested.
 
    The asynchronous AS2-MDN is sent on a separate HTTP or HTTPS
-   TCP/IP connection. Logically, the asynchronous AS2-MDN is a response
+   connection. Logically, the asynchronous AS2-MDN is a response
    to an AS2 message. However, at the transfer-protocol layer, assuming
    that no HTTP pipelining is utilized, the asynchronous AS2-MDN is
-   delivered on a unique TCP/IP connection, distinct from that used to
+   delivered on a unique HTTP connection, distinct from that used to
    deliver the original AS2 message.
 
    When handling an asynchronous request, the receiving system **SHOULD**
@@ -1436,7 +1459,7 @@ RFC 3798 for backward compatibility.
    **RECOMMENDED** for simplicity, but not required.  Some application
    servers and frameworks manage connection lifecycles automatically and
    may keep the socket open.  The AS2 specification does not mandate that
-   the AS2 layer explicitly close the connection.
+   the AS2 layer explicitly close the connection (see {{connection-management}}).
 
    The following diagram illustrates the synchronous versus asynchronous
    varieties of AS2-MDN delivery using HTTP:
@@ -1583,15 +1606,21 @@ RFC 3798 for backward compatibility.
    The currently used value for &lt;protocol symbol> is "pkcs7-signature"
    for the S/MIME detached signature format.
 
-   The currently supported values for MIC algorithm &lt;micalg> values are:
+   The signed-receipt-micalg parameter specifies which message integrity
+   check (MIC) algorithm should be used when generating the signed receipt.
+   Values are defined by the S/MIME specification [RFC8551] and MUST use
+   the algorithm identifiers registered in the SMI Security for S/MIME
+   registries.
 
-         Algorithm   Value Used
-         ---------    ---------
-          SHA-256      sha-256
-          SHA-384      sha-384
-          SHA-512      sha-512
-          SHA-1        sha-1 or sha1 (should *only* be used in legacy deployments that
-                                      cannot support SHA-256 or greater)
+~~~text
+   Supported values:
+      SHA-256      sha-256 (REQUIRED)
+      SHA-384      sha-384 (RECOMMENDED)
+      SHA-512      sha-512 (OPTIONAL)
+      SHA-1        sha-1 or sha1 (DEPRECATED - legacy deployments only)
+~~~
+
+   See {{lifecycle-management}} for current algorithm requirements and lifecycle guidance.
 
    The semantics of the "signed-receipt-protocol" and the "signed-receipt-micalg"
    parameters are as follows:
@@ -1697,16 +1726,17 @@ RFC 3798 for backward compatibility.
       requested protocol format or the requested MIC algorithms, then
       either a signed or unsigned receipt SHOULD be returned.
 
-   3. When a signature is not explicitly requested, or if the signed
-      receipt request parameter is not recognized by the UA, then no
+   3. When a signature is not explicitly requested (indicated by the
+      absence of the Disposition-Notification-Options header), or if the
+      signed receipt request parameter is not recognized by the UA, then no
       receipt, an unsigned receipt, or a signed receipt MAY be returned
       by the recipient.
 
-   NOTE: For Internet EDI, it is RECOMMENDED that when a signature is
-   not explicitly requested, or if parameters are not recognized, the UA
-   send back, at a minimum, an unsigned receipt. If, however, a signed
-   receipt was always returned as a policy, whether requested or not,
-   then any false unsigned receipts can be repudiated.
+   NOTE: It is RECOMMENDED that when a signature is not explicitly requested,
+   or if parameters are not recognized, the UA send back, at a minimum,
+   an unsigned receipt. If, however, a signed receipt was always returned
+   as a policy, whether requested or not, then any false unsigned receipts
+   can be repudiated.
 
    When a request for a signed receipt is made, but there is an error in
    processing the contents of the message, a signed receipt MUST still
@@ -1854,6 +1884,7 @@ AS2-disposition-modifier-extension =
     "error: invalid-message-id" |
     "error: unexpected-processing-error" |
     "error: unknown-trading-relationship" |
+    "error: unknown-trading-partner" |
     "warning: " AS2-MDN-warning-description |
     "failure: " AS2-MDN-failure-description
 
@@ -2064,7 +2095,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    specific, well-known error. Further information about the error may
    be contained in an error field.
 
-   For Internet EDI use, the following "error" AS2-disposition-modifier
+   For AS2 implementations, the following "error" AS2-disposition-modifier
    values are defined:
 
 ~~~text
@@ -2103,8 +2134,8 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
                                               additional processing
                                               errors.
 
-   o "Error: unknown-trading-relationship"   - the receiver could not
-                                              correlate the AS2-To/AS2-From
+   o "Error: unknown-trading-relationship"  - the receiver could not
+      or "Error: unknown-trading-partner"     correlate the AS2-To/AS2-From
                                               header values to values known
                                               to the system.
 ~~~
@@ -2234,16 +2265,15 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 
    Message Disposition Notifications, when used in the HTTP reply context,
    follow the same semantics as those defined in [RFC3798]. For example, the
-   disposition field is a required element in the machine-readable
-   second part of a multipart/report for a MDN. The final-recipient-
-   field ([RFC3798], Section 3.1) value SHOULD be derived from the entity
-   headers of the request.
+   disposition field is a required element in the machine-readable second
+   part of a multipart/report for a MDN. The final-recipient-field ([RFC3798],
+   Section 3.1) value SHOULD be derived from the entity headers of the request.
 
    In an MDN, the first part of the multipart/report (the human-readable
    portion) SHOULD include items such as the subject, the date, and other
    information when those fields are present in entity header fields
-   following the POST request. An application MUST report the Message-
-   ID of the request in the second part of the multipart/report (the
+   following the POST request. An application MUST report the Message-ID
+   of the request in the second part of the multipart/report (the
    machine-readable portion). Also, an MDN SHOULD have its own unique
    Message-ID HTTP header. The HTTP reply SHOULD normally omit the
    third optional part of the multipart/report (this was historically
@@ -2286,7 +2316,7 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
             SHOULD be issued by a trusted certification authority (CA) in production
             environments. For public-facing servers, TLS certificates SHOULD comply
             with the CA/Browser Forum Baseline Requirements
-           (https://cabforum.org/baseline-requirements-documents/). Self-signed
+            (https://cabforum.org/baseline-requirements-documents/). Self-signed
             TLS certificates MAY be used for testing or by explicit agreement
             between trading partners, provided they include a **Subject Alternative
             Name (SAN)** extension containing the DNS name and/or IP address. The
@@ -2304,12 +2334,12 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
             keys**.  For elliptic-curve certificates, the selected curve MUST provide
             equivalent or stronger security (e.g., P-256 or higher).
 
-   Although short certificate lifetimes are now common in the TLS ecosystem
-   due to CA/Browser Forum requirements and industry regulations, AS2 certificates
-   generally do not require the same frequency of renewal. AS2 systems handle far fewer
-   encrypted transactions than high-volume web servers, and certificate
-   rollover can be operationally complex.  Implementations SHOULD allow
-   independent lifetime policies for AS2 and TLS certificates.
+   Although short certificate lifetimes are now common in the TLS ecosystem due to
+   CA/Browser Forum requirements and industry regulations, AS2 certificates generally
+   do not require the same frequency of renewal. AS2 systems handle far fewer encrypted
+   transactions than high-volume web servers, and certificate rollover can be
+   operationally complex.  Implementations SHOULD allow independent lifetime policies
+   for AS2 and TLS certificates.
 
 ## Certificate Exchange and Renewal {#certificate-exchange-and-renewal}
 
@@ -2386,18 +2416,16 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 ## HTTPS and TLS Requirements {#https-tls-reqs}
 
 **Consensus Update:**
-   Implementations **MUST** support TLS 1.2 or higher and **SHOULD** support TLS 1.3.
-   TLS 1.3 is strongly encouraged as the default where platform support allows, but TLS 1.2
-   remains the mandatory baseline to ensure interoperability with older environments (e.g., legacy JVMs).
-   Products SHOULD allow administrators to configure which TLS versions are enabled, so that TLS 1.3 can be
-   mandated by policy where required. Future revisions of this specification are expected to mandate TLS 1.3
-   as the minimum required version once deployment is widespread.
+   Implementations **MUST** support TLS 1.3 [RFC8446] or higher and **MAY** support TLS 1.2 [RFC5246]
+   when interoperating with systems that have not yet migrated to TLS 1.3.
+   Products SHOULD allow administrators to configure which TLS versions are enabled to allow support
+   for older versions of TLS where needed for backward compatibility.
 
    Administrators SHOULD use only cipher suites listed as “Recommended (Y)” in the
    [IANA TLS Parameters](https://www.iana.org/assignments/tls-parameters) registry.
    Implementations SHOULD provide configurable cipher selection rather than hardcoding cipher lists.
 
-   New implementations of AS2 **SHOULD** use HTTPS as the default transport
+   New implementations of AS2 **MUST** use HTTPS as the default transport
    protocol to provide confidentiality and integrity in transit. Plain HTTP
    remains permitted to support message-level encryption and backward
    compatibility with existing deployments.
@@ -2405,16 +2433,6 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    This guidance promotes strong encryption, aligns with current best practices,
    and ensures that AS2 remains interoperable with existing deployments while
    allowing administrators to phase out weaker protocols and cipher suites over time.
-
-**Future Considerations**
-   Per BCP 195/RFC 7525bis, new IETF protocols and major revisions are expected to mandate TLS 1.3.
-   AS2-bis is a backward-compatible revision, and therefore specifies MUST support of TLS 1.2 and SHOULD
-   support of TLS 1.3 to preserve interoperability with existing implementations. At the same time, implementers
-   are strongly encouraged to deploy TLS 1.3 as the default for all new products and configurations.
-   Future versions of AS2 (for example, a potential AS2-Version 1.3 or subsequent update) are expected to raise
-   the baseline to MUST support TLS 1.3 or higher, and may deprecate TLS 1.2 once widespread deployment
-   makes this feasible. Implementers are encouraged to prepare for a future revision of this specification
-   that will mandate TLS 1.3 as the minimum required version.
 
 ##  TLS Server Certificates
 
@@ -2521,6 +2539,66 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
          o  Message Disposition Notification Parameters
             https://www.iana.org/assignments/mdn/mdn.xhtml#parameters
 
+         o  Hypertext Transfer Protocol (HTTP) Field Name Registry
+            https://www.iana.org/assignments/http-fields/http-fields.xhtml
+
+##  HTTP Field Name Registrations
+
+   IANA is requested to register the following field names in the "Hypertext
+   Transfer Protocol (HTTP) Field Name Registry" as defined in [RFC9110]:
+
+     **Field Name:** AS2-Version
+     **Status:**     permanent
+     **Reference:**  rfc4130bis, Section 6.1
+
+     **Field Name:** AS2-Product
+     **Status:**     permanent
+     **Reference:**  rfc4130bis, Section 6.2
+
+     **Field Name:** AS2-From
+     **Status:**     permanent
+     **Reference:**  rfc4130bis, Section 6.3
+
+     **Field Name:** AS2-To
+     **Status:**     permanent
+     **Reference:**  rfc4130bis, Section 6.3
+
+   The following AS2 headers were previously defined in RFC 4130 and are
+   already registered or are standard HTTP/MIME headers:
+
+         o  Subject (standard MIME header)
+         o  Disposition-Notification-To (RFC 3798)
+         o  Disposition-Notification-Options (RFC 3798)
+         o  Receipt-Delivery-Option (RFC 4130)
+
+##  AS2 MDN Disposition Modifier Registry
+
+   IANA is requested to create a new registry titled "AS2 MDN Disposition
+   Modifiers" under the "Multipurpose Internet Mail Extensions (MIME) and
+   Media Types" registry group.
+
+   **Registration Procedure:** Specification Required (per RFC 8126)
+
+   **Initial Registry Contents:**
+
+   | Modifier Value                          | Reference        |
+   |-----------------------------------------|------------------|
+   | error: authentication-failed            | rfc4130bis       |
+   | error: decompression-failed             | rfc4130bis       |
+   | error: decryption-failed                | rfc4130bis       |
+   | error: insufficient-message-security    | rfc4130bis       |
+   | error: integrity-check-failed           | rfc4130bis       |
+   | error: unexpected-processing-error      | rfc4130bis       |
+   | error:duplicate-filename                | rfc4130bis       |
+   | error:illegal-filename                  | rfc4130bis       |
+   | error:invalid-message-id                | rfc4130bis       |
+   | error:unknown-trading-relationship      | rfc4130bis       |
+   | error:unknown-trading-partner           | rfc4130bis       |
+
+
+   Note: The base disposition types "processed" and "failed" are defined
+   in RFC 8098 and are not part of this AS2-specific registry.
+
 ##  Registration
 
    RFC 4130 originally defined an extension to the Message Disposition Notification (MDN)
@@ -2532,11 +2610,11 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 
 ###  Disposition Modifier 'warning'
 
-~~~text
-   Parameter-name:  warning
-   Semantics: See (#as2-mdn-fields) and
-   (#processing-warnings) in this document.
-~~~
+
+      Parameter-name:  warning
+      Semantics: See section 8.4.3 and
+                 section 8.5.5 in this document.
+
 
 # Acknowledgments
    Carl Hage, Karen Rosenfeld, Chuck Fenton, Russ Housley, Marc Blanchet,
@@ -2691,7 +2769,6 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
    AS2-From: as2_company
    AS2-To: "AS2 Test"
    AS2-Version: 1.3
-   Connection: close
    Content-Length: 3428
 
      {omitted binary encrypted data}
@@ -2702,7 +2779,6 @@ digest-alg-id = "sha-256" | "sha-384" | "sha-512" | "sha-1" | "sha1"
 ~~~text
    POST / HTTP/1.1
    Host: 10.234.160.12:80
-   Connection: close, TE
    TE: trailers, deflate, gzip, compress
    User-Agent: AS2 Company Server
    Date: Thu, 19 Dec 2024 15:05:38 GMT
@@ -2881,7 +2957,7 @@ from the original RFC 4130 draft toward the current version of this document.
   * Conformance requires selecting one algorithm in Received-content-MIC.
   * SHA-256 set as the default minimum; SHA-1 only permitted for legacy use.
 - Relaxed constraints on the content of the Disposition-notification-to header.
-- Definitions have been included for additional supported error dispositions.0
+- Definitions have been included for additional supported error dispositions.
 - Clarified required MDN fields:
   * `Final-Recipient` — MUST always be present.
   * `Original-Message-ID` — REQUIRED and must match the original message exactly.
@@ -2904,11 +2980,12 @@ from the original RFC 4130 draft toward the current version of this document.
   reporting.
 - New recommended modifiers:
   * `error: decompression-failed`
-  * `error/duplicate-filename`
-  * `error/illegal-filename`
+  * `error:duplicate-filename`
+  * `error:illegal-filename`
   * `error: insufficient-message-security`
-  * `error/invalid-message-id`
-  * `error/unknown-trading-relationship`
+  * `error:invalid-message-id`
+  * `error:unknown-trading-relationship`
+  * `error: unknown-trading-partner`
 - Clarified that implementations returning these modifiers MUST include a
   human-readable explanation in the MDN `Explanation` field.
 
@@ -2955,7 +3032,7 @@ from the original RFC 4130 draft toward the current version of this document.
     from SHOULD NOT) reuse TLS certificates for AS2 message security.
 
 ## Changes affecting Section 10 - Security Considerations
-- Provided guidance for the usgae of HTTPS and the minimum and recommended usage of TLS versions.
+- Provided guidance for the usage of HTTPS and the minimum and recommended usage of TLS versions.
 - Expanded discussion of algorithm lifecycle:
   * SHA-1 and MD5 deprecated; 3DES formally withdrawn by NIST (2024).
   * Implementations SHOULD NOT generate deprecated algorithms.
@@ -3011,6 +3088,95 @@ technical review feedback:
 - **Bullet Formatting**:
   * Standardized all sections requiring bullets to use the same type and
     and same spacing and margins.
+
+## Editorial Corrections
+
+- **Terminology Updates**:
+  * Changed all instances of "TCP/IP connection" to "HTTP connection" (3 locations)
+    to properly reflect the protocol layer and accommodate HTTP/2, HTTP/3, and QUIC
+  * Added RFC reference to S/MIME definition in Section 1.4 (Terms)
+  * Simplified "Internet's HTTP environment" to "over HTTP" in Section 2 (Overview)
+  * Removed outdated "Internet EDI" terminology (2 instances in Sections 8.3 and 8.5.4)
+  * Fixed typos in Appendix B change log ("dispositions.0" and "usgae")
+
+- **Cross-Reference Fixes**:
+  * Removed problematic forward reference to structure-and-processing-of-an-mdn-message
+    from Section 2.4.2 (reference was not resolving in kramdown-rfc)
+  * Replaced three anchor references with explicit section numbers due to kramdown-rfc
+    limitations with third-level explicit heading anchors:
+    - `{{the-secure-transmission-loop}}` -> Section 2.3.1
+    - `{{backward-compatibility-and-interoperability}}.1` -> Section 1.2.1
+    - `{{legacy-interoperability-non-normative}}` -> Section 1.2.1 (in bullet list context)
+
+## Substantive Technical Changes
+
+- **Section 2.4.2 (Security Permutations)**:
+  * Replaced exhaustive 24-permutation enumeration with concise capability summary
+  * Added clarification that security combinations are determined by partner agreements
+  * Addresses reviewer concern about unnecessary implementation complexity
+
+- **Section 2.4.2 (Compression and Signature Ordering)**:
+  * Added explicit guidance that compression is always applied before encryption
+  * Clarified that implementations MAY apply compression before or after signing
+  * Added requirement that conformant implementations MUST handle decompression
+    regardless of compression/signing order
+  * Added note that MIC computation is always applied to the signed portion and
+    includes inner MIME headers
+
+- **Section 2.4.2 (MIME Type Requirements)**:
+  * Distinguished between protocol-level MIME types (MUST support) and
+    content-specific types (SHOULD support based on use case)
+  * Moved EDI-specific MIME types (application/EDI-X12, application/EDIFACT) to
+    SHOULD category to avoid unnecessary requirements for non-EDI implementations
+
+- **Section 5 (HTTP Considerations)**:
+  * Updated to clarify that HTTP/1.1 is the baseline, with HTTP/2 and HTTP/3 as
+    optional when supported by both partners
+  * Clarified that certification programs define their own conformance profiles
+  * Addresses concern about IETF/RFC overreach into certification scope
+
+- **Section 5 (Connection Management) - NEW SUBSECTION**:
+  * Added comprehensive guidance on HTTP persistent connections
+  * Clarified that Connection: close is not required and SHOULD NOT be used
+    unless specifically needed
+  * Explained that HTTP/1.1 persistent connections are the default behavior
+  * Noted performance benefits of persistent connections, particularly for HTTPS
+  * Removed Connection: close header from message examples (2 instances in Appendix A)
+  * Addresses working group discussion about unnecessary connection closing
+
+- **Section 5.1 (TLS Requirements)**:
+  * Updated to acknowledge TLS 1.3 [RFC8446] as current IETF standard
+  * Maintained TLS 1.2 [RFC5246] as baseline requirement for backward compatibility
+  * Provided clear migration guidance
+  * Added RFC8446 and RFC5246 to normative references
+
+- **Section 6.2 (AS2-Product Header)**:
+  * Updated format to support optional Private Enterprise Number (PEN) prefix
+  * Format: `[PEN-<number>:]<product-name>:<version>`
+  * PEN usage is RECOMMENDED but not required
+  * Addresses concern about vendor identification without requiring PEN registration
+
+- **Section 7 (Algorithm Lifecycle Management) - NEW SUBSECTION**:
+  * Added formal algorithm lifecycle management guidance
+  * Defined algorithm categories (MUST, SHOULD, MAY, DEPRECATED, MUST NOT)
+  * Referenced existing S/MIME v4.0 and CMS algorithm registries rather than
+    creating redundant AS2-specific registry
+  * Provided references to NIST SP 800-57 and 800-131A for implementer guidance
+  * Establishes update pathway without requiring constant RFC revisions
+
+- **Section 11 (IANA Considerations)**:
+  * Added HTTP Field Name Registry section requesting registration of AS2 headers
+    (AS2-Version, AS2-Product, AS2-From, AS2-To) per RFC9110
+  * Created new AS2 MDN Disposition Modifier Registry with Specification Required
+    registration procedure
+  * Initial registry includes 10 error disposition modifiers
+  * Added RFC9110 to normative references
+
+## Normative References Added
+
+- RFC5246 (TLS 1.2)
+- RFC8446 (TLS 1.3)
+- RFC9110 (HTTP Semantics)
 
 These updates improve RFC formatting compliance and document clarity while
 maintaining all technical content and backward compatibility requirements.
