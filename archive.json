@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-30T00:48:18.588737+00:00",
+  "timestamp": "2026-07-02T00:47:41.504708+00:00",
   "repo": "DrummondGroup/draft-petta-rfc4130bis",
   "labels": [
     {
@@ -63,6 +63,62 @@
       "body": "# Header\n\n## Sub Header\n\n~~~\ncode block\n~~~",
       "createdAt": "2025-04-17T18:17:32Z",
       "updatedAt": "2025-04-17T18:17:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOObRTLM8AAAABHTHNCA",
+      "title": "as2-product-header",
+      "url": "https://github.com/DrummondGroup/draft-petta-rfc4130bis/issues/2",
+      "state": "OPEN",
+      "author": "ecki",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The product header is made mandatory for new implementations, but this does not allow for local policy to skip this header. Identifying software versions is often regarded as a security weakness and therefore companies often mandate to remove such identifying headers (at least from server responses). The rfc should allow such a local policy.\n\nAlso the header mostly talks about \u201csender\u201d however with AS2 GET it could be interesting to also provide this in the http response of the server.\n\nThe example messages do not showcase this new header but instead still have a User-Agent header.\n\n",
+      "createdAt": "2026-07-01T10:42:36Z",
+      "updatedAt": "2026-07-01T10:42:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOObRTLM8AAAABHTNmPw",
+      "title": "https-TLS-reqs",
+      "url": "https://github.com/DrummondGroup/draft-petta-rfc4130bis/issues/3",
+      "state": "OPEN",
+      "author": "ecki",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The draft states \n\n> The following certificate types MUST be supported for TLS server certificates:\n> o  with URL in the Distinguished Name Common Name attribute\n> o  without URL in the Distinguished Name Common Name attribute\n\nHowever there is no such thing as a URI in DN.\n\nI recommend to remove the bullet points and add an additional requirement instead.\n\nSomething like:\n\nServer certificates SHOULD allow endpoint validation by having a SAN extension for hostname, IP address or URI or at least using the traditional fallback for hostname as a CN. If present, client implementations MUST enforce this to match with the requested URI in edition to verifying the trust chain.",
+      "createdAt": "2026-07-01T10:58:22Z",
+      "updatedAt": "2026-07-01T12:26:45Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "ecki",
+          "authorAssociation": "NONE",
+          "body": "BTW I just noticed the draft talks in two places about making the SAN extension non critical. While this is the usual practice, I don\u2019t see a reason why the standard should mention or enforce this - especially given the fact that certificates without a Subject MUST define the SAN as critical (according to RFC 5280). So my recommendation is to just remove this stipulation (in both places).",
+          "createdAt": "2026-07-01T12:26:45Z",
+          "updatedAt": "2026-07-01T12:26:45Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOObRTLM8AAAABHYK29Q",
+      "title": "Use example PEN",
+      "url": "https://github.com/DrummondGroup/draft-petta-rfc4130bis/issues/4",
+      "state": "OPEN",
+      "author": "ecki",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In the following example section. Random pen and product trademark is used, I would recommend to use a PEN reserved for example usage (rfc 5612) and a more neutral name:\n\n```md\n      AS2-Product: PEN-32473:as2gateway:2.1.0\n      AS2-Product: example-connect:2025.1\n```\n\nTo that extend, it seems like the third example also can be skipped.",
+      "createdAt": "2026-07-01T23:57:07Z",
+      "updatedAt": "2026-07-01T23:57:07Z",
       "closedAt": null,
       "comments": []
     }
